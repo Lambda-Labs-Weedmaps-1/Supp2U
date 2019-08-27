@@ -21,14 +21,22 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
+
+
 development:
   <<: *default
+<<<<<<< HEAD
   adapter: postgresql
   encoding: unicode
   database: supp2u_dev
   pool: 5
   username: postgres
   password: <%= ENV['SUPP2U_DATABASE_PASSWORD'] %>
+=======
+  database: supp2u_development
+  url: <%= ENV["DATABASE_URL"] %>
+
+>>>>>>> bcfce8a6558e2ef8884e277abad804b663fd4de1
 
 
   # The specified database role being used to connect to postgres.
@@ -89,8 +97,10 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
   <<: *default
   database: supp2u_production
-  username: supp2u
-  password: <%= ENV['SUPP2U_DATABASE_PASSWORD'] %>
+  # username: supp2u
+  # password: <%= ENV['SUPP2U_DATABASE_PASSWORD'] %>
+  url: <%= ENV["DATABASE_URL"] %>
