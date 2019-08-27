@@ -86,7 +86,7 @@ test:
 
 production:
   <<: *default
-  database: supp2u_production
+#  database: supp2u_production
   # username: supp2u
   # password: <%= ENV['SUPP2U_DATABASE_PASSWORD'] %>
   url: <%= ENV["DATABASE_URL"] %>
