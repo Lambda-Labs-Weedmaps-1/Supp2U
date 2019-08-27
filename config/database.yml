@@ -11,11 +11,9 @@ default: &default
   username: postgres
   password: <%= ENV["PASSWORD"] %>
 
-
 development:
   <<: *default
   database: supp2u_dev
-
 
 test:
   <<: *default
@@ -23,7 +21,6 @@ test:
   encoding: unicode
   database: supp2u_test
   pool: 5 <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
 
 production:
   # <<: *default

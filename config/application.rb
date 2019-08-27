@@ -40,7 +40,7 @@ module Supp2u
         if Rails.env == key["development"]
           ENV["PASSWORD"] = value["PASSWORD"]
         elsif Rails.env == key["production"]
-          ENV["DATABASE_URL"] = value["DATABASE_URL"]
+          # ENV["DATABASE_URL"] = value["DATABASE_URL"]
         end
       end
     end
