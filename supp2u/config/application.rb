@@ -10,6 +10,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
+require 'yaml'
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -31,5 +32,28 @@ module Supp2u
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      puts env_file
+      YAML.load(File.open(env_file)).each do |key, value|
+        if Rails.env == key["development"]
+          ENV["DATABASE_URL"] = value["DATABASE_URL"]
+        elsif Rails.env == key["production"]
+          ENV["DATABASE_URL"] = value["DATABASE_URL"]
+        end
+      end
+      puts ENV["DATABASE_URL"], "111111111"
+    end
   end
 end
+
+
+
+#     config.before_configuration do
+  #   env_file = File.join(Rails.root, 'config', 'local_env.yml')
+  #   puts env_file
+  #   ENV["DATABASE_URL"] = YAML.load(File.open(env_file))
+  #   puts ENV["DATABASE_URL"]
+  # end
