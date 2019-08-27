@@ -1,0 +1,15 @@
+{
+  "name": "Supp2U",
+  "scripts": {},
+  "env": {},
+  "formation": {},
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby"
+    }
+  ],
+  "stack": "heroku-18"
+}
