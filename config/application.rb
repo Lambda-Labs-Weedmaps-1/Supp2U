@@ -44,7 +44,7 @@ module Supp2u
           # ENV["DATABASE_URL"] = value["DATABASE_URL"]
         end
       end
-      # puts ENV["DATABASE_URL"], "111111111"
+      puts ENV["DATABASE_URL"], "111111111"
     end
   end
 end

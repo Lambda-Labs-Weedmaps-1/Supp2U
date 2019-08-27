@@ -25,7 +25,7 @@ default: &default
 
 development:
   <<: *default
-  database: supp2u_development
+#  database: supp2u_development
   url: <%= ENV["DATABASE_URL"] %>
 
 
