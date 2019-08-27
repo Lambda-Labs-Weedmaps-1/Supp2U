@@ -36,7 +36,7 @@ module Supp2u
 
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
-      puts env_file
+      # puts env_file
       YAML.load(File.open(env_file)).each do |key, value|
         if Rails.env == key["development"]
           ENV["DATABASE_URL"] = value["DATABASE_URL"]
@@ -44,7 +44,7 @@ module Supp2u
           # ENV["DATABASE_URL"] = value["DATABASE_URL"]
         end
       end
-      puts ENV["DATABASE_URL"], "111111111"
+      # puts ENV["DATABASE_URL"], "111111111"
     end
   end
 end
