@@ -41,10 +41,10 @@ module Supp2u
         if Rails.env == key["development"]
           ENV["DATABASE_URL"] = value["DATABASE_URL"]
         elsif Rails.env == key["production"]
-          ENV["DATABASE_URL"] = value["DATABASE_URL"]
+          # ENV["DATABASE_URL"] = value["DATABASE_URL"]
         end
       end
-      puts ENV["DATABASE_URL"], "111111111"
+      # puts ENV["DATABASE_URL"], "111111111"
     end
   end
 end
