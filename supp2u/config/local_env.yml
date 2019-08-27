@@ -1,5 +1,0 @@
-development:
-  PASSWORD: slaughter101
-
-production:
-  DATABASE_URL: 'postgres://vnvcxhykkgwchl:7c56cfcb830b3f24922600581806b3593a5f568621ebaeb55b9a19769b044f59@ec2-54-235-180-123.compute-1.amazonaws.com:5432/d93e1ri722v1j6'
