@@ -34,15 +34,15 @@ module Supp2u
     config.api_only = true
 
 
-    # config.before_configuration do
-    #   env_file = File.join(Rails.root, 'config', 'local_env.yml')
-    #   YAML.load(File.open(env_file)).each do |key, value|
-    #     if Rails.env == key["development"]
-    #       ENV["PASSWORD"] = value["PASSWORD"]
-    #     elsif Rails.env == key["production"]
-    #       ENV["DATABASE_URL"] = value["DATABASE_URL"]
-    #     end
-    #   end
-    # end
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      YAML.load(File.open(env_file)).each do |key, value|
+        if Rails.env == key["development"]
+          ENV["PASSWORD"] = value["PASSWORD"]
+        elsif Rails.env == key["production"]
+          ENV["DATABASE_URL"] = value["DATABASE_URL"]
+        end
+      end
+    end
   end
 end
