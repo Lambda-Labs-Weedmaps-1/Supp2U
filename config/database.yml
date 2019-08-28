@@ -25,4 +25,5 @@ test:
 production:
   # <<: *default
   # database: supp2u_production
+  adapter: postgresql
   url: <%= ENV["DATABASE_URL"] %>
