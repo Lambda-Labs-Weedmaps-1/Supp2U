@@ -9,3 +9,7 @@
 2019-08-28 13:32:54.839 EDT [6253] FATAL:  role "postgres" does not exist
 2019-08-28 13:34:02.623 EDT [6334] ERROR:  role "postgres" already exists
 2019-08-28 13:34:02.623 EDT [6334] STATEMENT:  CREATE ROLE postgres SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN;
+2019-08-28 14:19:51.229 EDT [7453] ERROR:  database "supp2u_dev" already exists
+2019-08-28 14:19:51.229 EDT [7453] STATEMENT:  CREATE DATABASE "supp2u_dev" ENCODING = 'unicode'
+2019-08-28 14:19:51.252 EDT [7454] ERROR:  database "supp2u_test" already exists
+2019-08-28 14:19:51.252 EDT [7454] STATEMENT:  CREATE DATABASE "supp2u_test" ENCODING = 'unicode'
