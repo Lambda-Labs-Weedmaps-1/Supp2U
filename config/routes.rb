@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'controllername/new'
   get 'controllername/create'
+  # get 'home_controller/index'
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #ALL 7 ACTIONS = index, new, create, show, edit, update, destroy. 
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      # resources :home, only: [:index, :show]
       resources :users, only: [:index, :show, :create] do
         resources :customers, only: [:index, :show, :create]
         resources :businesses, only: [:index, :show, :create]
