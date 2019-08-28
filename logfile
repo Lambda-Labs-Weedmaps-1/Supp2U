@@ -13,3 +13,7 @@
 2019-08-28 14:19:51.229 EDT [7453] STATEMENT:  CREATE DATABASE "supp2u_dev" ENCODING = 'unicode'
 2019-08-28 14:19:51.252 EDT [7454] ERROR:  database "supp2u_test" already exists
 2019-08-28 14:19:51.252 EDT [7454] STATEMENT:  CREATE DATABASE "supp2u_test" ENCODING = 'unicode'
+2019-08-28 16:03:25.263 EDT [8902] ERROR:  relation "users" already exists
+2019-08-28 16:03:25.263 EDT [8902] STATEMENT:  CREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "wallet" character varying, "is_admin" boolean DEFAULT FALSE, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)
+2019-08-28 16:04:33.133 EDT [8932] ERROR:  relation "users" already exists
+2019-08-28 16:04:33.133 EDT [8932] STATEMENT:  CREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "wallet" character varying, "is_admin" boolean DEFAULT FALSE, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)
