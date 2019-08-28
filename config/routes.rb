@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'controllername/new'
   get 'controllername/create'
+  root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #ALL 7 ACTIONS = index, new, create, show, edit, update, destroy. 
   #EDIT and NEW will not be used.

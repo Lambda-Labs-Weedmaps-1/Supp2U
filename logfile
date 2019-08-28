@@ -1,0 +1,19 @@
+2019-08-28 13:23:29.207 EDT [2293] LOG:  listening on IPv6 address "::1", port 5432
+2019-08-28 13:23:29.207 EDT [2293] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-08-28 13:23:29.208 EDT [2293] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-08-28 13:23:29.233 EDT [2294] LOG:  database system was shut down at 2019-08-28 13:23:19 EDT
+2019-08-28 13:23:29.243 EDT [2293] LOG:  database system is ready to accept connections
+2019-08-28 13:23:38.268 EDT [2324] FATAL:  role "postgres" does not exist
+2019-08-28 13:25:00.005 EDT [3238] FATAL:  role "postgres" does not exist
+2019-08-28 13:29:41.238 EDT [6133] FATAL:  role "postgres" does not exist
+2019-08-28 13:32:54.839 EDT [6253] FATAL:  role "postgres" does not exist
+2019-08-28 13:34:02.623 EDT [6334] ERROR:  role "postgres" already exists
+2019-08-28 13:34:02.623 EDT [6334] STATEMENT:  CREATE ROLE postgres SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN;
+2019-08-28 14:19:51.229 EDT [7453] ERROR:  database "supp2u_dev" already exists
+2019-08-28 14:19:51.229 EDT [7453] STATEMENT:  CREATE DATABASE "supp2u_dev" ENCODING = 'unicode'
+2019-08-28 14:19:51.252 EDT [7454] ERROR:  database "supp2u_test" already exists
+2019-08-28 14:19:51.252 EDT [7454] STATEMENT:  CREATE DATABASE "supp2u_test" ENCODING = 'unicode'
+2019-08-28 16:03:25.263 EDT [8902] ERROR:  relation "users" already exists
+2019-08-28 16:03:25.263 EDT [8902] STATEMENT:  CREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "wallet" character varying, "is_admin" boolean DEFAULT FALSE, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)
+2019-08-28 16:04:33.133 EDT [8932] ERROR:  relation "users" already exists
+2019-08-28 16:04:33.133 EDT [8932] STATEMENT:  CREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "wallet" character varying, "is_admin" boolean DEFAULT FALSE, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)
