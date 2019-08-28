@@ -24,6 +24,7 @@ test:
 
 production:
   # <<: *default
-  # database: supp2u_production
-  adapter: postgresql
+  database: supp2u_production
+  # adapter: postgresql
+  encoding: unicode
   url: <%= ENV["DATABASE_URL"] %>

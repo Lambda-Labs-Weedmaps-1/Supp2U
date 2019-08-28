@@ -28,6 +28,8 @@ gem 'knock'
 gem 'active_model_serializers'
 gem 'dotenv-rails'
 gem 'faker'
+gem 'omniauth-auth0'
+gem 'omniauth-rails_csrf_protection'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
