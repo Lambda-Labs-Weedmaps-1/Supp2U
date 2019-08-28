@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2019_08_28_180025) do
     t.string "description"
     t.string "hours"
     t.boolean "recommended"
+    t.string "long"
+    t.string "lat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
