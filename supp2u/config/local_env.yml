@@ -1,5 +1,0 @@
-development:
-  DATABASE_URL: postgres://ntxxjndtzsxorx:8d8ea582544323f245bdb10be9fce1b06412312d38546fc59a680aad3ad7c1d5@ec2-54-83-9-36.compute-1.amazonaws.com:5432/d750vprflufl8s
-
-production:
-  DATABASE_URL: 'postgres://vnvcxhykkgwchl:7c56cfcb830b3f24922600581806b3593a5f568621ebaeb55b9a19769b044f59@ec2-54-235-180-123.compute-1.amazonaws.com:5432/d93e1ri722v1j6'

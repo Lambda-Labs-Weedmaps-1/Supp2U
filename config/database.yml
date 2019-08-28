@@ -1,0 +1,29 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+
+#default will fill in the blanks, so to speak.
+default: &default
+  host: 127.0.0.1
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: <%= ENV["PASSWORD"] %>
+
+development:
+  <<: *default
+  database: supp2u_dev
+
+test:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: supp2u_test
+  pool: 5 <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+production:
+  # <<: *default
+  # database: supp2u_production
+  adapter: postgresql
+  url: <%= ENV["DATABASE_URL"] %>
