@@ -13,6 +13,8 @@ class Businesses < ActiveRecord::Migration[5.2]
       t.string :description
       t.string :hours
       t.boolean :recommended
+      t.string :long
+      t.string :lat
 
       t.timestamps
     end
