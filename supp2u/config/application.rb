@@ -49,11 +49,3 @@ module Supp2u
   end
 end
 
-
-
-#     config.before_configuration do
-  #   env_file = File.join(Rails.root, 'config', 'local_env.yml')
-  #   puts env_file
-  #   ENV["DATABASE_URL"] = YAML.load(File.open(env_file))
-  #   puts ENV["DATABASE_URL"]
-  # end
