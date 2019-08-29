@@ -37,11 +37,11 @@ module Api
         def destroy
           @customer = Customer.find(params[:user_id])
 
-            if @customer.destroy
-                render json: { message: "Your customer has successfully been terminated." } 
-            else
-                render json: { message: "Could not find the customer you are trying to remove." }
-            end
+          if @customer.destroy
+            render json: { message: "Your customer has successfully been terminated." } 
+          else
+            render json: { message: "Could not find the customer you are trying to remove." }
+          end
         end
 
         private

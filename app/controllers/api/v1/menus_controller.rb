@@ -32,7 +32,7 @@ module Api
           else
               render json: @menu.errors, status: :unprocessable_entity
           end
-      end
+        end
 
       def destroy
         @menu = Menu.find(params[:business_id])
@@ -42,7 +42,7 @@ module Api
         else
             render json: { message: "Could not find the menu you are trying to remove." }
         end
-    end
+      end
 
         private
         
