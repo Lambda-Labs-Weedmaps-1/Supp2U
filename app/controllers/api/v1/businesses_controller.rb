@@ -50,7 +50,7 @@ module Api
         private
 
         def business_params
-            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :hours, :long, :lat, :user_id)
+            params.permit(:user_id, :name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :hours, :long, :lat, :user_id)
         end
 
         def update_params

@@ -18,10 +18,16 @@ module Api
           end
         end
 
+        def show 
+          @item = Item.find(params[:id])
+
+          render json: @item
+      end
+
         def update
           @item = Item.find(params[:id])
 
-          if @item.udpate(item_params)
+          if @item.update(item_params)
               render json: @item, status: :created
           else
               render json: @item.errors, status: :unprocessable_entity

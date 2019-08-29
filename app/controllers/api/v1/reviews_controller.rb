@@ -25,7 +25,7 @@ module Api
         def update
           @review = Review.find(params[:id])
 
-          if @review.udpate(review_params)
+          if @review.update(review_params)
             render json: @review, status: :created
           else
             render json: @review.errors, status: :unprocessable_entity
