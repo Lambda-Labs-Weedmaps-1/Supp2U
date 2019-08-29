@@ -16,3 +16,32 @@ User.create!(
         password:       password
     )
 end
+
+Business.create!(
+    user_id: 1,
+    name: "Carls Jr.",
+    website: "www.CarlsJr.com",
+    city: "Simi Valley",
+    state: "California",
+    street: "2034 Valley Terrace Dr",
+    zipcode: 90635,
+    theme: "fast food",
+    description: "making people unhealthy, one product at a time.",
+    hours: "8am - 5pm"
+)
+
+Menu.create!(
+    business_id: 1,
+    name: "Burger Menu"
+)
+
+10.times do |i|
+    item_name = Faker::Commerce.product_name
+    price = Faker::Commerce.price
+Item.create!(
+    menu_id: 1,
+    item_name: item_name,
+    price: price,
+    category: "Breakfast, Lunch and Dinner."
+)
+end

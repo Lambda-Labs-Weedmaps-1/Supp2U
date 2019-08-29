@@ -15,8 +15,6 @@ module Api
         end
 
         def create
-            
-            puts "I am here #{params[:user_id]}"
             @business = Business.new( business_params )
 
             if @business.save
