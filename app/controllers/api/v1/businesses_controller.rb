@@ -3,8 +3,11 @@ module Api
       class BusinessesController < ApplicationController
 
         def index
-            @businesses = Business.all
-
+            if params[:user_id].present?
+                @businesses = Business.where(user_id: params[:user_id])
+            else
+                @businesses = Business.all
+            end
             render json: @businesses
         end
 
@@ -46,9 +49,13 @@ module Api
 
         private
 
+        def business_params
+            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :hours, :long, :lat, :user_id)
+        end
+
         def update_params
            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :hours, :long, :lat)
-       end
+        end
 
       end
     end

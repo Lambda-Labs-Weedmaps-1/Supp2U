@@ -3,13 +3,13 @@ module Api
       class MenusController < ApplicationController
 
         def index
-          @menus = Menu.all
+          @menus = Business.find(params[:business_id]).menu
 
           render json: @menus
         end
 
         def show
-          @menu = Menu.find(params[:business_id])
+          @menu = Menu.find(params[:id])
 
           render json: @menu
         end
@@ -25,9 +25,9 @@ module Api
         end
 
         def update
-          @menu = Menu.find(params[:business_id])
+          @menu = Menu.find(params[:id])
 
-          if @menu.udpate(menu_params)
+          if @menu.update(menu_params)
               render json: @menu, status: :created
           else
               render json: @menu.errors, status: :unprocessable_entity
@@ -35,7 +35,7 @@ module Api
         end
 
       def destroy
-        @menu = Menu.find(params[:business_id])
+        @menu = Menu.find(params[:id])
 
         if @menu.destroy
             render json: { message: "Your menu has successfully been terminated." } 
