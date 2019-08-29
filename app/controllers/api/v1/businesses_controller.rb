@@ -26,6 +26,25 @@ module Api
             end
         end
 
+        def update
+            @business = Business.find(params[:id])
+            if @business.udpate(business_params)
+                render json: @business, status: :created
+            else
+                render json: @business.errors, status: :unprocessable_entity
+            end
+        end
+
+        def destroy
+            @business = Business.find(params[:id])
+
+            if @business.destroy
+                render json: { message: "Your business has successfully been terminated." } 
+            else
+                render json: { message: "Could not find the business you are trying to remove." }
+            end
+        end
+
         private
 
         def business_params

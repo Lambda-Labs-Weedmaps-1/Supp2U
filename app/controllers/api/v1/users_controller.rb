@@ -38,9 +38,9 @@ module Api
             @user= User.find(params[:id])
 
             if @user.destroy
-                render json: {message: "You're user has successfully been terminated."}
+                render json: { message: "Your user has successfully been terminated." }
             else
-                render json: {message: "Could not find the user you are trying to remove."}
+                render json: { message: "Could not find the user you are trying to remove." }
             end
         end
 
