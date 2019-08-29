@@ -15,15 +15,15 @@ Rails.application.routes.draw do
         resources :businesses, only: [:index, :create]
       end
 
-      resources :businesses, only: [:index, :show] do
+      resources :businesses, except: [:create, :edit, :new] do
         resources :menus, only: [:index, :create]
       end
 
-      resources :customers, only: [:index, :show] do
+      resources :customers, except: [:edit, :new] do
         resources :reviews, only: [:index, :create]
       end
 
-      resources :menus, only: [:index, :show] do
+      resources :menus, except: [:edit, :new] do
         resources :items, only: [:index, :create]
       end
     end

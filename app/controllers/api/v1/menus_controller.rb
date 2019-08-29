@@ -24,6 +24,26 @@ module Api
           end
         end
 
+        def update
+          @menu = Menu.find(params[:business_id])
+
+          if @menu.udpate(menu_params)
+              render json: @menu, status: :created
+          else
+              render json: @menu.errors, status: :unprocessable_entity
+          end
+        end
+
+      def destroy
+        @menu = Menu.find(params[:business_id])
+
+        if @menu.destroy
+            render json: { message: "Your menu has successfully been terminated." } 
+        else
+            render json: { message: "Could not find the menu you are trying to remove." }
+        end
+      end
+
         private
         
         def menu_params
