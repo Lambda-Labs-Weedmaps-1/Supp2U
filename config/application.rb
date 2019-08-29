@@ -39,8 +39,6 @@ module Supp2u
     #   YAML.load(File.open(env_file)).each do |key, value|
     #     if Rails.env == key["development"]
     #       ENV["PASSWORD"] = value["PASSWORD"]
-    #     elsif Rails.env == key["production"]
-    #       ENV["DATABASE_URL"] = value["DATABASE_URL"]
     #     end
     #   end
     # end

@@ -1,5 +1,4 @@
 # PostgreSQL. Versions 9.1 and up are supported.
-
 #default will fill in the blanks, so to speak.
 default: &default
   host: 127.0.0.1
@@ -9,7 +8,7 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
-  password: slaughter101
+  password: <%= ENV["PASSWORD"] %>
 
 development:
   <<: *default
