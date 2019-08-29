@@ -31,6 +31,9 @@ gem 'faker'
 gem 'omniauth-auth0'
 gem 'omniauth-rails_csrf_protection'
 
+# Faraday HTTP client (embraces rack middleware concept)
+gem 'faraday', '~> 0.15.4'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
