@@ -24,6 +24,26 @@ module Api
           end
         end
 
+        def update
+          @customer = Customer.find(params[:user_id])
+
+          if @customer.save
+            render json: @customer, status: :created
+          else
+            render json: @customer.errors, status: :unprocessable_entity
+          end
+        end
+
+        def destroy
+          @customer = Customer.find(params[:user_id])
+
+            if @customer.destroy
+                render json: { message: "Your customer has successfully been terminated." } 
+            else
+                render json: { message: "Could not find the customer you are trying to remove." }
+            end
+        end
+
         private
 
         def customer_params
