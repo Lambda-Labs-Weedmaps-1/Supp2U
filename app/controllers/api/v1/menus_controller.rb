@@ -20,7 +20,7 @@ module Api
           if @menu.save
             render json: @menu, status: :created
           else
-            render json: @menu.errors, status: :unprocessable_identity
+            render json: @menu.errors, status: :unprocessable_entity
           end
         end
 
