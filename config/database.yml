@@ -9,7 +9,7 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
-  password: <%= ENV["PASSWORD"] %>
+  password: slaughter101
 
 development:
   <<: *default
@@ -27,4 +27,4 @@ production:
   database: supp2u_production
   # adapter: postgresql
   encoding: unicode
-  url: <%= ENV["DATABASE_URL"] %>
+  # url: <%= ENV["DATABASE_URL"] %>
