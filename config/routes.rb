@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         resources :businesses, only: [:index, :create]
       end
 
-      resources :businesses, except: [:create, :edit, :new] do
+      resources :businesses, only: [:index, :show] do
         resources :menus, only: [:index, :create]
       end
 
