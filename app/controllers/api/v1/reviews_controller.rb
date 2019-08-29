@@ -18,7 +18,7 @@ module Api
           elsif @review.save
             render json: @review, status: :created
           else
-            render json: @review.errors, status: :unprocessable_identity
+            render json: @review.errors, status: :unprocessable_entity
           end
         end
 

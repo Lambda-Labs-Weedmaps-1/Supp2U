@@ -14,7 +14,7 @@ module Api
           if @item.save
             render json: @item, status: :created
           else
-            render json: @item.errors, status: unprocessable_identity
+            render json: @item.errors, status: :unprocessable_entity
           end
         end
 
