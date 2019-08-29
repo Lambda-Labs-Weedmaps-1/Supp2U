@@ -23,9 +23,9 @@ module Api
         end
 
         def update
-          @review = Review.find(params[:customer_id])
+          @review = Review.find(params[:id])
 
-          if @review.udpate(review_params)
+          if @review.update(review_params)
             render json: @review, status: :created
           else
             render json: @review.errors, status: :unprocessable_entity
@@ -33,7 +33,7 @@ module Api
         end
 
         def destroy
-          @review = Review.find(params[:customer_id])
+          @review = Review.find(params[:id])
 
           if @review.destroy
               render json: { message: "Your review has successfully been terminated." } 
