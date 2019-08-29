@@ -19,7 +19,7 @@ module Api
         end
 
         def update
-          @item = Item.find(params[:menu_id])
+          @item = Item.find(params[:id])
 
           if @item.udpate(item_params)
               render json: @item, status: :created
@@ -29,7 +29,7 @@ module Api
       end
 
         def destroy
-          @item = Item.find(params[:menu_id])
+          @item = Item.find(params[:id])
 
           if @item.destroy
               render json: { message: "Your item has successfully been terminated." } 

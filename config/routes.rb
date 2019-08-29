@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       resources :menus, only: [:show, :update, :destroy] do
         resources :items, only: [:index, :create]
       end
+      resources :items, only: [:show, :destroy, :update]
+      resources :reviews, only: [:show, :destroy, :update]
     end
   end
 end

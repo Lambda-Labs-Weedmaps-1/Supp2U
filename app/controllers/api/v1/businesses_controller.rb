@@ -30,7 +30,7 @@ module Api
         def update
             @business = Business.find(params[:id])
 
-            if @business.udpate(update_params)
+            if @business.update(update_params)
                 render json: @business, status: :created
             else
                 render json: @business.errors, status: :unprocessable_entity
