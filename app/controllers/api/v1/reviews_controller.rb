@@ -9,7 +9,7 @@ module Api
         end
 
         def create
-          #ensures that a Customer can only leave one review per business to prevent review spamming.
+          #ensures that a Customer can only leave one review per review to prevent review spamming.
           @has_review = Customer.find(params[:customer_id]).reviews.where(business_id: review_params[:business_id] )
           @review = Review.new(review_params)
 
@@ -18,7 +18,27 @@ module Api
           elsif @review.save
             render json: @review, status: :created
           else
-            render json: @review.errors, status: :unprocessable_identity
+            render json: @review.errors, status: :unprocessable_entity
+          end
+        end
+
+        def update
+          @review = Review.find(params[:customer_id])
+
+          if @review.udpate(review_params)
+            render json: @review, status: :created
+          else
+            render json: @review.errors, status: :unprocessable_entity
+          end
+        end
+
+        def destroy
+          @review = Review.find(params[:customer_id])
+
+          if @review.destroy
+              render json: { message: "Your review has successfully been terminated." } 
+          else
+              render json: { message: "Could not find the review you are trying to remove." }
           end
         end
 
