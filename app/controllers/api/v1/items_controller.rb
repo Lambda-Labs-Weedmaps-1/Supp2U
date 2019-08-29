@@ -18,10 +18,16 @@ module Api
           end
         end
 
-        def update
-          @item = Item.find(params[:menu_id])
+        def show 
+          @item = Item.find(params[:id])
 
-          if @item.udpate(item_params)
+          render json: @item
+      end
+
+        def update
+          @item = Item.find(params[:id])
+
+          if @item.update(item_params)
               render json: @item, status: :created
           else
               render json: @item.errors, status: :unprocessable_entity
@@ -29,7 +35,7 @@ module Api
       end
 
         def destroy
-          @item = Item.find(params[:menu_id])
+          @item = Item.find(params[:id])
 
           if @item.destroy
               render json: { message: "Your item has successfully been terminated." } 
