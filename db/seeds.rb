@@ -17,34 +17,83 @@ User.create!(
     )
 end
 
-    @user_id = 0
-10.times do |i|
-    @user_id += 1
-    name       = Faker::Company.name
-    zipCode    = Faker::Address.zip_code
-    city       = Faker::Address.city
-    street     = Faker::Address.street_address + " " + Faker::Address.street_name
-    state      = Faker::Address.state
-    lat        = Faker::Address.latitude
-    long       = Faker::Address.longitude
+#     @user_id = 0
+# 10.times do |i|
+#     @user_id += 1
+#     name       = Faker::Company.name
+#     zipCode    = Faker::Address.zip_code
+#     city       = Faker::Address.city
+#     street     = Faker::Address.street_address + " " + Faker::Address.street_name
+#     state      = Faker::Address.state
+#     lat        = Faker::Address.latitude
+#     long       = Faker::Address.longitude
+
+
+
+#     Business.create!(
+#     user_id: @user_id,
+#     name: name,
+#     website: "www.CarlsJr.com",
+#     city: city,
+#     state: state,
+#     street: street,
+#     zipcode: zipCode,
+#     theme: "OSFA",
+#     description: "making people unhealthy, one product at a time.",
+#     hours: "8am - 5pm",
+#     lat: lat,
+#     long: long
+# )
+# end
+
+
 Business.create!(
-    user_id: @user_id,
-    name: name,
-    website: "www.CarlsJr.com",
-    city: city,
-    state: state,
-    street: street,
-    zipcode: zipCode,
-    theme: "OSFA",
-    description: "making people unhealthy, one product at a time.",
+    user_id: 10,
+    name: "Angelo's Taverna",
+    website: "angelosdenver.com",
+    city: "Denver",
+    state: "CO",
+    street: "620 E 6th Ave",
+    zipcode: 80203,
+    theme: "American",
+    description: "Angelo's Yo !",
     hours: "8am - 5pm",
-    lat: lat,
-    long: long
+    lat: "39.725465",
+    long: "-104.979174"
 )
-end
+
+Business.create!(
+    user_id: 2,
+    name: "Lowdown Brewery",
+    website: "angelosdenver.com",
+    city: "Denver",
+    state: "CO",
+    street: "800 Lincoln St",
+    zipcode: 80203,
+    theme: "American",
+    description: "Low down place for Low down people!",
+    hours: "8am - 5pm",
+    lat: 39.729261,
+    long: -104.985802
+)
+
+Business.create!(
+    user_id: 3,
+    name: "Ivy On 7th",
+    website: "ivyon7th.com",
+    city: "Denver",
+    state: "CO",
+    street: "410 E 7th Ave, Denver",
+    zipcode: 80203,
+    theme: "American",
+    description: "It's IVY !!!",
+    hours: "8am - 5pm",
+    lat: 39.727066,
+    long: -104.981963
+)
 
 @business_id = 0
-10.times do |i|
+3.times do |i|
     @business_id += 1
     name = Faker::Company.bs
 Menu.create!(
