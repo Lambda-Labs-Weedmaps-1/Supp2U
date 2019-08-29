@@ -9,8 +9,10 @@
 10.times do |i|
     username    = Faker::Internet.user_name
     email       = Faker::Internet.email
+    password    = Faker::Internet.password
 User.create!(
         username:       username ,
-        email:          email
+        email:          email,
+        password:       password
     )
 end
