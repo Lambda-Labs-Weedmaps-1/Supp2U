@@ -15,7 +15,7 @@ module Api
           @review = Review.new(review_params)
 
           if @has_review.length > 0
-            render json: { message: "You have already left a review. Thank you for your feedback.", proof: @has_review }
+            render json: { message: "You have already left a review. Thank you for your feedback.", proof: @has_review }, status: :unprocessable_entity
           elsif @review.save
             render json: @review, status: :created
           else
