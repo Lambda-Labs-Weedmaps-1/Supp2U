@@ -8,6 +8,7 @@ module Api
           render json: @reviews
         end
 
+        
         def create
           #ensures that a Customer can only leave one review per review to prevent review spamming.
           @has_review = Customer.find(params[:customer_id]).reviews.where(business_id: review_params[:business_id] )
@@ -21,6 +22,7 @@ module Api
             render json: @review.errors, status: :unprocessable_entity
           end
         end
+
 
         def update
           @review = Review.find(params[:id])
