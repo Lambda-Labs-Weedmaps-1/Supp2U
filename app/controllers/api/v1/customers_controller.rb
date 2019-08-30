@@ -3,8 +3,11 @@ module Api
       class CustomersController < ApplicationController
 
         def index
-          @customers = Customer.all
-
+          if params[:user_id].present?
+              @customers = Customer.where(user_id: params[:user_id])
+          else
+              @customers = Customer.all
+          end
           render json: @customers
         end
 
