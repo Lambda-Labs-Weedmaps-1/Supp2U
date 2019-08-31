@@ -1,6 +1,7 @@
 class Business < ApplicationRecord
     belongs_to :user
     has_one :menu
+    has_one :schedule
 
     validates :name, presence: true
     validates :city, presence: true
