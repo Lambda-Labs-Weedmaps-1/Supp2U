@@ -51,11 +51,11 @@ module Api
 
         #user_id will need to be passed in on the front end.
         def business_params
-            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :hours, :long, :lat, :user_id)
+            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id)
         end
 
         def update_params
-           params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :hours, :long, :lat)
+           params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat)
         end
 
       end
