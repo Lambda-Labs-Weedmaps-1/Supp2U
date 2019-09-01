@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
     t.string "description"
     t.string "hours"
     t.boolean "recommended"
+    t.string "long"
+    t.string "lat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
     t.string "username"
     t.string "email"
     t.string "wallet"
+    t.string "password"
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

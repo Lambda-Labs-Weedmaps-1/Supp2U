@@ -21,7 +21,8 @@ module Api
 				data = JSON.parse(resp.body)
 
 				# rendering out 2nd restaurant from dataset
-				render json: data['restaurants'][5]
+				render json: JSON.pretty_generate(data['restaurants'][5])
+				# render json: data['restaurants'][5]
 			end
 		end
 	end
