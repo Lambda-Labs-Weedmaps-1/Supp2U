@@ -1,21 +1,24 @@
+# module Api
+# 	module V1
 module Eatstreet
 	class Restaurants < Base
-		attr_accessor :name, :streetAddress, :city, :foodTypes, :offersDelivery
+		attr_accessor :address, :restaurants
 
-		# MAX_LIMIT = 10
+		def self.search
+			resp =
+				Request.get('restaurant/search') do |req|
+					req.params['street-address'] = '94010'
+					req.params['method'] = 'both'
+					req.body = { query: 'burlingame_restaurants' }.to_json
+				end
 
-		# example query
-		# https://api.spotify.com/v1/search?type=artist&q=tycho
-		def self.search(query = {}, options)
-			response =
-				Request.where(
-					'restaurant/search',
-					query = {
-						latitude: '39.7392358', longitude: '-104.990251', method: 'both'
-					}
-				)
-			denver_restaurant_names =
-				response.body.restaurants.map { |restaurant| restaurant[:name] }
+			Restaurants.new(
+				resp.body.restaurants.map { |restaurant| restaurant[:name] }
+			)
+			# burlingame_names =
+			# 	resp.body.restaurants.map { |restaurant| restaurant[:name] }
 		end
 	end
 end
+# 	end
+# end
