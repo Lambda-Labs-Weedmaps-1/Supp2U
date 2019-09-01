@@ -9,7 +9,7 @@ class Connection
 			faraday.response :logger
 			faraday.adapter Faraday.default_adapter
 			faraday.headers['Content-Type'] = 'application/json'
-			faraday.headers['X-Mashape-key'] = ENV['EATSTREET_KEY']
+			faraday.headers['X-Access-Token'] = ENV['EATSTREET_KEY']
 		end
 	end
 end

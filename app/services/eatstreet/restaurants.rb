@@ -1,7 +1,6 @@
-# module Api
-# 	module V1
 module Eatstreet
 	class Restaurants < Base
+		include Eatstreet::Request
 		attr_accessor :address, :restaurants
 
 		def self.search
@@ -12,13 +11,11 @@ module Eatstreet
 					req.body = { query: 'burlingame_restaurants' }.to_json
 				end
 
-			Restaurants.new(
-				resp.body.restaurants.map { |restaurant| restaurant[:name] }
-			)
-			# burlingame_names =
+			# Restaurants.new(
 			# 	resp.body.restaurants.map { |restaurant| restaurant[:name] }
+			# )
+			burlingame_names =
+				resp.body.restaurants.map { |restaurant| restaurant[:name] }
 		end
 	end
 end
-# 	end
-# end

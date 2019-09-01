@@ -1,5 +1,3 @@
-# module Api
-# 	module V1
 module Eatstreet
 	class Base
 		attr_accessor :errors
@@ -14,5 +12,3 @@ module Eatstreet
 		end
 	end
 end
-# 	end
-# end

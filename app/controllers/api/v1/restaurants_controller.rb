@@ -1,10 +1,41 @@
+require 'faraday'
+require 'json'
+
 module Api
 	module V1
 		class RestaurantsController < ApplicationController
-			def index
-				@restaurants, @errors = Eatstreet::Restaurants.search
+			include Faraday
 
-				render json: restaurants
+			def index
+				# Todo place faraday code here to test requests
+				#* refactor to follow convention once it's working.
+				#? https://www.mobomo.com/2012/03/faraday-one-http-client-to-rule-them-all/
+
+				# build connection
+				conn = Faraday.new(url: 'https://eatstreet.com/publicapi/v1')
+				# headers: {
+				# 	# 'X-Mashape-key' => '86e96159e57f9343'
+				# 	'Content-Type' => 'application/json'
+				# }
+
+				resp =
+					conn.get('restaurant/search') do |req|
+						req.headers['Content-Type'] = 'application/json'
+						req.headers['X-Access-Token'] = ENV['EATSTREET_KEY']
+						req.params['street-address'] = '80012'
+						req.params['method'] = 'both'
+						# req.body = { query: 'burlingame_restaurants' }.to_json
+					end
+
+				# address = resp.body.address
+				# restaurants = resp.body.restaurants
+
+				data = JSON.parse(resp.body)
+
+				render json: data['restaurants'][1]
+				# @restaurants, @errors = Eatstreet::Restaurants.search
+
+				# render json: restaurants
 			end
 		end
 	end
