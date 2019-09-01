@@ -5,6 +5,8 @@ class Items < ActiveRecord::Migration[5.2]
       t.string :item_name
       t.integer :price
       t.string :category
+      t.string :description
+      t.integer :cals
 
       t.timestamps
     end
