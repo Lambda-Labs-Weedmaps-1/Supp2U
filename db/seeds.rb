@@ -57,7 +57,6 @@ Business.create!(
     zipcode: 80203,
     theme: "American",
     description: "Angelo's Yo !",
-    hours: "8am - 5pm",
     lat: "39.725465",
     long: "-104.979174"
 )
@@ -72,7 +71,6 @@ Business.create!(
     zipcode: 80203,
     theme: "American",
     description: "Low down place for Low down people!",
-    hours: "8am - 5pm",
     lat: 39.729261,
     long: -104.985802
 )
@@ -87,7 +85,6 @@ Business.create!(
     zipcode: 80203,
     theme: "American",
     description: "It's IVY !!!",
-    hours: "8am - 5pm",
     lat: 39.727066,
     long: -104.981963
 )

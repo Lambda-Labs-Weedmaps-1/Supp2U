@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_180025) do
+ActiveRecord::Schema.define(version: 2019_08_31_180952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_180025) do
     t.integer "building_number"
     t.string "theme"
     t.string "description"
-    t.string "hours"
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
@@ -61,6 +60,19 @@ ActiveRecord::Schema.define(version: 2019_08_28_180025) do
     t.integer "business_id"
     t.string "review"
     t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "sunday"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.integer "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
