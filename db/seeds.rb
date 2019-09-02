@@ -89,6 +89,22 @@ Business.create!(
     long: -104.981963
 )
 
+Customer.create!(
+    user_id: 1,
+    custname: "Athos"
+)
+
+Customer.create!(
+    user_id: 2,
+    custname: "Porthos"
+)
+
+Customer.create!(
+    user_id: 3,
+    custname: "Aramis"
+)
+
+
 @business_id = 0
 3.times do |i|
     @business_id += 1
