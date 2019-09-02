@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
 	namespace :api do
 		namespace :v1 do
-			# restaurants resource here
+			# restaurant details resource (nest under restaurants)
+			resources :restaurant, only: %i[show]
+
+			# restaurants list resource
 			resources :restaurants, only: %i[index]
 
 			# resources :home, only: [:index, :show]
