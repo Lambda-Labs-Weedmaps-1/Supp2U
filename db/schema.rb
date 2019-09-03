@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
     t.integer "building_number"
     t.string "theme"
     t.string "description"
-    t.string "hours"
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
   create_table "items", force: :cascade do |t|
     t.integer "menu_id"
     t.string "item_name"
-    t.integer "price"
+    t.float "price"
     t.string "category"
     t.string "description"
     t.integer "cals"
@@ -60,9 +59,10 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "customer_id"
     t.integer "business_id"
     t.string "review"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,12 +83,13 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "wallet"
     t.string "password"
+    t.string "wallet"
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["password"], name: "index_users_on_password", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
