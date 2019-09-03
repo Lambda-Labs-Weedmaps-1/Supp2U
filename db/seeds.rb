@@ -40,61 +40,6 @@ end
 # )
 # end
 
-#* example restaurant object
-=begin
-"apiKey": "35abd97e268d42d3f15b4f2e73e76180d6148a65a9632c92",
-  "deliveryMin": 0.0,
-  "logoUrl": "https://static.eatstreet.com/assets/images/restaurant_logos/lamars-donuts-e-iliff-ave-31465_1434699777325.png",
-  "name": "LaMar's Donuts - E. Iliff Ave.",
-  "streetAddress": "10001 E Iliff Ave",
-  "city": "Aurora",
-  "state": "CO",
-  "zip": "80247",
-  "foodTypes": [
-    "Breakfast",
-    "Donuts",
-    "Coffee & Tea"
-  ],
-  "phone": "(303) 743-8585",
-  "latitude": 39.6752,
-  "longitude": -104.870069,
-  "minFreeDelivery": 0.0,
-  "taxRate": 0.076,
-  "acceptsCash": true,
-  "acceptsCard": true,
-  "offersPickup": true,
-  "offersDelivery": true,
-  "isTestRestaurant": false,
-  "minWaitTime": 45,
-  "maxWaitTime": 60,
-  "open": false,
-  "url": "https://eatstreet.com/aurora-co/restaurants/lamars-donuts-e-iliff-ave",
-  "hours": {
-    "Monday": [
-      "5:30 AM - 11:00 AM"
-    ],
-    "Saturday": [
-      "5:30 AM - 3:00 PM"
-    ],
-    "Sunday": [
-      "6:00 AM - 3:00 PM"
-    ],
-    "Wednesday": [
-      "5:30 AM - 3:00 PM"
-    ],
-    "Tuesday": [
-      "5:30 AM - 3:00 PM"
-    ],
-    "Friday": [
-      "5:30 AM - 3:00 PM"
-    ],
-    "Thursday": [
-      "5:30 AM - 3:00 PM"
-    ]
-  },
-  "timezone": "US/Mountain"
-=end
-
 Business.create!(
 	user_id: 10,
 	name: "Angelo's Taverna",
@@ -137,21 +82,11 @@ Business.create!(
 	long: -104.981963
 )
 
-Customer.create!(
-    user_id: 1,
-    custname: "Athos"
-)
+Customer.create!(user_id: 1, custname: 'Athos')
 
-Customer.create!(
-    user_id: 2,
-    custname: "Porthos"
-)
+Customer.create!(user_id: 2, custname: 'Porthos')
 
-Customer.create!(
-    user_id: 3,
-    custname: "Aramis"
-)
-
+Customer.create!(user_id: 3, custname: 'Aramis')
 
 @business_id = 0
 3.times do |i|
