@@ -1,5 +1,4 @@
 # PostgreSQL. Versions 9.1 and up are supported.
-
 #default will fill in the blanks, so to speak.
 default: &default
   host: 127.0.0.1
@@ -24,6 +23,7 @@ test:
 
 production:
   # <<: *default
-  # database: supp2u_production
-  adapter: postgresql
-  url: <%= ENV["DATABASE_URL"] %>
+  database: supp2u_production
+  # adapter: postgresql
+  encoding: unicode
+  # url: <%= ENV["DATABASE_URL"] %>

@@ -33,16 +33,11 @@ module Supp2u
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-
-    # config.before_configuration do
-    #   env_file = File.join(Rails.root, 'config', 'local_env.yml')
-    #   YAML.load(File.open(env_file)).each do |key, value|
-    #     if Rails.env == key["development"]
-    #       ENV["PASSWORD"] = value["PASSWORD"]
-    #     elsif Rails.env == key["production"]
-    #       ENV["DATABASE_URL"] = value["DATABASE_URL"]
-    #     end
-    #   end
-    # end
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+         origins '*'
+         resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
   end
 end
