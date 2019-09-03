@@ -3,8 +3,11 @@ module Api
       class ReviewsController < ApplicationController
 
         def index
-          @reviews = Customer.find(params[:customer_id]).reviews
-  
+          if params[:customer_id].present?
+            @reviews = Customer.find(params[:customer_id]).reviews
+          elsif params[:business_id].present?
+            @reviews = Business.find(params[:business_id]).reviews
+          end
           render json: @reviews
         end
 
