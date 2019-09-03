@@ -232,6 +232,7 @@ DEPENDENCIES
   byebug
   dotenv-rails
   faker
+  faraday (~> 0.15.4)
   jwt
   knock
   listen (>= 3.0.5, < 3.2)
