@@ -1,12 +1,19 @@
-class AuthenticationController < ApplicationController
+class Api::V1::AuthenticationController < ApplicationController
     before_action :authorize_request, except: :login
 
     def login
-        @user = User.find_by_email(params[:email])
-        if @user.present?
-            token = JsonWebToken.encode(user_id: @user.id)
+        @customer = User.find_by_email(params[:email]).customer
+        @business = User.find_by_email(params[:email]).business
+
+        if @customer.present?
+
+            token = JsonWebToken.encode(user_id: @customer.user_id)
             time = Time.now + 72.hours.to_i
-            render json: { token: token, exp: time.strftime("%m-%d-%y %H:%M"), username: @user.username }, status: 200
+            render json: { token: token, exp: time.strftime("%m-%d-%y %H:%M"), customer: @customer }, status: 200
+        elsif @business.present?
+              token = JsonWebToken.encode(user_id: @business.user_id)
+              time = Time.now + 72.hours.to_i
+              render json: { token: token, exp: time.strftime("%m-%d-%y %H:%M"), business: @business }, status: 200
         else
             @user = User.new(user_params)
             if @user.save
@@ -21,7 +28,7 @@ class AuthenticationController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :email, :password, :wallet, :is_admin).required(:email)
+        params.permit(:username, :email, :password, :wallet, :is_admin)
     end
 
     def auth_params
