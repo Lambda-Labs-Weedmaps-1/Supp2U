@@ -1,5 +1,6 @@
 class Business < ApplicationRecord
     belongs_to :user
+    has_many :reviews
     has_one :menu
     has_one :schedule
 
