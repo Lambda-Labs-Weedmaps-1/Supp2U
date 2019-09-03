@@ -2,7 +2,7 @@ class AuthenticationController < ApplicationController
     before_action :authorize_request, except: :login
 
     def login
-        @user = User.find(params[:email])
+        @user = User.find_by_email(params[:email])
         if @user.present?
             token = JsonWebToken.encode(user_id: @user.id)
             time = Time.now + 72.hours.to_i
