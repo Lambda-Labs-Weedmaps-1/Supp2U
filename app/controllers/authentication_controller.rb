@@ -6,6 +6,7 @@ class Api::V1::AuthenticationController < ApplicationController
         @business = User.find_by_email(params[:email]).business
 
         if @customer.present?
+
             token = JsonWebToken.encode(user_id: @customer.user_id)
             time = Time.now + 72.hours.to_i
             render json: { token: token, exp: time.strftime("%m-%d-%y %H:%M"), customer: @customer }, status: 200
