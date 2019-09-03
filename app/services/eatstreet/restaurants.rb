@@ -25,10 +25,11 @@ module Eatstreet
 			#! Test the feature => what does the user expect when they take this action
 			#? How are you going to save restaurants into db efficiently???
 			# parse json response
-			data = JSON.parse(response.body)
+			#* rails method: with_indifferent_access allows for access via symbols
+			data = JSON.parse(response.body).with_indifferent_access
 			# access array of restaurant objects
-			puts data['restaurants']
-			data['restaurants']
+			# puts data[:restaurants][2]
+			data[:restaurants]
 		end
 	end
 end
