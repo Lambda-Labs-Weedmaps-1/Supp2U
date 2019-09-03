@@ -2,10 +2,9 @@ require 'swagger_helper'
 
 describe 'User API' do
   path '/users' do
-
     get 'Gets all users' do
       tags 'User'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
       response '200', 'All users' do
         schema type: :array, '$ref' => '#/definitions/Users'
         run_test!

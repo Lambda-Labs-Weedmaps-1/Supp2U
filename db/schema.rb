@@ -45,8 +45,6 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
     t.string "item_name"
     t.integer "price"
     t.string "category"
-    t.string "description"
-    t.integer "cals"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
