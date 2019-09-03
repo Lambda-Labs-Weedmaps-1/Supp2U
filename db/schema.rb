@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
     t.integer "building_number"
     t.string "theme"
     t.string "description"
-    t.string "hours"
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
   create_table "items", force: :cascade do |t|
     t.integer "menu_id"
     t.string "item_name"
-    t.integer "price"
+    t.float "price"
     t.string "category"
     t.string "description"
     t.integer "cals"

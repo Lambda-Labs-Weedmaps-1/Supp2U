@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # resources :home, only: [:index, :show]
+      post '/auth/login', to: 'authentication#login'
       resources :users, except: [:edit, :new] do
         resources :customers, only: [:index, :create]
         resources :businesses, only: [:index, :create]
