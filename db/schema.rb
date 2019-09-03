@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_180952) do
     t.integer "building_number"
     t.string "theme"
     t.string "description"
+    t.string "hours"
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
