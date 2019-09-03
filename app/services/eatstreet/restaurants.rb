@@ -17,6 +17,7 @@ module Eatstreet
 					req.headers['X-Access-Token'] = ENV['EATSTREET_KEY']
 					req.params['street-address'] = '80012'
 					req.params['method'] = 'both'
+					req.params['pickup-radius'] = '30'
 				end
 
 			#! Error handling what if response fails???
@@ -26,6 +27,7 @@ module Eatstreet
 			# parse json response
 			data = JSON.parse(response.body)
 			# access array of restaurant objects
+			puts data['restaurants']
 			data['restaurants']
 		end
 	end
