@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       resources :businesses, except: [:create, :edit, :new] do
         resources :menus, only: [:index, :create]
         resources :schedules, only: [:index, :create]
+        resources :reviews, only: [:index]
+          get :ratings, on: :member
       end
 
       resources :customers, except: [:create, :edit, :new] do

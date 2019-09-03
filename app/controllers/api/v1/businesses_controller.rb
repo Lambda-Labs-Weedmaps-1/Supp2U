@@ -1,3 +1,4 @@
+
 module Api
     module V1
       class BusinessesController < ApplicationController
@@ -46,6 +47,15 @@ module Api
                 render json: { message: "Could not find the business you are trying to remove." }
             end
         end
+
+        def ratings
+            @all_ratings = Business.find(params[:id]).reviews.pluck(:rating)
+            @sum = @all_ratings.reduce(:+)
+            @rating = Float(@sum/@all_ratings.length).ceil(1)
+
+            render json: @rating
+        end
+
 
         private
 
