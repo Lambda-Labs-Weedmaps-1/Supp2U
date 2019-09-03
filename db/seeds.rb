@@ -86,12 +86,77 @@ end
 end
 
 10.times do |i|
-	item_name = Faker::Commerce.product_name
-	price = Faker::Commerce.price
-	Item.create!(
-		menu_id: 3,
-		item_name: item_name,
-		price: price,
-		category: 'Breakfast, Lunch and Dinner.'
-	)
+    item_name = Faker::Commerce.product_name
+    price = Faker::Commerce.price
+Item.create!(
+    menu_id: 3,
+    item_name: item_name,
+    price: price,
+    category: "Breakfast, Lunch and Dinner."
+)
 end
+
+Review.create!(
+    customer_id: 1,
+    business_id: 1,
+    review: "The food was way too salty and the chicken tasted like dumpster fish.... I can't wait to go back!!!",
+    rating: 5
+
+)
+
+Review.create!(
+    customer_id: 2,
+    business_id: 1,
+    review: "The price was cheap, the portions were generous, and the quality was beyond perfect. Never going back. Perfection is overrated.",
+    rating: 1
+
+)
+
+Review.create!(
+    customer_id: 3,
+    business_id: 1,
+    review: "I spilled coffee on myself. It was hot and did not feel good. If it weren't for that, I would have rated them a 5.",
+    rating: 3
+)
+
+Review.create!(
+    customer_id: 1,
+    business_id: 2,
+    review: "The grandma-aged woman who served me coffee called me sweetheart. My girlfriend got jealous and broke up with me...",
+    rating: 1.5
+)
+
+Review.create!(
+    customer_id: 2,
+    business_id: 2,
+    review: "The dentures of the grandma-aged woman, who served me, fell into my coffee. It still tasted fantastic!",
+    rating: 5
+)
+
+Review.create!(
+    customer_id: 3,
+    business_id: 2,
+    review: "I didn't find out there was a cockroach in my soup until it started moving after being bitten in half!",
+    rating: 5
+)
+
+Review.create!(
+    customer_id: 1,
+    business_id: 3,
+    review: "I ordered pancakes, and got waffles... I like waffles more than pancakes.",
+    rating: 5
+)
+
+Review.create!(
+    customer_id: 2,
+    business_id: 3,
+    review: "I tripped on flat ground as I was walking to my table... It made me uncomfortable...",
+    rating: 1
+)
+
+Review.create!(
+    customer_id: 3,
+    business_id: 3,
+    review: "Another customer said that my food looked delicious...",
+    rating: 2.3
+)

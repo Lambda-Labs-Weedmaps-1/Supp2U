@@ -9,18 +9,21 @@ Rails.application.routes.draw do
 	#ALL 7 ACTIONS = index, new, create, show, edit, update, destroy.
 	#EDIT and NEW will not be used.
 
-	namespace :api do
-		namespace :v1 do
-			# resources :home, only: [:index, :show]
-			resources :users, except: %i[edit new] do
-				resources :customers, only: %i[index create]
-				resources :businesses, only: %i[index create]
-			end
+  namespace :api do
+    namespace :v1 do
+      # resources :home, only: [:index, :show]
+      post '/auth/login', to: 'authentication#login'
+      resources :users, except: [:edit, :new] do
+        resources :customers, only: [:index, :create]
+        resources :businesses, only: [:index, :create]
+      end
 
-			resources :businesses, except: %i[create edit new] do
-				resources :menus, only: %i[index create]
-				resources :schedules, only: %i[index create]
-			end
+      resources :businesses, except: [:create, :edit, :new] do
+        resources :menus, only: [:index, :create]
+        resources :schedules, only: [:index, :create]
+        resources :reviews, only: [:index]
+          get :ratings, on: :member
+      end
 
 			resources :customers, except: %i[create edit new] do
 				resources :reviews, only: %i[index create]
