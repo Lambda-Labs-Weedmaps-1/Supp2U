@@ -34,6 +34,7 @@ module Supp2u
 		config.api_only = true
 		config.autoload_paths += %W[#{config.root}/app/services]
 
+<<<<<<< HEAD
 		config.middleware.insert_before 0, Rack::Cors do
 			allow do
 				origins '*'
@@ -41,4 +42,13 @@ module Supp2u
 			end
 		end
 	end
+=======
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+         origins '*'
+         resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+  end
+>>>>>>> 5fefa45c07df9e1b25a790bdc4049b96846782fc
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
 	get 'controllername/new'
 	get 'controllername/create'
 	# get 'home_controller/index'
@@ -6,6 +7,17 @@ Rails.application.routes.draw do
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	#ALL 7 ACTIONS = index, new, create, show, edit, update, destroy.
 	#EDIT and NEW will not be used.
+=======
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+  get 'controllername/new'
+  get 'controllername/create'
+  # get 'home_controller/index'
+  root 'home#index'
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  #ALL 7 ACTIONS = index, new, create, show, edit, update, destroy. 
+  #EDIT and NEW will not be used.
+>>>>>>> 5fefa45c07df9e1b25a790bdc4049b96846782fc
 
 	namespace :api do
 		namespace :v1 do
