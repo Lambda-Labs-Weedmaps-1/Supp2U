@@ -6,7 +6,7 @@ module Api
           if params[:user_id].present?
               @customers = Customer.where(user_id: params[:user_id])
           else
-              @customers = Customer.all
+              @customers = Customer.all.with_attached_image
           end
           render json: @customers
         end
@@ -14,7 +14,7 @@ module Api
         def show
           @customer = Customer.find(params[:user_id])
 
-          render json: @customer
+          render json: @customer.with_attached_image
         end
 
         def create
@@ -30,11 +30,17 @@ module Api
         def update
           @customer = Customer.find(params[:user_id])
 
-          if @customer.save
+          if @customer.update(customer_params)
             render json: @customer, status: :created
           else
             render json: @customer.errors, status: :unprocessable_entity
           end
+
+          # if ImageUploadService.new(@customer, customer_params)
+          #   render json: @customer status: :ok
+          # else
+          #   render json: @customers.errors, status: :unprocessable_entity
+          # end
         end
 
         def destroy
@@ -50,7 +56,7 @@ module Api
         private
 
         def customer_params
-            params.permit(:user_id, :custname)
+            params.permit(:user_id, :custname, :image)
         end
 
       end
