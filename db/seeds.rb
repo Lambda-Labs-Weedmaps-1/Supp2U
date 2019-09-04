@@ -48,7 +48,7 @@ end
 
 
 Business.create!(
-    user_id: 10,
+    user_id: 1,
     name: "Angelo's Taverna",
     website: "angelosdenver.com",
     city: "Denver",
@@ -90,17 +90,17 @@ Business.create!(
 )
 
 Customer.create!(
-    user_id: 1,
+    user_id: 4,
     custname: "Athos"
 )
 
 Customer.create!(
-    user_id: 2,
+    user_id: 5,
     custname: "Porthos"
 )
 
 Customer.create!(
-    user_id: 3,
+    user_id: 6,
     custname: "Aramis"
 )
 
