@@ -7,6 +7,7 @@ if Rails.env.production?
 	abort('The Rails environment is running in production mode!')
 end
 require 'rspec/rails'
+require 'features/support/factory_bot'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -33,6 +34,9 @@ rescue ActiveRecord::PendingMigrationError => e
 	exit 1
 end
 RSpec.configure do |config|
+	# Factory bot
+	# required from support/factory_bot.rb
+	# config.include FactoryBot::Syntax::Methods
 	# DB cleaning strategy setup #
 	# -------------------------- #
 	#* before tests run
