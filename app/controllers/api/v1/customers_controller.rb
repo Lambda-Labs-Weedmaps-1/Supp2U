@@ -6,7 +6,7 @@ module Api
           if params[:user_id].present?
               @customers = Customer.where(user_id: params[:user_id])
           else
-              @customers = Customer.all.with_attached_image
+              @customers = Customer.all
           end
           render json: @customers
         end
@@ -14,7 +14,7 @@ module Api
         def show
           @customer = Customer.find(params[:user_id])
 
-          render json: @customer.with_attached_image
+          render json: @customer
         end
 
         def create
