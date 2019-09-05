@@ -8,7 +8,7 @@ local:
 
 amazon:
    service: s3
-   access_key_id: ""
-   secret_access_key: ""
-   bucket: "supp2u"
+   access_key_id: ENV["ACCESS_KEY_ID"]
+   secret_access_key: ENV["SECRET_ACCESS_KEY"]
+   bucket: ENV["bucket"]
    region: "us-east-1"
