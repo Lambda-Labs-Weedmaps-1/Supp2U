@@ -7,7 +7,7 @@ module Api
             if params[:user_id].present?
                 @businesses = Business.where(user_id: params[:user_id])
             else
-                @businesses = Business.all
+                @businesses = Business.all.with_attached_image
             end
             render json: @businesses
         end
@@ -15,7 +15,7 @@ module Api
         def show
             @business = Business.find(params[:id])
 
-            render json: @business
+            render json: @business.with_attached_image
         end
 
         def create
@@ -31,8 +31,13 @@ module Api
         def update
             @business = Business.find(params[:id])
 
-            if @business.update(update_params)
-                render json: @business, status: :created
+            # if @business.update(update_params)
+            #     render json: @business, status: :created
+            # else
+            #     render json: @business.errors, status: :unprocessable_entity
+            # end
+            if ImageUploadService.new(@business, update_params).call
+                render json: @business, status: :ok
             else
                 render json: @business.errors, status: :unprocessable_entity
             end
@@ -61,11 +66,11 @@ module Api
 
         #user_id will need to be passed in on the front end.
         def business_params
-            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id)
+            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id, :image)
         end
 
         def update_params
-           params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat)
+           params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :image)
         end
 
       end
