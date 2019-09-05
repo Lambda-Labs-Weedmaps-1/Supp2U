@@ -7,7 +7,7 @@ module Api
             if params[:user_id].present?
                 @businesses = Business.where(user_id: params[:user_id])
             else
-                @businesses = Business.all.with_attached_image
+                @businesses = Business.all
             end
             render json: @businesses
         end
@@ -15,7 +15,7 @@ module Api
         def show
             @business = Business.find(params[:id])
 
-            render json: @business.with_attached_image
+            render json: @business
         end
 
         def create
