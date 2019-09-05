@@ -6,5 +6,6 @@ FactoryBot.define do
     state { "CO" }
     street { "620 E 6th Ave" }
     zipcode { 80_203 }
+    image {}
   end
 end
