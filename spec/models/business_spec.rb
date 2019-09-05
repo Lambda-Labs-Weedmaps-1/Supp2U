@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# Run with `rspec spec/models/business_spec.rb`
 RSpec.describe Business, type: :model do
   before(:all) do
     # @user1 = create(:user)
