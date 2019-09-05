@@ -30,13 +30,17 @@ module Api
 
         def update
             @business = Business.find(params[:id])
+            puts @business
 
+
+            @upload = ImageUploader.new(@business, update_params)
             # if @business.update(update_params)
             #     render json: @business, status: :created
             # else
             #     render json: @business.errors, status: :unprocessable_entity
             # end
-            if ImageUploadService.new(@business, update_params).call
+            puts "I AM HEREEEEEEEEEEEEEEE #{update_params}"
+            if @upload.call
                 render json: @business, status: :ok
             else
                 render json: @business.errors, status: :unprocessable_entity
@@ -70,9 +74,9 @@ module Api
         end
 
         def update_params
-           params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :image)
+           params.permit(:id, :image, :name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat)
         end
 
       end
     end
-  end
+end
