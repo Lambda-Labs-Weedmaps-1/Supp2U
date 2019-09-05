@@ -13,8 +13,8 @@
 
 FactoryBot.define do
 	factory :user do
-		username { 'PickleRiccckkkk' }
-		email { 'blipsnchitz@example.com' }
-		password { 'wubbalubbadubdub' }
+    # username { "PickleRiccckkkk" }
+		# email { "blipsnchitz@example.com" }
+		# password { "wubbalubbadubdub" }
 	end
 end

@@ -1,34 +1,22 @@
 require 'rails_helper'
 
-# Validations what makes a business a business
 RSpec.describe Business, type: :model do
-	it 'is valid with valid attributes' do
-		expect(
-			Business.new(
-				user_id: 10,
-				name: "Angelo's Taverna",
-				website: 'angelosdenver.com',
-				city: 'Denver',
-				state: 'CO',
-				street: '620 E 6th Ave',
-				zipcode: 80_203,
-				theme: 'American',
-				description: "Angelo's Yo !",
-				lat: '39.725465',
-				long: '-104.979174'
-			)
-		).to be_valid
-	end
-	it 'is not valid without a name' do
-		business = Business.new(name: nil)
-		expect(business).to_not be_valid
-	end
-	it 'is not valid without a city' do
-	end
-	it 'is not valid without a state' do
-	end
-	it 'is not valid without a street' do
-	end
-	it 'is not valid without a zipcode' do
-	end
+  before(:all) do
+    @business1 = create(:business)
+  end
+
+  describe "associations" do
+    it { should belong_to(:user).class_name('User') }
+    it { should have_many(:reviews).through(:customers).class_name('Customer') } 
+    it { should have_one(:menu).class_name('Menu') }
+    it { should have_one(:schedule).class_name('Schedule') }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:state) }
+    it { should validate_presence_of(:street) }
+    it { should validate_presence_of(:zipcode) }
+  end
 end
