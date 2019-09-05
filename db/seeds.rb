@@ -90,17 +90,17 @@ Business.create!(
 )
 
 Customer.create!(
-    user_id: 4,
+    user_id: 1,
     custname: "Athos"
 )
 
 Customer.create!(
-    user_id: 5,
+    user_id: 2,
     custname: "Porthos"
 )
 
 Customer.create!(
-    user_id: 6,
+    user_id: 3,
     custname: "Aramis"
 )
 
