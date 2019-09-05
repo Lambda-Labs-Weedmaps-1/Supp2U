@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Business, type: :model do
   before(:all) do
+    @user1 = create(:user)
     @business1 = create(:business)
   end
 
