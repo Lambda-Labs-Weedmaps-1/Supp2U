@@ -18,12 +18,12 @@ example_id                            | status | run_time        |
 ./spec/models/item_spec.rb[1:2:2]     | passed | 0.00535 seconds |
 ./spec/models/menu_spec.rb[1:1:1]     | passed | 0.0026 seconds  |
 ./spec/models/menu_spec.rb[1:1:2]     | passed | 0.00768 seconds |
-./spec/models/review_spec.rb[1:1:1]   | failed | 0.00002 seconds |
+./spec/models/review_spec.rb[1:1:1]   | failed | 0.00003 seconds |
 ./spec/models/review_spec.rb[1:1:2]   | failed | 0.00001 seconds |
 ./spec/models/review_spec.rb[1:2:1]   | failed | 0.00001 seconds |
 ./spec/models/review_spec.rb[1:2:2]   | failed | 0.00001 seconds |
-./spec/models/review_spec.rb[1:2:3]   | failed | 0.00001 seconds |
-./spec/models/review_spec.rb[1:2:4]   | failed | 0.00001 seconds |
+./spec/models/review_spec.rb[1:2:3]   | failed | 0.00002 seconds |
+./spec/models/review_spec.rb[1:2:4]   | failed | 0 seconds       |
 ./spec/models/schedule_spec.rb[1:1:1] | passed | 0.02157 seconds |
 ./spec/models/user_spec.rb[1:1:1]     | passed | 0.01155 seconds |
 ./spec/models/user_spec.rb[1:1:2]     | passed | 0.01874 seconds |
