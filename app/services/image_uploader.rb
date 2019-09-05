@@ -1,16 +1,17 @@
-class ImageUploadService
-    def initialze(customer, params)
-        @customer = customer
+
+class ImageUploader
+    def initialize(foobar, params)
+        @foobar = foobar
         @params = params
     end
 
     def call
         if @params[:image] && !file?(@params[:image])
-            delete_image if @customer.image.attached?
+            delete_image if @foobar.image.attached?
             @params.delete(:image)
         end
-
-        @customer.update(@params)
+        puts "updating the parameters"
+        @foobar.update(@params)
     end
 
     private
@@ -19,6 +20,6 @@ class ImageUploadService
     end
 
     def delete_image
-        @customer.image.purge
+        @foobar.image.purge
     end
 end
