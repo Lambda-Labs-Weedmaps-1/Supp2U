@@ -11,6 +11,7 @@ RSpec.describe Business, type: :model do
     it { should have_many(:reviews).through(:customers).class_name('Customer') } 
     it { should have_one(:menu).class_name('Menu') }
     it { should have_one(:schedule).class_name('Schedule') }
+    it { should have_one_attached(:image) }
   end
 
   describe "validations" do
