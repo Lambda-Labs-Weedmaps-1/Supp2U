@@ -26,6 +26,17 @@ module Api
           end
         end
 
+        def show
+          @review = Review.find(params[:id])
+
+          if @review
+            render json: @review, status: :ok
+          else
+            render json: @review.errors, status: :unprocessable_entity
+          end
+        end
+
+
 
         def update
           @review = Review.find(params[:id])
