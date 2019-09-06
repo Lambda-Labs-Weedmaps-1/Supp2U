@@ -2,13 +2,11 @@
 #default will fill in the blanks, so to speak.
 default: &default
   host: 127.0.0.1
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgres
-  password: <%= ENV["PASSWORD"] %>
 
 development:
   <<: *default
@@ -16,7 +14,7 @@ development:
 
 test:
   <<: *default
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   database: supp2u_test
   pool: 5 <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
