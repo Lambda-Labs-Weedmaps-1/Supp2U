@@ -27,10 +27,12 @@ module Api
         def update
           @item = Item.find(params[:id])
 
-          if @item.update(item_params)
-              render json: @item, status: :created
+          @upload = ImageUploader.new(@item, item_params)
+
+          if @upload.call
+            render json: @upload, status: :ok
           else
-              render json: @item.errors, status: :unprocessable_entity
+            render json: @upload.errors, status: :unprocessable_entity
           end
       end
 
