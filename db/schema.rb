@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_193916) do
     t.integer "customer_id"
     t.integer "business_id"
     t.string "review"
-    t.float "rating"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
