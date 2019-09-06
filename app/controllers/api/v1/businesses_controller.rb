@@ -39,7 +39,6 @@ module Api
             # else
             #     render json: @business.errors, status: :unprocessable_entity
             # end
-            puts "I AM HEREEEEEEEEEEEEEEE #{update_params}"
             if @upload.call
                 render json: @business, status: :ok
             else
