@@ -1,7 +1,8 @@
-class ReviewSerializer < ActiveModel::Serializer
+class ItemSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :image, :customer_id, :business_id, :review, :rating
+  attributes :id, :item_name, :price, :category, :description, :cals, :image
+
   def image
     return unless object.image.attached?
 

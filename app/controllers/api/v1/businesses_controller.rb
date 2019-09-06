@@ -9,7 +9,7 @@ module Api
             else
                 @businesses = Business.all
             end
-            render json: @businesses
+            render json: @businesses.with_attached_image
         end
 
         def show
