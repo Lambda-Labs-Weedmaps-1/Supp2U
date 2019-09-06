@@ -8,7 +8,7 @@ module Api
           elsif params[:business_id].present?
             @reviews = Business.find(params[:business_id]).reviews
           end
-          render json: @reviews
+          render json: @reviews.with_attached_image
         end
 
         
@@ -36,16 +36,23 @@ module Api
           end
         end
 
-
-
         def update
           @review = Review.find(params[:id])
 
-          if @review.update(review_params)
-            render json: @review, status: :created
+          @upload = ImageUploader.new(@business, review_params)
+
+          # if @review.update(review_params)
+          #   render json: @review, status: :created
+          # else
+          #   render json: @review.errors, status: :unprocessable_entity
+          # end
+
+          if @upload.call
+            render json: @upload, status: :ok
           else
-            render json: @review.errors, status: :unprocessable_entity
+            render json: @upload.errors, status: :unprocessable_entity
           end
+
         end
 
         def destroy
@@ -62,7 +69,7 @@ module Api
         def review_params
           #passing through the business_id needs to be handled on the front-end
           #Going to let the front-end handle and decide the range for the rating
-          params.permit(:customer_id, :business_id, :review, :rating)
+          params.permit(:customer_id, :business_id, :review, :rating, :image)
         end
 
       end
