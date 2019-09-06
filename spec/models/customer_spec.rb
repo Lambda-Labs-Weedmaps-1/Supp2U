@@ -2,7 +2,9 @@ require "rails_helper"
 
 RSpec.describe Customer, :type => :model do 
   before(:all) do
+    # make these Customers before `all` tests
     # built_users = build_list(:user, 10)
+    # can't have a customer until a user exists
     # @user2 = create(:user)
     # @user2 = create(:user)
     # @customer1 = create(:customer)

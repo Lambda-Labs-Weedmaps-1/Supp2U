@@ -3,6 +3,7 @@ require 'rails_helper'
 # Run with `rspec spec/models/business_spec.rb`
 RSpec.describe Business, type: :model do
   before(:all) do
+    # make these Businesses before `all` tests
     # @user1 = create(:user)
     # built_users = build_list(:user, 10)
     # @business1 = create(:business)

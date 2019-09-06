@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :schedule do
+    # add hours strings
      sunday {}
      monday {}
      tuesday {}
