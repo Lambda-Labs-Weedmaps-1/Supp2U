@@ -20,13 +20,14 @@ RSpec.configure do |config|
         version: 'v1',
         description: 'Yelp clone api'
       },
-      servers: [{ url: 'https://development.gigantic-server.com/v1', description: 'Development server' },
-                  { url: 'https://staging.gigantic-server.com/v1', description: 'Staging server' },
-                  { url: 'https://api.gigantic-server.com/v1', description: 'Production server' }],
       basePath: '/api/v1',
       paths: {},
       definitions: {
         Users: {
+          type: 'array',
+          properties: { '#ref' => '#/definitions/User' }
+        },
+        User: {
           type: 'object',
           properties: {
             name: { type: 'string' },
@@ -38,7 +39,7 @@ RSpec.configure do |config|
             created_at: { type: 'string' },
             updated_at: { type: 'string' }
           },
-          required: %w[username email password]
+          required: %w[ email ]
         },
         Customers: {
           type: 'object',
