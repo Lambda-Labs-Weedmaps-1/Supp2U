@@ -4,7 +4,7 @@ class Reviews < ActiveRecord::Migration[5.2]
       t.integer :customer_id
       t.integer :business_id
       t.string :review
-      t.integer :rating
+      t.float :rating
 
       t.timestamps
     end

@@ -1,3 +1,4 @@
+
 module Api
     module V1
       class BusinessesController < ApplicationController
@@ -8,7 +9,7 @@ module Api
             else
                 @businesses = Business.all
             end
-            render json: @businesses
+            render json: @businesses.with_attached_image
         end
 
         def show
@@ -29,9 +30,17 @@ module Api
 
         def update
             @business = Business.find(params[:id])
+            puts @business
 
-            if @business.update(update_params)
-                render json: @business, status: :created
+
+            @upload = ImageUploader.new(@business, update_params)
+            # if @business.update(update_params)
+            #     render json: @business, status: :created
+            # else
+            #     render json: @business.errors, status: :unprocessable_entity
+            # end
+            if @upload.call
+                render json: @business, status: :ok
             else
                 render json: @business.errors, status: :unprocessable_entity
             end
@@ -47,17 +56,26 @@ module Api
             end
         end
 
+        def ratings
+            @all_ratings = Business.find(params[:id]).reviews.pluck(:rating)
+            @sum = @all_ratings.reduce(:+)
+            @rating = Float(@sum/@all_ratings.length).ceil(1)
+
+            render json: @rating
+        end
+
+
         private
 
         #user_id will need to be passed in on the front end.
         def business_params
-            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id)
+            params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id, :image)
         end
 
         def update_params
-           params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat)
+           params.permit(:id, :image, :name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat)
         end
 
       end
     end
-  end
+end
