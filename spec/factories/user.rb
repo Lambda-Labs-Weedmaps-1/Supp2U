@@ -16,5 +16,8 @@ FactoryBot.define do
 		username { 'PickleRiccckkkk' }
 		email { 'blipsnchitz@example.com' }
 		password { 'wubbalubbadubdub' }
-	end
+  end
+  factory :random_user, class: User do
+    email { Faker::Internet.email }
+  end
 end

@@ -9,4 +9,12 @@ FactoryBot.define do
     # add image url
     image {}
   end
+  factory :random_business, class: Business do
+    user_id { 1 }
+    name { Faker::Name.name }
+    street { Faker::Address.street_address }
+    zipcode {Faker::Company.sic_code}
+    city { Faker::Address.city  }
+    state { Faker::Address.state }
+  end
 end

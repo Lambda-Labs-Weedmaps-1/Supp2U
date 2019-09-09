@@ -1,8 +1,6 @@
-
 module Api
     module V1
       class BusinessesController < ApplicationController
-
         def index
             if params[:user_id].present?
                 @businesses = Business.where(user_id: params[:user_id])

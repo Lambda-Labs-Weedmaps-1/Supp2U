@@ -31,10 +31,10 @@ RSpec.configure do |config|
           type: 'object',
           properties: {
             name: { type: 'string' },
-            username: { type: 'string' },
+            username: { type: 'string', 'x-nullable': true },
             email: { type: 'string' },
-            password: { type: 'string' },
-            wallet: { type: 'string' },
+            password: { type: 'string', 'x-nullable': true },
+            wallet: { type: 'string', 'x-nullable': true },
             is_admin: { type: 'boolean' },
             created_at: { type: 'string' },
             updated_at: { type: 'string' }
@@ -42,6 +42,10 @@ RSpec.configure do |config|
           required: %w[ email ]
         },
         Customers: {
+          type: 'array',
+          properties: { '#ref' => '#/definitions/Customer' }
+        },
+        Customer: {
           type: 'object',
           properties: {
             user_id: { type: 'integer' },
@@ -54,17 +58,17 @@ RSpec.configure do |config|
           properties: {
             user_id: { type: 'integer' },
             name: { type: 'string' },
-            website: { type: 'string' },
+            website: { type: 'string', 'x-nullable': true },
             city: { type: 'string' },
             street: { type: 'string' },
             state: { type: 'string' },
-            zipcode: { type: 'string' },
-            building_number: { type: 'string' },
-            theme: { type: 'string' },
-            description: { type: 'string' },
+            zipcode: { type: 'integer' },
+            building_number: { type: 'string', 'x-nullable': true },
+            theme: { type: 'string', 'x-nullable': true },
+            description: { type: 'string', 'x-nullable': true },
             hours: { type: 'string' },
-            long: { type: 'string' },
-            lat: { type: 'string' },
+            long: { type: 'string', 'x-nullable': true },
+            lat: { type: 'string', 'x-nullable': true },
             recommended: { type: 'boolean' },
             created_at: { type: 'string' },
             updated_at: { type: 'string' }
