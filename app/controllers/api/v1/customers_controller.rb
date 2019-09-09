@@ -30,12 +30,6 @@ module Api
         def update
           @customer = Customer.find(params[:user_id])
 
-          # if @customer.update(customer_params)
-          #   render json: @customer, status: :created
-          # else
-          #   render json: @customer.errors, status: :unprocessable_entity
-          # end
-
           if ImageUploadService.new(@customer, customer_params).call
             render json: @customer, status: :ok
           else

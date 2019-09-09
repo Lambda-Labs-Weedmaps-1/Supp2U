@@ -9,7 +9,7 @@ module Api
             else
                 @businesses = Business.all
             end
-            render json: @businesses
+            render json: @businesses.with_attached_image
         end
 
         def show
@@ -39,7 +39,6 @@ module Api
             # else
             #     render json: @business.errors, status: :unprocessable_entity
             # end
-            puts "I AM HEREEEEEEEEEEEEEEE #{update_params}"
             if @upload.call
                 render json: @business, status: :ok
             else
