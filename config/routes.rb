@@ -9,24 +9,25 @@ Rails.application.routes.draw do
 	#ALL 7 ACTIONS = index, new, create, show, edit, update, destroy.
 	#EDIT and NEW will not be used.
 
-  namespace :api do
-    namespace :v1 do
-      # resources :home, only: [:index, :show]
-      post '/auth/login', to: 'authentication#login'
-      resources :users, except: [:edit, :new] do
-        resources :customers, only: [:index, :create]
-        resources :businesses, only: [:index, :create]
-      end
+  	namespace :api do
+		namespace :v1 do
+		# resources :home, only: [:index, :show]
+			post '/auth/login', to: 'authentication#login'
+			resources :users, except: [:edit, :new] do
+				resources :customers, only: [:index, :create]
+				resources :businesses, only: [:index, :create]
+			end
 
-      resources :businesses, except: [:create, :edit, :new] do
-        resources :menus, only: [:index, :create]
-        resources :schedules, only: [:index, :create]
-        resources :reviews, only: [:index]
-          get :ratings, on: :member
-      end
+			resources :businesses, except: [:create, :edit, :new] do
+				resources :menus, only: [:index, :create]
+				resources :schedules, only: [:index, :create]
+				resources :reviews, only: [:index]
+				get :ratings, on: :member
+			end
 
 			resources :customers, except: %i[create edit new] do
 				resources :reviews, only: %i[index create]
+				resources :carts, only: [:index, :create]
 			end
 
 			resources :menus, only: %i[show update destroy] do
@@ -36,6 +37,10 @@ Rails.application.routes.draw do
 			resources :items, only: %i[show destroy update]
 			resources :reviews, only: %i[show destroy update]
 			resources :schedules, only: %i[show destroy update]
+
+			resources :carts, only: [:show, :update]
+			
+
 		end
 	end
 end
