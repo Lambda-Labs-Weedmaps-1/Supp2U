@@ -46,7 +46,7 @@
 #         run_test!
 #       end
 
-#       response '422', 'invalid request' do
+#       response '422', 'invalid requests' do
 #         let(:user) { { name: nil } }
 #         run_test!
 #       end

@@ -1,24 +1,22 @@
 FactoryBot.define do
-	factory :business do
-		user_id { 1 }
-		name { "Angelo's Taverna" }
-		city { 'Denver' }
-		state { 'CO' }
-		street { '620 E 6th Ave' }
-		zipcode { 80_203 }
-		# add image url
-		image {}
-	end
-
-	factory :random_business, class: Business do
-		user_id { 1 }
-		# user_id { Faker::Number.within(range: 1..10) }
-		name { Faker::Restaurant.name }
-		city { Faker::Address.city }
-		state { Faker::Address.state }
-		street { Faker::Address.street_address }
-		zipcode { Faker::Address.zip }
-		# add image url
-		image {}
-	end
+  # factory :business do
+  #   user_id { 1 }
+  #   name { "Angelo's Taverna" }
+  #   city { "Denver" }
+  #   state { "CO" }
+  #   street { "620 E 6th Ave" }
+  #   zipcode { 80_203 }
+  #   # add image url
+  #   image {}
+  # end
+  
+  factory :random_business, class: Business do
+    user_id { 1 }
+    name { Faker::Name.name }
+    street { Faker::Address.street_address }
+    zipcode {Faker::Company.sic_code}
+    city { Faker::Address.city  }
+    state { Faker::Address.state }
+    image { { io: File.open('/Users/sibhattemelso/Desktop/test.png'), filename: "test.png", content_type: "image/png" }}
+  end
 end

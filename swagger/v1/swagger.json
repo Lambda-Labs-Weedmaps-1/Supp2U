@@ -5,20 +5,6 @@
     "version": "v1",
     "description": "Yelp clone api"
   },
-  "servers": [
-    {
-      "url": "https://development.gigantic-server.com/v1",
-      "description": "Development server"
-    },
-    {
-      "url": "https://staging.gigantic-server.com/v1",
-      "description": "Staging server"
-    },
-    {
-      "url": "https://api.gigantic-server.com/v1",
-      "description": "Production server"
-    }
-  ],
   "basePath": "/api/v1",
   "paths": {
     "/businesses": {
@@ -727,7 +713,7 @@
     },
     "/users": {
       "get": {
-        "summary": "Gets all users",
+        "summary": "users",
         "tags": [
           "User"
         ],
@@ -740,134 +726,6 @@
             "description": "All users",
             "schema": {
               "type": "array",
-              "$ref": "#/definitions/Users"
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Creates a customer",
-        "tags": [
-          "User"
-        ],
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Users",
-              "required": [
-                "username",
-                "email",
-                "password"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "User created",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Users"
-            }
-          },
-          "422": {
-            "description": "invalid request"
-          }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "summary": "Get a user by id ",
-        "tags": [
-          "User"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User by id",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Users"
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Updated user by id",
-        "tags": [
-          "User"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "type": "integer",
-            "required": true
-          },
-          {
-            "name": "user",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Users",
-              "required": [
-                "username",
-                "email",
-                "password"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated user by id",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Users"
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete user by id",
-        "tags": [
-          "User"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Delete user by id",
-            "schema": {
-              "type": "object",
               "$ref": "#/definitions/Users"
             }
           }
