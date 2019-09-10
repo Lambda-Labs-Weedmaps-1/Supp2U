@@ -4,9 +4,9 @@ require 'rails_helper'
 RSpec.describe Business, type: :model do
 	before(:all) do
 		# make these Businesses before `all` tests
-		@user1 = create(:user)
-		built_users = build_list(:user, 10)
-		@business1 = create(:business)
+		@user1 = create(:random_user)
+		built_users = build_list(:random_user, 10)
+		@business1 = create(:random_business)
 	end
 
 	describe 'associations' do

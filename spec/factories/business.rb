@@ -9,9 +9,9 @@ FactoryBot.define do
   #   # add image url
   #   image {}
   # end
-  
   factory :random_business, class: Business do
-    user_id { 1 }
+    # user_id { 1 }
+    association :user, factory: :random_user
     name { Faker::Name.name }
     street { Faker::Address.street_address }
     zipcode {Faker::Company.sic_code}
