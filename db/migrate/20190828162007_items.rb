@@ -7,6 +7,7 @@ class Items < ActiveRecord::Migration[5.2]
       t.string :category
       t.string :description
       t.integer :cals
+      # t.integer :cart_id
 
       t.timestamps
     end

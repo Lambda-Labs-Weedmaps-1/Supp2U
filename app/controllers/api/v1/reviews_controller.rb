@@ -39,7 +39,7 @@ module Api
         def update
           @review = Review.find(params[:id])
 
-          @upload = ImageUploader.new(@business, review_params)
+          @upload = ImageUploader.new(@review, review_params)
 
           # if @review.update(review_params)
           #   render json: @review, status: :created
