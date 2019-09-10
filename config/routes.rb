@@ -19,10 +19,12 @@ Rails.application.routes.draw do
 			end
 
 			resources :businesses, except: [:create, :edit, :new] do
+				get :ratings, on: :member
 				resources :menus, only: [:index, :create]
 				resources :schedules, only: [:index, :create]
 				resources :reviews, only: [:index]
-				get :ratings, on: :member
+				resources :orders, only: [:index]
+					post :shiporder, on: :member
 			end
 
 			resources :customers, except: [:create, :edit, :new] do
@@ -45,7 +47,6 @@ Rails.application.routes.draw do
 			end
 
 			resources :orders, only: [:show, :index, :destroy, :update] do 
-				post :ship, on: :member
 				resources :items, only: [:index, :create]
 			end
 		end

@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
   create_table "orders", force: :cascade do |t|
     t.string "status"
     t.integer "customer_id"
+    t.integer "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
