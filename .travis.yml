@@ -7,7 +7,7 @@ script:
 #  - bundle exec rails db:create
 #  - bundle exec rails db:migrate
 #  - bundle exec rails db:seed
-  - bundle exec rspec   spec/integration/users_spec.rb
+  - bundle exec rspec spec/models/review_spec.rb --format documentation
 #deploy:
 #  provider: heroku
 #  api_key:
