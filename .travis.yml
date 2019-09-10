@@ -2,12 +2,14 @@ language:
   ruby
 rvm:
   - 2.5.5
+cache:
+  - bundler
 services:
   - postgresql
 before_script:
   - psql -c 'create database supp2u_test;' -U postgres
 script:
-  - bundle install
+#  - bundle install
   - bundle exec rspec --format documentation
 #deploy:
 #  provider: heroku
