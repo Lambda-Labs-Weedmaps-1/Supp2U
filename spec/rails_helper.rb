@@ -40,7 +40,7 @@ RSpec.configure do |config|
 	# -------------------------- #
 	#* before tests run
 	config.before(:suite) do
-		DatabaseCleaner.strategy = :transaction
+		DatabaseCleaner.strategy = :truncation
 		DatabaseCleaner.clean_with(:truncation)
 	end
 	#* before and after each test runs

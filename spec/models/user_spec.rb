@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  # Validate -> Associations -> Indexes -> Destruction!!!
 	# FactoryBot building a 'valid user'
 	# by using `subject` test will reference the object
 	# subject { build(:user) }
@@ -17,12 +18,6 @@ RSpec.describe User, type: :model do
 	describe 'validations' do
 		it { should validate_presence_of(:email) }
 		it { should validate_uniqueness_of(:email) }
-	end
-
-	context 'when email is absent' do
-		# overriding base object with nil email to fail this test
-		subject { build(:random_user, email: nil) }
-		it { should_not validate_presence_of(:email) }
 	end
 
 	context 'when user is a customer' do
