@@ -2,6 +2,10 @@ language:
   ruby
 rvm:
   - 2.5.5
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database supp2u_test;' -U postgres
 script:
   - bundle install
 #  - bundle exec rails db:create
