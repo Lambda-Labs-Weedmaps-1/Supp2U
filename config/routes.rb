@@ -25,24 +25,29 @@ Rails.application.routes.draw do
 				get :ratings, on: :member
 			end
 
-			resources :customers, except: %i[create edit new] do
-				resources :reviews, only: %i[index create]
+			resources :customers, except: [:create, :edit, :new] do
+				resources :reviews, only: [:index, :create]
 				resources :carts, only: [:index, :create]
+				resources :orders, only: [:index, :create]
 			end
 
-			resources :menus, only: %i[show update destroy] do
-				resources :items, only: %i[index create]
+			resources :menus, only: [:show, :update, :destroy] do
+				resources :items, only: [:index, :create]
 			end
 
-			resources :items, only: %i[show destroy update]
-			resources :reviews, only: %i[show destroy update]
-			resources :schedules, only: %i[show destroy update]
+			resources :items, only: [:show, :destroy, :update]
+			resources :reviews, only: [:show, :destroy, :update]
+			resources :schedules, only: [:show, :destroy, :update]
 
 			resources :carts, only: [:show, :update] do
 				put :add, on: :member
 				get :itemfetch, on: :member
 			end
 
+			resources :orders, only: [:show, :index, :destroy, :update] do 
+				post :ship, on: :member
+				resources :items, only: [:index, :create]
+			end
 		end
 	end
 end
