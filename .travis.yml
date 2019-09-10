@@ -6,6 +6,8 @@ rvm:
 cache:
   - bundler
 before_script:
+  - rvm install 2.2.5
+  - rvm use 2.2.5
   - bundle exec rake db:create
   - bundle exec rake db:migrate
   - bundle exec rake db:seed
