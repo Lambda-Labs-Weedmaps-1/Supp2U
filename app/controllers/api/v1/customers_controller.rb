@@ -20,7 +20,7 @@ module Api
         def create
           @customer = Customer.new(customer_params)
 
-          if @customer.save
+          if @customer.save 
               render json: @customer, status: :created
           else
               render json: @customer.errors, status: :unprocessable_entity
@@ -30,12 +30,15 @@ module Api
         def update
           @customer = Customer.find(params[:user_id])
 
-          if ImageUploadService.new(@customer, customer_params).call
-            render json: @customer, status: :ok
+          @upload = ImageUploader.new(@customer, customer_params)
+
+          if @upload.call
+            render json: @business, status: :ok
           else
-            render json: @customers.errors, status: :unprocessable_entity
+            render json: @business.errors, status: :unprocessable_entity
           end
         end
+
 
         def destroy
           @customer = Customer.find(params[:user_id])
