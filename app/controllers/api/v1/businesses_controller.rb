@@ -3,10 +3,11 @@ module Api
       class BusinessesController < ApplicationController
         def index
             if params[:user_id].present?
-                @businesses = Business.where(user_id: params[:user_id])
+                @businesses = Business.where(user_id: params[:user_id]).first
             else
                 @businesses = Business.all
             end
+            puts @businesses
             render json: @businesses.with_attached_image
         end
 
@@ -57,7 +58,11 @@ module Api
         def ratings
             @all_ratings = Business.find(params[:id]).reviews.pluck(:rating)
             @sum = @all_ratings.reduce(:+)
-            @rating = Float(@sum/@all_ratings.length).ceil(1)
+            @rating = if @sum.nil?
+                        0
+                      else
+                        Float(@sum/@all_ratings.length).ceil(1)
+                      end
 
             render json: @rating
         end
