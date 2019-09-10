@@ -2,7 +2,6 @@ language:
   ruby
 rvm:
   - 2.5.5
-  - jruby
 cache:
   - bundler
 before_script:
@@ -10,9 +9,9 @@ before_script:
   - gem update --system
   - rvm install 2.2.5
   - rvm use 2.2.5
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
-  - bundle exec rake db:seed
+#  - bundle exec rake db:create
+#  - bundle exec rake db:migrate
+#  - bundle exec rake db:seed
 deploy:
   provider: heroku
   api_key:
