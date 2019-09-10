@@ -20,8 +20,10 @@ module Api
 
         def create
             @business = Business.new( business_params )
+            
+            @upload = ImageUploader.new(@business, update_params)
 
-            if @business.save
+            if @business.save && @upload.call
                 render json: @business, status: :created
             else
                 render json: @business.errors, status: :unprocessable_entity
