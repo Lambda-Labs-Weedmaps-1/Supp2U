@@ -16,5 +16,6 @@ FactoryBot.define do
     zipcode {Faker::Company.sic_code}
     city { Faker::Address.city  }
     state { Faker::Address.state }
+    image { { io: File.open('/Users/sibhattemelso/Desktop/test.png'), filename: "test.png", content_type: "image/png" }}
   end
 end
