@@ -13,15 +13,16 @@ require 'faker'
 # -----------------------------------------------------------------------------
 
 FactoryBot.define do
-	factory :user do
-		username { 'PickleRiccckkkk' }
-		email { 'blipsnchitz@example.com' }
-		password { 'wubbalubbadubdub' }
-  end
+	# factory :user do
+	# 	username { 'PickleRiccckkkk' }
+	# 	email { 'blipsnchitz@example.com' }
+	# 	password { 'wubbalubbadubdub' }
+  # end
 
   factory :random_user, class: User do
     username { Faker::Name.name }
     email { Faker::Internet.safe_email }
     # password { Faker::Password.password}
   end
+
 end

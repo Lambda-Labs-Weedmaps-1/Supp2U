@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
 	# build(:user) => Returns instance w/o saving
   # create(:user) => Returns saved instance
-  before(:all) do
+  before do
     built_users = build_list(:random_user, 10)
   end
   
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
 
 	context 'when email is absent' do
 		# overriding base object with nil email to fail this test
-		subject { build(:user, email: nil) }
+		subject { build(:random_user, email: nil) }
 		it { should_not validate_presence_of(:email) }
 	end
 
