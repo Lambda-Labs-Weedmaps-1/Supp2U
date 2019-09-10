@@ -13,6 +13,19 @@ RSpec.describe 'Business request', type: :request do
       expect(response_body.count).to eq(3)
     end
   end
+  describe 'Get /api/v1/businesses/business_id/ratings' do
+    let(:user) { create(:random_user) }
+    let(:random_business) { create(:random_business) }
+    context 'with valid request' do
+      it 'should return ratings for business by id' do
+        get "/api/v1/businesses/#{random_business[:id]}/ratings"
+        response_body = JSON.parse(response.body)
+        expect(response).to have_http_status(200)
+        expect(response_body).to eq(0)
+
+      end
+    end
+  end
   describe 'POST /api/v1/users/{id}/businesses' do
     let(:user) { create(:random_user) }
     context 'with valid request' do
@@ -57,16 +70,16 @@ RSpec.describe 'Business request', type: :request do
     let(:business) { create(:random_business) }
 
     it 'should update business by id' do
-      updateBusiness = { city: 'portland' }
-      put "/api/v1/businesses/#{business[:id]}", params: updateBusiness
+      update_business = { city: 'portland' }
+      put "/api/v1/businesses/#{business[:id]}", params: update_business
       response_body = JSON.parse(response.body).deep_symbolize_keys
       expect(response).to have_http_status(200)
-      expect(response_body[:city]).to eq(updateBusiness[:city])
+      expect(response_body[:city]).to eq(update_business[:city])
       expect(response_body[:id]).to eq(business[:id])
     end
     it 'should send invalid request to update business by id' do
-      updateBusiness = { city: nil }
-      put "/api/v1/businesses/#{business[:id]}", params: updateBusiness
+      update_business = { city: nil }
+      put "/api/v1/businesses/#{business[:id]}", params: update_business
       response_body = JSON.parse(response.body).deep_symbolize_keys
       expect(response).to have_http_status(422)
       expect(response_body[:city]).to eq(['can\'t be blank'])
@@ -92,4 +105,20 @@ RSpec.describe 'Business request', type: :request do
     #   expect(response_body[:message]).to eq('Could not find the user you are trying to remove.')
     # end
   end
+
+  # describe 'GET /api/v1/users/{user_id}/businesses' do
+  #   let(:user) { create(:user) }
+  #   let(:random_business) { create(:random_business, user_id: user[:id]) }
+  #
+  #
+  #   it 'should return business by user_id' do
+  #     puts user[:id]
+  #     puts random_business[:image]
+  #
+  #     get "/api/v1/users/#{user[:id]}/businesses"
+  #     response_body = JSON.parse(response.body)
+  #     expect(response).to have_http_status(200)
+  #     expect(response_body[:city]).to eq(random_business[:city])
+  #   end
+  # end
 end
