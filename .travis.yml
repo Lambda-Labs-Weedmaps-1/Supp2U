@@ -4,11 +4,10 @@ rvm:
   - 2.5.5
 script:
   - bundle install
-  - bundle exec rails db:setup
-  - bundle exec rails db:create
+#  - bundle exec rails db:create
 #  - bundle exec rails db:migrate
 #  - bundle exec rails db:seed
-#  - bundle exec rspec
+  - bundle exec rspec   spec/integration/users_spec.rb
 #deploy:
 #  provider: heroku
 #  api_key:
