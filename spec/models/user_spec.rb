@@ -6,11 +6,8 @@ RSpec.describe User, type: :model do
 	# subject { build(:user) }
 
 	# build(:user) => Returns instance w/o saving
-  # create(:user) => Returns saved instance
-  before(:all) do
-    built_users = build_list(:random_user, 10)
-  end
-  
+	# create(:user) => Returns saved instance
+	before { built_users = build_list(:random_user, 10) }
 
 	describe 'associations' do
 		it { should have_one(:customer).class_name('Customer') }

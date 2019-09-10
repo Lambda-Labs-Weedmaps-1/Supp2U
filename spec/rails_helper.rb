@@ -36,9 +36,6 @@ rescue ActiveRecord::PendingMigrationError => e
 	exit 1
 end
 RSpec.configure do |config|
-	# Factory bot
-	# required from support/factory_bot.rb
-	# config.include FactoryBot::Syntax::Methods
 	# DB cleaning strategy setup #
 	# -------------------------- #
 	#* before tests run
@@ -86,7 +83,8 @@ end
 shared_context 'with integration test' do
 	run_test!
 	after do |example|
-		example.metadata[:response][:examples] =
-				{ 'application/json' => JSON.parse(response.body, symbolize_names: true) }
+		example.metadata[:response][:examples] = {
+			'application/json' => JSON.parse(response.body, symbolize_names: true)
+		}
 	end
 end

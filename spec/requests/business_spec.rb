@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Business request', type: :request do
   describe 'GET /api/v1/businesses' do
-    before(:all) do
+    before do
       create(:random_user)
       create_list(:random_business, 3)
     end
