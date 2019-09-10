@@ -11,8 +11,9 @@ RSpec.describe Customer, type: :model do
 
 	describe 'associations' do
 		it { should belong_to(:user).class_name('User') }
-		it { should have_many(:reviews).class_name('Review') }
-		it { should have_one(:image) }
+    it { should have_many(:reviews).class_name('Review') }
+    # Todo update
+		# it { should have_one(:image) }
 	end
 
 	# Todo add once Model has validations attached

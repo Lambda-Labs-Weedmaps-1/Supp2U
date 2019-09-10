@@ -11,18 +11,18 @@ require 'faker'
 # user2 = create(:user, username: "PickleRiccckkkk", email: "bob@gmail.com")
 # user2 attributes will be username: PickleRiccckkkk, email: bob@gmail.com, #password: blah
 # -----------------------------------------------------------------------------
-
+# Persisting to the database slows down tests. Whenever possible, favor using FactoryGirl’s build_stubbed over create. build_stubbed will generate the object in memory and save you from having to write to the disk. If you are testing something in which you have to query for the object (like User.where(admin: true)), your database will be expecting to find it in the database, meaning you must use create.
 FactoryBot.define do
+	# skip_create
 	# factory :user do
 	# 	username { 'PickleRiccckkkk' }
 	# 	email { 'blipsnchitz@example.com' }
 	# 	password { 'wubbalubbadubdub' }
-  # end
+	# end
 
-  factory :random_user, class: User do
-    username { Faker::Name.name }
-    email { Faker::Internet.safe_email }
-    # password { Faker::Password.password}
-  end
-
+	factory :random_user, class: User do
+		username { Faker::Name.name }
+		email { Faker::Internet.safe_email }
+		# password { Faker::Password.password}
+	end
 end
