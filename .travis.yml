@@ -8,10 +8,7 @@ before_script:
   - psql -c 'create database supp2u_test;' -U postgres
 script:
   - bundle install
-#  - bundle exec rails db:create
-#  - bundle exec rails db:migrate
-#  - bundle exec rails db:seed
-  - bundle exec rspec spec/models/review_spec.rb --format documentation
+  - bundle exec rspec --format documentation
 #deploy:
 #  provider: heroku
 #  api_key:
