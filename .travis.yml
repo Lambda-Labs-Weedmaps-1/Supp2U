@@ -12,7 +12,7 @@ before_script:
 deploy:
   provider: heroku
   api_key:
-    secure: be692c06b6c26db8c7fa1c52bd5f46b6ef00bff9
+    secure: key
   app: supp2u
   on:
     repo: Lambda-Labs-Weedmaps-1/Supp2U
