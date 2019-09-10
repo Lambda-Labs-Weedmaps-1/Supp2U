@@ -20,4 +20,4 @@ deploy:
   on:
     repo: Lambda-Labs-Weedmaps-1/Supp2U
 script:
-  -rspec
+#  -rspec
