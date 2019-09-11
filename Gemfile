@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.0'
+ruby '2.5.5'
 
 gem 'jwt'
 
@@ -60,6 +60,7 @@ end
 
 group :test do 
   gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 group :development do
