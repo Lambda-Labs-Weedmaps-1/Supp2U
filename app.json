@@ -1,7 +1,17 @@
 {
   "name": "Supp2U",
   "scripts": {},
-  "env": {},
+  "env": {
+    "DATABASE_URL": {
+      "reqired": true
+    },
+    "JWT_SECRET": {
+      "reqired": true
+    },
+    "STRIPE_SECRET_KEY": {
+      "reqired": true
+    }
+  },
   "formation": {},
   "addons": [
     "heroku-postgresql"
