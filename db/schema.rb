@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
   create_table "customers", force: :cascade do |t|
     t.integer "user_id"
     t.string "custname"
+    t.string "stripe_token"
+    t.string "stripe_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,6 +77,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.string "item_name"
     t.float "price"
     t.string "category"
+    t.string "description"
+    t.integer "cals"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -105,7 +109,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.integer "customer_id"
     t.integer "business_id"
     t.string "review"
-    t.integer "rating"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
