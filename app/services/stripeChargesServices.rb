@@ -1,11 +1,11 @@
 class StripeChargesServices
     DEFAULT_CURRENCY = 'usd'.freeze
     
-    def initialize(params, user)
+    def initialize(params, customer)
       @stripe_email = params[:stripeEmail]
       @stripe_token = params[:stripeToken]
       @order = params[:order_id]
-      @user = user
+      @customer = customer
     end
   
     def call
@@ -14,11 +14,11 @@ class StripeChargesServices
   
     private
   
-    attr_accessor :user, :stripe_email, :stripe_token, :order
+    attr_accessor :customer, :stripe_email, :stripe_token, :order
   
     def find_customer
-    if user.stripe_token
-      retrieve_customer(user.stripe_token)
+    if customer.stripe_token
+      retrieve_customer(customer.stripe_token)
     else
       create_customer
     end
@@ -33,7 +33,7 @@ class StripeChargesServices
         email: stripe_email,
         source: stripe_token
       )
-      user.update(stripe_token: customer.id)
+      customer.update(stripe_token: customer.id)
       customer
     end
   
@@ -42,7 +42,7 @@ class StripeChargesServices
         customer: customer.id,
         amount: order_amount,
         description: customer.email,
-        currency: DEFAULT_CURRENCY
+        currency: usd,
       )
     end
   
