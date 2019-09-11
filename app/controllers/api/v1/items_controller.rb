@@ -48,7 +48,7 @@ module Api
 
         private
         def item_params
-          params.permit(:menu_id, :item_name, :price, :inventory, :category, :description, :cals, :images)
+          params.permit(:menu_id, :item_name, :price, :inventory, :category, :description, :cals, :image)
         end
 
       end
