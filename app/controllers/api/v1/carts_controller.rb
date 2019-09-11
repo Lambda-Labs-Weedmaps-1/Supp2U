@@ -11,12 +11,9 @@ module Api
 
 
             def create
-                # @cartitem = params[:id]
-                # @newItem = Menu.find(item = cartitem)
-
                 @cartthere = Customer.find(params[:customer_id]).cart
-                puts('CAT CHECK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-                puts(@cartthere)
+                # puts('CAT CHECK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+                # puts(@cartthere)
 
                 if @cartthere
                     render json: @cartthere, status: :ok
@@ -60,37 +57,42 @@ module Api
 
 
             def itemfetch
-                @cart = Cart.find(params[:id])
-
+                cart = Cart.find(params[:id])
                 #assumes coming in as an array
-                @itemlot = @cart.item_numbers
-
-                @arrayofitems = ["Array of Cart Items"]
-                # @arrayofitems = Array.new(@itemlot.length, "null")
-                puts("I AM HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-                puts(@arrayofitems)
-
-                @itemlot.each { |a| 
-                    @items = Item.where(id: a)
-                    puts(@items.inspect)
-                    @arrayofitems.push(@items)
-                    # @arrayofitems.unshift(@items)
-                    # @arrayofitems.delete("null")
-
-                    puts("I GOT HERE NOW MEOWWSWWWwwwwwwwwwwwwwww")
-                    puts(@arrayofitems)
-
-                }
-
-                # @arrayofitems.unshift()
-
-                if @arrayofitems.length > 0
-                    render json: @arrayofitems, status: :ok
-                else
-                    render json: @itemlot, status: :not_acceptable
+                itemlot = cart.item_numbers # looking at array column on carts table
+                arrayofitems = []
+                
+                itemlot.each do |item_id|
+                    item = Item.find(item_id)
+                    arrayofitems << item
                 end
 
-                
+                if arrayofitems.length > 0
+                    render json: arrayofitems, status: :ok
+                else
+                    render json: itemlot, status: :not_acceptable
+                end
+                # @cart = Cart.find(params[:id])
+
+                # #assumes coming in as an array
+                # @itemlot = @cart.item_numbers
+
+                # @arrayofitems = ["Array of Cart Items"]
+                # # @arrayofitems = Array.new(@itemlot.length, "null")
+                # puts("I AM HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+                # puts(@arrayofitems)
+
+                # @itemlot.each { |a| 
+                #     @items = Item.where(id: a)
+                #     puts(@items.inspect)
+                #     @arrayofitems.push(@items)
+                # }
+
+                # if @arrayofitems.length > 0
+                #     render json: @arrayofitems, status: :ok
+                # else
+                #     render json: @itemlot, status: :not_acceptable
+                # end
 
             end
 
