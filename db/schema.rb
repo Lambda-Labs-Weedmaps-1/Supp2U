@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.float "price"
     t.integer "inventory"
     t.string "category"
+    t.string "description"
+    t.integer "cals"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -89,7 +91,9 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
 
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
-    t.integer "item_id"
+    t.string "item_name"
+    t.float "price"
+    t.integer "inventory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -106,7 +110,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.integer "customer_id"
     t.integer "business_id"
     t.string "review"
-    t.integer "rating"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
