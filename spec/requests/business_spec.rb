@@ -8,7 +8,7 @@ RSpec.describe 'Business request', type: :request do
 		end
 		it 'should return all[3] businesses' do
 			get '/api/v1/businesses'
-			response_body = JSON.parse(response.body)
+			response_body = json
 			expect(response).to have_http_status(200)
 			expect(response_body.count).to eq(3)
 		end
@@ -19,7 +19,7 @@ RSpec.describe 'Business request', type: :request do
 		context 'with valid request' do
 			it 'should return ratings for business by id' do
 				get "/api/v1/businesses/#{business[:id]}/ratings"
-				response_body = JSON.parse(response.body)
+				response_body = json
 				expect(response).to have_http_status(200)
 				expect(response_body).to eq(0)
 			end
@@ -39,7 +39,7 @@ RSpec.describe 'Business request', type: :request do
 				}
 
 				post "/api/v1/users/#{user[:id]}/businesses", params: businesses
-				response_body = JSON.parse(response.body).deep_symbolize_keys
+				response_body = json.deep_symbolize_keys
 				expect(response).to have_http_status(201)
 				expect(response_body[:name]).to eq(businesses[:name])
 			end
@@ -58,7 +58,7 @@ RSpec.describe 'Business request', type: :request do
 
 		it 'should return business by id' do
 			get "/api/v1/businesses/#{business[:id]}"
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:state]).to eq(business[:state])
 			expect(response_body[:city]).to eq(business[:city])
@@ -72,7 +72,7 @@ RSpec.describe 'Business request', type: :request do
 		it 'should update business by id' do
 			update_business = { city: 'portland' }
 			put "/api/v1/businesses/#{business[:id]}", params: update_business
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:city]).to eq(update_business[:city])
 			expect(response_body[:id]).to eq(business[:id])
@@ -80,7 +80,7 @@ RSpec.describe 'Business request', type: :request do
 		it 'should send invalid request to update business by id' do
 			update_business = { city: nil }
 			put "/api/v1/businesses/#{business[:id]}", params: update_business
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(422)
 			expect(response_body[:city]).to eq(["can't be blank"])
 		end
@@ -91,7 +91,7 @@ RSpec.describe 'Business request', type: :request do
 
 		it 'should delete businesses by id' do
 			delete "/api/v1/businesses/#{business[:id]}"
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:message]).to eq(
 				'Your business has successfully been terminated.'
@@ -99,7 +99,7 @@ RSpec.describe 'Business request', type: :request do
 		end
 		# it 'should send invalid user id' do
 		#   delete "/api/v1/users/#{user[:id]}"
-		#   response_body = JSON.parse(response.body).deep_symbolize_keys
+		#   response_body = json.deep_symbolize_keys
 		#   puts response_body
 		#   expect(response).to have_http_status(200)
 		#   expect(response_body[:message]).to eq('Could not find the user you are trying to remove.')
@@ -116,7 +116,7 @@ RSpec.describe 'Business request', type: :request do
 	#     puts random_business
 	#
 	#     get "/api/v1/users/#{user[:id]}/businesses"
-	#     response_body = JSON.parse(response.body)
+	#     response_body = json
 	#     expect(response).to have_http_status(200)
 	#     expect(response_body[:city]).to eq(random_business[:city])
 	#   end

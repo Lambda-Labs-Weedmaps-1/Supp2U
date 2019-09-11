@@ -1,12 +1,13 @@
 FactoryBot.define do
 	factory :menu do
-		business_id { 1 }
+		business
 		name { Faker::Restaurant.name }
-	end
 
-	# factory :random_menu, class: Menu do
-	#   business_id { 1 }
-	#   name { Faker::Restaurant.name }
-	#   # business_id { Faker::Number.within(range: 1..10)}
-	# end
+		factory :menu_with_items do
+			transient { items_count { 7 } }
+			after(:create) do |menu, evaluator|
+				create_list(:item, evaluator.items_count, menu: menu)
+			end
+		end
+	end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
 	factory :business, class: Business do
-		# association :user, factory: :random_user
+		user
 		name { Faker::Name.name }
 		street { Faker::Address.street_address }
 		zipcode { Faker::Company.sic_code }
@@ -13,6 +13,15 @@ FactoryBot.define do
 				content_type: 'image/png'
 			}
 		end
-		user
+
+		# create(:business).reviews.length # 0
+		# create(:business_with_reviews).reviews.length # 7
+		# create(:business_with_reviews, reviews_count: 15).reviews.length # 15
+		factory :business_with_reviews do
+			transient { reviews_count { 7 } }
+			before(:create) do |business, evaluator|
+				create_list(:review, evaluator.reviews_count, business: business)
+			end
+		end
 	end
 end

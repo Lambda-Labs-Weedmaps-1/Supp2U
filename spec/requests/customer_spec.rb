@@ -8,7 +8,7 @@ RSpec.describe 'Customer request', type: :request do
 		end
 		it 'should return all[3] customers' do
 			get '/api/v1/customers'
-			response_body = JSON.parse(response.body)
+			response_body = json
 			expect(response).to have_http_status(200)
 			expect(response_body.count).to eq(3)
 		end
@@ -20,7 +20,7 @@ RSpec.describe 'Customer request', type: :request do
 				customer = { user_id: user[:id] }
 
 				post "/api/v1/users/#{user[:id]}/customers", params: customer
-				response_body = JSON.parse(response.body).deep_symbolize_keys
+				response_body = json.deep_symbolize_keys
 				expect(response).to have_http_status(201)
 				expect(response_body[:custname]).to eq(customer[:custname])
 			end
@@ -40,7 +40,7 @@ RSpec.describe 'Customer request', type: :request do
 		it 'should return customer by id' do
 			puts customer[:id]
 			get "/api/v1/customers/#{customer[:id]}"
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:custname]).to eq(customer[:custname])
 			expect(response_body[:user_id]).to eq(customer[:user_id])
@@ -54,7 +54,7 @@ RSpec.describe 'Customer request', type: :request do
 			update_customer = { custname: 'portland' }
 			put "/api/v1/customers/#{customer[:id]}", params: update_customer
 
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:custname]).to eq(update_customer[:custname])
 			expect(response_body[:id]).to eq(customer[:id])
@@ -62,7 +62,7 @@ RSpec.describe 'Customer request', type: :request do
 		it 'should send invalid request to update customers by id' do
 			update_customer = { user_id: nil }
 			put "/api/v1/customers/#{customer[:id]}", params: update_customer
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(422)
 			expect(response_body[:user]).to eq(['must exist'])
 		end
@@ -73,7 +73,7 @@ RSpec.describe 'Customer request', type: :request do
 
 		it 'should delete customers by id' do
 			delete "/api/v1/customers/#{customer[:id]}"
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:message]).to eq(
 				'Your customer has successfully been terminated.'
@@ -81,7 +81,7 @@ RSpec.describe 'Customer request', type: :request do
 		end
 		# it 'should send invalid user id' do
 		#   delete "/api/v1/users/#{user[:id]}"
-		#   response_body = JSON.parse(response.body).deep_symbolize_keys
+		#   response_body = json.deep_symbolize_keys
 		#   puts response_body
 		#   expect(response).to have_http_status(200)
 		#   expect(response_body[:message]).to eq('Could not find the user you are trying to remove.')
@@ -97,7 +97,7 @@ RSpec.describe 'Customer request', type: :request do
 			puts customer
 
 			get "/api/v1/users/#{user[:id]}/customers"
-			response_body = JSON.parse(response.body).deep_symbolize_keys
+			response_body = json.deep_symbolize_keys
 			expect(response).to have_http_status(200)
 			expect(response_body[:custname]).to eq(customer[:custname])
 		end
