@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.integer "menu_id"
     t.string "item_name"
     t.float "price"
+    t.integer "inventory"
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

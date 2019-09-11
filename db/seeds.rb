@@ -70,6 +70,7 @@ end
 		menu_id: 1,
 		item_name: item_name,
 		price: price,
+		inventory: 5,
 		category: 'Breakfast, Lunch and Dinner.'
 	)
 end
@@ -81,6 +82,7 @@ end
 		menu_id: 2,
 		item_name: item_name,
 		price: price,
+		inventory: 5,
 		category: 'Breakfast, Lunch and Dinner.'
 	)
 end
@@ -91,7 +93,8 @@ end
 Item.create!(
     menu_id: 3,
     item_name: item_name,
-    price: price,
+	price: price,
+	inventory: 5,
     category: "Breakfast, Lunch and Dinner."
 )
 end
