@@ -1,0 +1,21 @@
+language:
+  ruby
+rvm:
+  - 2.5.5
+cache:
+  - bundler
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database supp2u_test;' -U postgres
+script:
+  - bundle exec rspec --format documentation
+#deploy:
+#  provider: heroku
+#  api_key:
+#    secure: key
+#  app: supp2u
+#  on:
+#    repo: Lambda-Labs-Weedmaps-1/Supp2U
+#script:
+#  -rspec

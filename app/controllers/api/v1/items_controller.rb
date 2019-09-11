@@ -22,7 +22,7 @@ module Api
           @item = Item.find(params[:id])
 
           render json: @item
-      end
+        end
 
         def update
           @item = Item.find(params[:id])
@@ -34,7 +34,7 @@ module Api
           else
             render json: @upload.errors, status: :unprocessable_entity
           end
-      end
+        end
 
         def destroy
           @item = Item.find(params[:id])
@@ -44,11 +44,11 @@ module Api
           else
               render json: { message: "Could not find the item you are trying to remove." }
           end
-      end
+        end
 
         private
         def item_params
-          params.permit(:menu_id, :item_name, :price, :category, :description, :cals)
+          params.permit(:menu_id, :item_name, :price, :inventory, :category, :description, :cals, :images)
         end
 
       end

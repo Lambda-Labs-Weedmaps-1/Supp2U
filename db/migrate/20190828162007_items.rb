@@ -4,6 +4,7 @@ class Items < ActiveRecord::Migration[5.2]
       t.integer :menu_id
       t.string :item_name
       t.float  :price
+      t.integer :inventory
       t.string :category
       t.string :description
       t.integer :cals

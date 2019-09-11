@@ -14,12 +14,20 @@ module Api
                 # @cartitem = params[:id]
                 # @newItem = Menu.find(item = cartitem)
 
-                @createcart = Cart.new(cart_params)
+                @cartthere = Customer.find(params[:customer_id]).cart
+                puts('CAT CHECK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+                puts(@cartthere)
 
-                if @createcart.save
-                    render json: @createcart, status: :created
+                if @cartthere
+                    render json: @cartthere, status: :ok
                 else
-                    render json: @createcart.errors, status: :unprocessable_entity
+                    @createcart = Cart.new(cart_params)
+
+                    if @createcart.save
+                        render json: @createcart, status: :created
+                    else
+                        render json: @createcart.errors, status: :unprocessable_entity
+                    end
                 end
 
             end
