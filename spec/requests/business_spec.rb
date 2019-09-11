@@ -22,7 +22,6 @@ RSpec.describe 'Business request', type: :request do
         response_body = JSON.parse(response.body)
         expect(response).to have_http_status(200)
         expect(response_body).to eq(0)
-
       end
     end
   end
@@ -93,7 +92,6 @@ RSpec.describe 'Business request', type: :request do
     it 'should delete businesses by id' do
       delete "/api/v1/businesses/#{business[:id]}"
       response_body = JSON.parse(response.body).deep_symbolize_keys
-      puts response_body
       expect(response).to have_http_status(200)
       expect(response_body[:message]).to eq('Your business has successfully been terminated.')
     end
@@ -107,13 +105,13 @@ RSpec.describe 'Business request', type: :request do
   end
 
   # describe 'GET /api/v1/users/{user_id}/businesses' do
-  #   let(:user) { create(:user) }
-  #   let(:random_business) { create(:random_business, user_id: user[:id]) }
+  #   let(:user) { create(:random_user) }
+  #   let(:random_business) { create(:random_business) }
   #
   #
   #   it 'should return business by user_id' do
   #     puts user[:id]
-  #     puts random_business[:image]
+  #     puts random_business
   #
   #     get "/api/v1/users/#{user[:id]}/businesses"
   #     response_body = JSON.parse(response.body)
