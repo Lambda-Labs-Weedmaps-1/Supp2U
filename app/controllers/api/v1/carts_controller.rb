@@ -37,7 +37,6 @@ module Api
                 render json: @cartnum
             end
 
-
             def add
 
                 @cart = Cart.find(params[:id])
