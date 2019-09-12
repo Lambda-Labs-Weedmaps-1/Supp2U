@@ -1,6 +1,5 @@
 class OrderMailer < ApplicationMailer
-    def order_email
-        @user = params[:user]
-        mail(to: @user.email, subject: "A New Order Has Been Made")
+    def order_email(user)
+        mail(to: user.email, subject: "Your order has been placed")
     end
 end

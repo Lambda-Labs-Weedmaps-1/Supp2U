@@ -24,9 +24,12 @@ module Api
             # customers/customer_id/orders
             def create
                 customer = Customer.find(params[:customer_id])
+                user = User.find_by_id(customer.user_id)
                 cart = customer.cart
                 order = customer.orders.create(business_id: params[:business_id], cart_id: cart.id, status: :pending)
                 items = Item.where( id: cart.item_numbers ) 
+                # This sends the email when an order is created
+                OrderMailer.order_email(user).deliver_now
 
                 items.each do |item|
                     order_item = OrderItem.new(order_id: order.id, item_name: item.item_name, price: item.price, inventory: item.inventory)
