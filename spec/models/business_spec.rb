@@ -2,11 +2,12 @@ require 'rails_helper'
 
 # Run with `rspec spec/models/business_spec.rb`
 RSpec.describe Business, type: :model do
-	before do
-		# make these Businesses before `all` tests
-		# @user1 = create(:random_user)
-		# built_users = build_list(:random_user, 10)
-		# @business1 = create(:random_business)
+	describe 'validations' do
+		it { should validate_presence_of(:name) }
+		it { should validate_presence_of(:city) }
+		it { should validate_presence_of(:state) }
+		it { should validate_presence_of(:street) }
+		it { should validate_presence_of(:zipcode) }
 	end
 
 	describe 'associations' do
@@ -14,18 +15,22 @@ RSpec.describe Business, type: :model do
 		it { should have_many(:reviews) }
 		it { should have_one(:menu).class_name('Menu') }
 		it { should have_one(:schedule).class_name('Schedule') }
-		# it { should have_one_attached?(:image) }
-		# Todo verify how this should work with team
-		# it { should have_one(:image) }
 	end
 
-	describe 'validations' do
-		it { should validate_presence_of(:name) }
-		it { should validate_presence_of(:city) }
-		it { should validate_presence_of(:state) }
-		it { should validate_presence_of(:street) }
-		it { should validate_presence_of(:zipcode) }
-		# Todo need to handle this attribute
-		# it { should validate_presence_of(:image) }
+	context 'attributes' do
+		it 'has expected attributes' do
+			typical_business = create(:business)
+			expect(typical_business.attribute_names).to include(
+				'name',
+				'street',
+				'zipcode',
+				'city',
+				'state'
+			)
+		end
+		it 'has expected amount of reviews' do
+			review_count = create(:business_with_reviews).reviews.length
+			expect(review_count).to eq(7)
+		end
 	end
 end
