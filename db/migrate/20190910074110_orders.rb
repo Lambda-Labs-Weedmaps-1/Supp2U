@@ -4,6 +4,7 @@ class Orders < ActiveRecord::Migration[5.2]
       t.string :status
       t.integer :customer_id
       t.integer :business_id
+      t.integer :cart_id
       t.datetime :created_at
       t.datetime :updated_at
 
