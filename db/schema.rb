@@ -50,8 +50,6 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
-    t.string "stripe_token"
-    t.string "stripe_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
