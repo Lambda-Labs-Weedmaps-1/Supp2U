@@ -11,7 +11,7 @@ FactoryBot.define do
 		end
 
 		factory :customer_with_reviews do
-			transient { reviews_count { 7 } }
+			transient { reviews_count { 11 } }
 			after(:create) do |customer, evaluator|
 				create_list(:review, evaluator.reviews_count, customer: customer)
 			end
