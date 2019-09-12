@@ -12,6 +12,7 @@ class Api::V1::AuthenticationController < ApplicationController
         render json: @user.errors, status: :unprocessable_entity
       end
     elsif @user.customer
+      OrderMailer.with(user: @user).order_email.deliver_now
       token = JsonWebToken.encode(user_id: @user.id)
       time = Time.now + 72.hours.to_i
       render json: { token: token, exp: time.strftime("%m-%d-%y %H:%M"), customer: @user.customer }, status: 200
