@@ -1,26 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-	before(:all) do
-		# can't have a customer until a user exists
-		# @user2 = create(:user)
-		# @user2 = create(:user)
-		# @customer1 = create(:customer)
-		# @customer2 = create(:customer)
-	end
-
 	describe 'associations' do
 		it { should belong_to(:user).class_name('User') }
-    it { should have_many(:reviews).class_name('Review') }
-    # Todo update
-		# it { should have_one(:image) }
+		it { should have_many(:reviews).class_name('Review') }
+		it { should have_one(:cart).class_name('Cart') }
 	end
 
-	# Todo add once Model has validations attached
-	# describe 'validations' do
-	#   it { should  }
-	# end
-
-	context 'a customer with multiple reviews' do
+	context 'attributes' do
+		it 'has expected attributes' do
+			typical_customer = create(:customer)
+			expect(typical_customer.attribute_names).to include('user_id', 'custname')
+		end
+		it 'has expected amount of reviews' do
+			review_count = create(:customer_with_reviews).reviews.length
+			expect(review_count).to eq(11)
+		end
 	end
 end
