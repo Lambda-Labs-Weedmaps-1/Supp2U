@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 			resources :reviews, only: [:show, :destroy, :update]
 			resources :schedules, only: [:show, :destroy, :update]
 
+			resources :charges
 			resources :carts, only: [:show, :update] do
 				put :add, on: :member
 				get :itemfetch, on: :member
