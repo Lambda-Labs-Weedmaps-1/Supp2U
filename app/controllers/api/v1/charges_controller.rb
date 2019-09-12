@@ -6,7 +6,11 @@ module Api
             end
         
             def create
-                @charge = StripeChargesServices.new(charges_params)
+                business = Business.find(params[:business_id])
+                puts business
+                puts "this is a business lllllllllllllllllllll---------"
+                puts params
+                @charge = StripeChargesServices.new(charges_params, business)
                 if @charge.call
                     render status: :ok, json: {message: "it workssssss!!!!!"}
                 else

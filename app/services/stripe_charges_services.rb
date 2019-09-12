@@ -63,19 +63,21 @@ class StripeChargesServices
         email: stripe_email,
         source: stripe_token
       )
-      puts "this works!!!!!!asdfkjas;kldfjas;kldfja;sdfjkl!!"
-      puts customer
-      puts params
+      
+      # puts params
     end
   
-    def create_charge(customer, buisness)
+    def create_charge(customer)
+      puts "this works!!!!!!asdfkjas;kldfjas;kldfja;sdfjkl!!"
+      puts customer
+      puts @amount.to_i
       Stripe::Charge.create(
         customer: customer.id,
-        amount: @amount,
+        amount: @amount.to_i,
         description: "supp2u!",
         currency: DEFAULT_CURRENCY,
         transfer_data: {
-          destination: business.id,
+          destination: @business.stripe_token,
         }
       )
     end
