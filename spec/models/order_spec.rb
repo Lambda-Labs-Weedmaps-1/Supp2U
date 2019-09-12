@@ -7,15 +7,6 @@ RSpec.describe Order, type: :model do
         it { should belong_to(:cart).class_name('Cart')}
     end
 
-    describe 'validations' do
-
-        it { should validate_presence_of(:customer_id) }
-        it { should validate_presence_of(:business_id) }
-        it { should validate_presence_of(:cart_id) }
-        it { should validate_presence_of(:status) }
-        it { should validate_presence_of(:cart_items_present?)}
-    end 
-    
     describe 'order creation' do
 
         user = User.create!(username: "bob", email: "thebuilder@work.com", password: "widget")
@@ -61,4 +52,16 @@ RSpec.describe Order, type: :model do
             
         })
     end
+
+
+    describe 'validations' do
+
+        it { should validate_presence_of(:customer_id) }
+        it { should validate_presence_of(:business_id) }
+        it { should validate_presence_of(:cart_id) }
+        it { should validate_presence_of(:status) }
+        it { should validate_presence_of(:cart_items_present?)}
+    end 
+    
+    
 end
