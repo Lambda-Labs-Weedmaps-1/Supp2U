@@ -6,11 +6,11 @@ class Order < ApplicationRecord
     validates :customer_id, presence: true
     validates :business_id, presence: true
     validates :status, presence: true
-    # validates :items, presence: true
+    validates :order_items, presence: true
 
     # makes sure the order passes shipping requirements
     def shippable?
-        status != "shipped" && items.count >= 1
+        status != "shipped" && order_items.count >= 1
     end
     
     # once the order is confirmed to be shippable, it ships.

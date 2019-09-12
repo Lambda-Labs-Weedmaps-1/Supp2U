@@ -23,17 +23,17 @@ module Api
 
             # customers/customer_id/orders
             def create
+                Order.create(customer_id: params[:customer_id], business_id: params[:business_id], status: :pending)
+                cart = Customer.find(params[:customer_id]).cart
+                items = Item.where( id: cart.item_numbers )
 
-                order = Order.create(customer_id: params[:customer_id], business_id: params[:business_id], status: :pending)
-                # cart = Customer.find(params[:customer_id]).cart
-                
-                # cart.item_numbers.each do |item_id|
-                #     order_holder = OrderItem.new(order_id: Nil, item_id: item_id)
-                #     order_holder.save
-                #     puts order_holder.inspect
-                # end
+                items.each do |item|
+                    order_item = OrderItem.new(order_id: order.id, item_name: item.item_name, price: item.price, inventory: item.inventory)
+                    order_item.save
+                    puts order_item.inspect
+                end
 
-                # puts " order is hereeeeeeeeeee #{order.inspect}"
+                puts " hellllooooo #{order.inspect}"
 
                 if order.save
                     render json: order, status: :created
@@ -73,7 +73,9 @@ module Api
                     {
                       id: item.id,
                       name: item.item_name,
-                      price: item.price
+                      price: item.price,
+                      order_id: item.order_id,
+                      inventory: item.inventory
                     }
                   end
                 }

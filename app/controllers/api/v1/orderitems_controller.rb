@@ -52,7 +52,7 @@ module Api
         end
 
         private
-        def item_params
+        def order_item_params
           params.permit(:order_id, :item_name, :price, :inventory, :image)
         end
 

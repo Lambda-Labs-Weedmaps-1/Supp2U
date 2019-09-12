@@ -4,7 +4,7 @@ class OrderProcessor
 
     def initialize(order)
         @order = order
-        @items = order.items
+        @items = order.order_items
     end
 
     # checks to see if the items in the order are shippable. If so, it reduces the inventory for
