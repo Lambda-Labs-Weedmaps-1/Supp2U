@@ -4,7 +4,7 @@ module Api
 			def index
 				@items = Menu.find(params[:menu_id]).items
 
-				render json: @items.with_attached_image 
+				render json: @items.with_attached_image
 			end
 
 			def create
