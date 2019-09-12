@@ -23,9 +23,10 @@ module Api
 
             # customers/customer_id/orders
             def create
-                Order.create(customer_id: params[:customer_id], business_id: params[:business_id], status: :pending)
+                order = Order.create(customer_id: params[:customer_id], business_id: params[:business_id], status: :pending)
                 cart = Customer.find(params[:customer_id]).cart
                 items = Item.where( id: cart.item_numbers )
+                puts items.inspect
 
                 items.each do |item|
                     order_item = OrderItem.new(order_id: order.id, item_name: item.item_name, price: item.price, inventory: item.inventory)
