@@ -25,37 +25,35 @@ RSpec.describe Order, type: :model do
 
         carto = Cart.create!(customer_id: 1, business_id: 1)
 
-        # Menu.create!(
-        #     {
-        #         "business_id": 1,
-        #         "name": "Gourmet Shit",
-        #     }
-        # )
+        Menu.create!(
+            {
+                "business_id": 1,
+                "name": "Gourmet Stuff",
+            }
+        )
 
-        # Item.create!(
-        #     menu_id: 1,
-        #     item_name: "bullshit",
-        #     price: 999.99,
-        #     inventory: 5,
-        #     category: "Breakfast, Lunch and Dinner."
-        # )
-        # end
+        itemo = Item.create!(
+            menu_id: 1,
+            item_name: "crab cake",
+            price: 999.99,
+            category: "Breakfast, Lunch and Dinner."
+        )
+        
 
         # carto.add({"item_number": 2})
-        carto.item_numbers.push(1)
+        carto.item_numbers.push(1,1)
+        puts('cartooooooo', cust.cart)
 
         order = Order.create!({
             "customer_id": 1,
             "business_id": 1,
-            "cart_id": 1,
-            "status": "pending",
-            "order_items": carto.item_numbers
+            
         })
 
         it { should validate_presence_of(:customer_id) }
         it { should validate_presence_of(:business_id) }
         it { should validate_presence_of(:cart_id) }
         it { should validate_presence_of(:status) }
-        # it { should validate_presence_of(:cart_items_present?)}
+        it { should validate_presence_of(:cart_items_present?)}
     end  
 end
