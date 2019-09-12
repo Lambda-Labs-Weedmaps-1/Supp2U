@@ -14,6 +14,8 @@ class Businesses < ActiveRecord::Migration[5.2]
       t.boolean :recommended
       t.string :long
       t.string :lat
+      t.string :stripe_token
+      t.string :stripe_email
 
       t.timestamps
     end

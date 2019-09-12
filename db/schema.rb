@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_074139) do
+ActiveRecord::Schema.define(version: 2019_09_12_201534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,8 +66,6 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
   create_table "customers", force: :cascade do |t|
     t.integer "user_id"
     t.string "custname"
-    t.string "stripe_token"
-    t.string "stripe_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,7 +74,6 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.integer "menu_id"
     t.string "item_name"
     t.float "price"
-    t.integer "inventory"
     t.string "category"
     t.string "description"
     t.integer "cals"
@@ -93,7 +90,9 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
 
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
-    t.integer "item_id"
+    t.string "item_name"
+    t.float "price"
+    t.integer "inventory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -102,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.string "status"
     t.integer "customer_id"
     t.integer "business_id"
+    t.integer "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.integer "customer_id"
     t.integer "business_id"
     t.string "review"
-    t.float "rating"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -126,6 +126,18 @@ ActiveRecord::Schema.define(version: 2019_09_10_074139) do
     t.integer "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sundayopen"
+    t.string "sundayclose"
+    t.string "mondayopen"
+    t.string "mondayclose"
+    t.string "tuesdayopen"
+    t.string "tuesdayclose"
+    t.string "wednesdayopen"
+    t.string "wednesdayclose"
+    t.string "thursdayopen"
+    t.string "thursdayclose"
+    t.string "fridayopen"
+    t.string "fridayclose"
   end
 
   create_table "users", force: :cascade do |t|

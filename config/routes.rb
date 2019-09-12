@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 			end
 
 			resources :items, only: [:show, :destroy, :update]
+			resources :orderitems, only: [:show, :index, :destroy, :update]
 			resources :reviews, only: [:show, :destroy, :update]
 			resources :schedules, only: [:show, :destroy, :update]
 
@@ -49,8 +50,10 @@ Rails.application.routes.draw do
 			resources :orders, only: [:show, :index, :destroy, :update] do 
 				post :ship, on: :member
 				post :additem, on: :member
-				resources :items, only: [:index, :create]
+				resources :orderitems, only: [:index, :create]
 			end
+
+
 		end
 	end
 end
