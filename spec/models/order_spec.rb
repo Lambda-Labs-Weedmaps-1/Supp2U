@@ -9,6 +9,15 @@ RSpec.describe Order, type: :model do
 
     describe 'validations' do
 
+        it { should validate_presence_of(:customer_id) }
+        it { should validate_presence_of(:business_id) }
+        it { should validate_presence_of(:cart_id) }
+        it { should validate_presence_of(:status) }
+        it { should validate_presence_of(:cart_items_present?)}
+    end 
+    
+    describe 'order creation' do
+
         user = User.create!(username: "bob", email: "thebuilder@work.com", password: "widget")
         cust = Customer.create!(user_id: 1, custname: 'Athos')
         bus = Business.create!(user_id: 1,
@@ -40,20 +49,16 @@ RSpec.describe Order, type: :model do
         )
         
 
-        # carto.add({"item_number": 2})
+        # Cart.add("item_number": 1)
         carto.item_numbers.push(1,1)
+        
         puts('cartooooooo', cust.cart)
 
+        # The order creation fails due to the validates order_items, line 11 on orders.rb
         order = Order.create!({
             "customer_id": 1,
             "business_id": 1,
             
         })
-
-        it { should validate_presence_of(:customer_id) }
-        it { should validate_presence_of(:business_id) }
-        it { should validate_presence_of(:cart_id) }
-        it { should validate_presence_of(:status) }
-        it { should validate_presence_of(:cart_items_present?)}
-    end  
+    end
 end
