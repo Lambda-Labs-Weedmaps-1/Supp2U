@@ -12,6 +12,10 @@ class StripeChargesServices
     def call
       create_charge(find_customer)
     end
+
+    def busCall
+      create_customer()
+    end
   
     private
   
@@ -34,6 +38,7 @@ class StripeChargesServices
         email: stripe_email,
         source: stripe_token
       )
+      puts "this works!!!!!!asdfkjas;kldfjas;kldfja;sdfjkl!!"
     end
   
     def create_charge(customer)
