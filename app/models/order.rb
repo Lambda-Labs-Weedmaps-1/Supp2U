@@ -6,8 +6,10 @@ class Order < ApplicationRecord
 
     validates :customer_id, presence: true
     validates :business_id, presence: true
+    validates :cart_id, presence: true
     validates :status, presence: true
     validates :order_items, presence: true, unless: :cart_items_present?
+
 
     # makes sure the order passes shipping requirements
     def shippable?
