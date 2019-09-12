@@ -19,7 +19,7 @@ FactoryBot.define do
 		# create(:business_with_reviews, reviews_count: 15).reviews.length # 15
 		factory :business_with_reviews do
 			transient { reviews_count { 7 } }
-			before(:create) do |business, evaluator|
+			after(:create) do |business, evaluator|
 				create_list(:review, evaluator.reviews_count, business: business)
 			end
 		end
