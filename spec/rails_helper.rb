@@ -7,7 +7,6 @@ if Rails.env.production?
 	abort('The Rails environment is running in production mode!')
 end
 require 'rspec/rails'
-# require 'support/attribute_hash_strategy'
 require 'support/factory_bot'
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -36,6 +35,7 @@ rescue ActiveRecord::PendingMigrationError => e
 	exit 1
 end
 RSpec.configure do |config|
+	config.include Requests::JsonHelpers, type: :request
 	# DB cleaning strategy setup #
 	# -------------------------- #
 	#* before tests run

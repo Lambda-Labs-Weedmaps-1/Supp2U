@@ -6,7 +6,7 @@ class OrderItems < ActiveRecord::Migration[5.2]
       t.float  :price
       t.integer :inventory
 
-      t.timestamps
-    end
-  end
+			t.timestamps
+		end
+	end
 end
