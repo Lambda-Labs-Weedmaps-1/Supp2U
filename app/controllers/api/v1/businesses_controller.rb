@@ -15,9 +15,10 @@ module Api
       def create
         @business = Business.new(business_params)
 
-        @stripeCreate = StripeChargesServices.new(business_params)
+        @stripeCreate = StripeChargesServices.new(business_params, @business)
 
-        if @business.save && @stripeCreate.busCall
+        if @business.save
+          @stripeCreate.busCall
           render json: @business, status: :created
         else
           render json: @business.errors, status: :unprocessable_entity
