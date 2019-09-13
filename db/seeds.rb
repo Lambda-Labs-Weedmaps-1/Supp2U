@@ -53,7 +53,7 @@ Business.create!(
 Business.create!(
 	user_id: 6,
 	name: Faker::Name.name,
-	website: Faker::Internet.email,
+	website: Faker::Internet.url,
 	city: 'Denver',
 	state: 'CO',
 	street: '410 E 7th Ave, Denver',
