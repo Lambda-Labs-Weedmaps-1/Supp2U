@@ -4,63 +4,77 @@ module Api
 
             def index
                 if params[:customer_id].present?
-                    @find_orders = Order.where(customer_id: params[:customer_id]).includes([:items])
+                    find_orders = Order.where(customer_id: params[:customer_id]).includes([:items])
                 elsif params[:business_id].present?
-                    @find_orders = Order.where(business_id: params[:business_id])
+                    find_orders = Order.where(business_id: params[:business_id])
                 else
-                    @find_orders = Order.all
+                    find_orders = Order.all
                 end
                 # Formatting the orders to include all of their items via join table
-                @orders = @find_orders.map { |order| format_order(order) }
-                render json: @orders
+                orders = find_orders.map { |order| format_order(order) }
+                render json: orders
             end
             
             def show
-                @order = Order.find(params[:id])
-                render json: @order
+                find_order = Order.find(params[:id])
+                
+                render json: format_order(find_order)
             end
 
-            # create is making a pending order. The order still needs to be populated with items using the additem action
+            # customers/customer_id/orders
             def create
-                @order = Order.new(customer_id: params[:customer_id], business_id: params[:business_id], status: :pending)
+                customer = Customer.find(params[:customer_id])
+                cart = customer.cart
+                order = customer.orders.create(business_id: params[:business_id], cart_id: cart.id, status: :pending)
+                items = Item.where( id: cart.item_numbers ) 
 
-                if @order.save
-                    render json: @order, status: :created
-                else
-                    render json: @order.errors, status: :unprocessable_entity
+                items.each do |item|
+                    order_item = OrderItem.new(order_id: order.id, item_name: item.item_name, price: item.price, inventory: item.inventory)
+                    order_item.save
+                    puts order_item.inspect
                 end
-            end
 
-            # additem is creating the join table.
-            def additem
-                @item = OrderItem.new(order_id: params[:id], item_id: params[:item_id])
-
-                if @item.save
-                    render json: @item, status: :created
+                if order.save
+                    render json: order, status: :created
                 else
-                    render json: @item.errors, status: :unprocessable_entity
+                    render json: order.errors, status: :unprocessable_entity
                 end
             end
 
             # this will change the status of the order from pending to shipped.
+            # orders/:id/ship
             def ship
+                order = Order.find(params[:id])
+                order_processor = OrderProcessor.new(order)
+
+                if order.status == "shipped"
+                    # can't ship an order that has already been shipped
+                    render json: {message: "you're order has already been shipped.", order: order}, status: :not_acceptable
+                elsif order_processor.ship
+                    # order gets shipped
+                    render json: order, status: :ok
+                else
+                    render json: order.errors, status: :unprocessable_entity
+                end
             end
 
             private
             def format_order(order)
                 # this is a guard clause to prevent `orders` calls until we write the orders association
-                return order unless order.respond_to?(:items)
+                return order unless order.respond_to?(:order_items)
         
                 {
                   id: order.id,
                   status: order.status,
                   business_id: order.business_id,
                   customer_id: order.customer_id,
-                  items: order.items.map do |item|
+                  items: order.order_items.map do |item|
                     {
                       id: item.id,
                       name: item.item_name,
-                      price: item.price
+                      price: item.price,
+                      order_id: item.order_id,
+                      inventory: item.inventory
                     }
                   end
                 }
