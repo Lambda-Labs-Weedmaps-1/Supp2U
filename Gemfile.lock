@@ -271,6 +271,9 @@ GEM
       actionpack (>= 3.1, < 6.0)
       railties (>= 3.1, < 6.0)
     ruby_dep (1.5.0)
+    ruby_http_client (3.3.0)
+    sendgrid-ruby (6.0.0)
+      ruby_http_client (~> 3.3.0)
     simplecov (0.17.0)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -331,6 +334,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails (~> 3.5)
   rswag
+  sendgrid-ruby
   shoulda-matchers!
   simplecov
   spring
