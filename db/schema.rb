@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
+    t.string "stripe_token"
+    t.string "stripe_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -66,6 +68,8 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
   create_table "customers", force: :cascade do |t|
     t.integer "user_id"
     t.string "custname"
+    t.string "stripe_token"
+    t.string "stripe_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.integer "menu_id"
     t.string "item_name"
     t.float "price"
+    t.integer "inventory"
     t.string "category"
     t.string "description"
     t.integer "cals"
@@ -109,7 +114,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.integer "customer_id"
     t.integer "business_id"
     t.string "review"
-    t.integer "rating"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -125,16 +130,6 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.integer "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "sundayopen"
-    t.string "sundayclose"
-    t.string "mondayopen"
-    t.string "mondayclose"
-    t.string "tuesdayopen"
-    t.string "tuesdayclose"
-    t.string "wednesdayopen"
-    t.string "wednesdayclose"
-    t.string "thursdayopen"
-    t.string "thursdayclose"
     t.string "fridayopen"
     t.string "fridayclose"
   end
