@@ -1,7 +1,7 @@
 class BusinessSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :image, :name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat
+  attributes :id, :image, :name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :stripe_token, :stripe_email
   def image
     return unless object.image.attached?
 
