@@ -11,6 +11,10 @@ module Api
 				render json: @businesses.with_attached_image
 			end
 
+			def search_theme
+				redirect_to search_businesses_path(params[:q])
+			end
+
 			def show
 				@business = Business.find(params[:id])
 

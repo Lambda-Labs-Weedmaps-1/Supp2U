@@ -9,51 +9,56 @@ Rails.application.routes.draw do
 	#ALL 7 ACTIONS = index, new, create, show, edit, update, destroy.
 	#EDIT and NEW will not be used.
 
-  	namespace :api do
+	namespace :api do
 		namespace :v1 do
-		# resources :home, only: [:index, :show]
+			# resources :home, only: [:index, :show]
 			post '/auth/login', to: 'authentication#login'
-			resources :users, except: [:edit, :new] do
-				resources :customers, only: [:index, :create]
-				resources :businesses, only: [:index, :create]
+			resources :users, except: %i[edit new] do
+				resources :customers, only: %i[index create]
+				resources :businesses, only: %i[index create]
 			end
 
-			resources :businesses, except: [:create, :edit, :new] do
+			# resource :businesses do
+			# 	collection { get :search, action: 'search_theme', on: :collection }
+			# end
+			resources :businesses, except: %i[create edit new] do
+				# collection do
+				# 	get :search, action: 'search_theme', on: :collection
+				# 	get 'search/:q', action: 'search', as: 'search'
+				# end
 				get :ratings, on: :member
-				resources :menus, only: [:index, :create]
-				resources :schedules, only: [:index, :create]
-				resources :reviews, only: [:index]
-				resources :orders, only: [:index]
+				resources :menus, only: %i[index create]
+				resources :schedules, only: %i[index create]
+				resources :reviews, only: %i[index]
+				resources :orders, only: %i[index]
 			end
 
-			resources :customers, except: [:create, :edit, :new] do
-				resources :reviews, only: [:index, :create]
-				resources :carts, only: [:index, :create]
-				resources :orders, only: [:index, :create]
+			resources :customers, except: %i[create edit new] do
+				resources :reviews, only: %i[index create]
+				resources :carts, only: %i[index create]
+				resources :orders, only: %i[index create]
 			end
 
-			resources :menus, only: [:show, :update, :destroy] do
-				resources :items, only: [:index, :create]
+			resources :menus, only: %i[show update destroy] do
+				resources :items, only: %i[index create]
 			end
 
-			resources :items, only: [:show, :destroy, :update]
-			resources :orderitems, only: [:show, :index, :destroy, :update]
-			resources :reviews, only: [:show, :destroy, :update]
-			resources :schedules, only: [:show, :destroy, :update]
+			resources :items, only: %i[show destroy update]
+			resources :orderitems, only: %i[show index destroy update]
+			resources :reviews, only: %i[show destroy update]
+			resources :schedules, only: %i[show destroy update]
 
 			resources :charges
-			resources :carts, only: [:show, :update] do
+			resources :carts, only: %i[show update] do
 				put :add, on: :member
 				get :itemfetch, on: :member
 			end
 
-			resources :orders, only: [:show, :index, :destroy, :update] do 
+			resources :orders, only: %i[show index destroy update] do
 				post :ship, on: :member
 				post :additem, on: :member
-				resources :orderitems, only: [:index, :create]
+				resources :orderitems, only: %i[index create]
 			end
-
-
 		end
 	end
 end
