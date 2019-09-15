@@ -173,10 +173,11 @@ Item.delete_all
 
 (1..20).each do |i|
 	# add more calls to create for additional menu items
-  # number of .create calls == number of items per menu
-  # 8 menu items per menu currently
+	# number of .create calls == number of items per menu
+	# 8 menu items per menu currently
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -184,6 +185,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -191,6 +193,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -198,6 +201,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -205,6 +209,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -212,6 +217,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -219,6 +225,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
@@ -226,6 +233,7 @@ Item.delete_all
 	)
 	Item.create!(
 		menu_id: i,
+		description: Faker::Food.description,
 		item_name: Faker::Food.dish,
 		price: Faker::Commerce.price,
 		inventory: Faker::Number.within(range: 1..10),
