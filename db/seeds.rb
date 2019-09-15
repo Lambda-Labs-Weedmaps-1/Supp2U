@@ -2,6 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 # Todo real addresses street, zip, lat - long in a hash
+# Todo add 50-100 business and extract hash to it's own file and require it here
 real_places = {
 	1 => {
 		street: '200 Fillmore Street',
@@ -62,13 +63,70 @@ real_places = {
 		zip: 80_202,
 		lat: '39.7538500000',
 		long: '-104.9953900000'
+	},
+	11 => {
+		street: '880 W Happy Canyon Rd.',
+		zip: 80_108,
+		lat: '39.4271042',
+		long: '-104.9021999'
+	},
+	12 => {
+		street: '18601 Green Valley Ranch Blvd #101',
+		zip: 80_249,
+		lat: '39.784645',
+		long: '-104.767735'
+	},
+	13 => {
+		street: '103 North Rubey Dr.',
+		zip: 80_403,
+		lat: '39.765138',
+		long: '-105.232381'
+	},
+	14 => {
+		street: '7444 W Chatfield Ave',
+		zip: 80_128,
+		lat: '39.565504',
+		long: '-105.081358'
+	},
+	15 => {
+		street: '8181 E Arapahoe Rd',
+		zip: 80_112,
+		lat: '39.595713',
+		long: '-104.893902'
+	},
+	16 => {
+		street: '203 W Hampden Ave',
+		zip: 80_110,
+		lat: '39.654998',
+		long: '-104.990235'
+	},
+	17 => {
+		street: '2772 S Wadsworth Blvd',
+		zip: 80_227,
+		lat: '39.666141',
+		long: '-105.080677'
+	},
+	18 => {
+		street: '3542 S Fox St', zip: 80_110, lat: '39.652076', long: '-104.994474'
+	},
+	19 => {
+		street: '9625 E Arapahoe Rd Ste F',
+		zip: 80_112,
+		lat: '39.595028',
+		long: '-104.817658'
+	},
+	20 => {
+		street: '8101 E Belleview Ave A-90',
+		zip: 80_237,
+		lat: '39.625717',
+		long: '-104.893844'
 	}
 }
 
 # Cleanup Existing User Data
 User.delete_all
 
-(1..15).each do |i|
+(1..30).each do |i|
 	User.create!(
 		username: Faker::Internet.user_name,
 		email: Faker::Internet.email,
@@ -79,8 +137,8 @@ end
 # Cleanup Existing Business Data
 Business.delete_all
 
-# 5 businesses with user_ids 1-5
-(1..10).each do |i|
+# 20 businesses with user_ids 1-20
+(1..20).each do |i|
 	Business.create!(
 		user_id: i,
 		name: Faker::Restaurant.name,
@@ -99,23 +157,66 @@ end
 # Cleanup Existing Menu Data
 Menu.delete_all
 
-# 5 menus with business_id 1-5
-(1..10).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
+# 20 menus with business_id 1-20
+(1..20).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
 
 # Cleanup Existing Customer Data
 Customer.delete_all
 
-# 5 customers with user_ids 6-10
-(11..15).each do |i|
+# 10 customers with user_ids 21-30
+(21..30).each do |i|
 	Customer.create!(user_id: i, custname: Faker::DcComics.name)
 end
 
 # Cleanup Existing Item Data
 Item.delete_all
 
-(1..10).each do |i|
+(1..20).each do |i|
 	# add more calls to create for additional menu items
-	# number of .create calls == number of items per menu
+  # number of .create calls == number of items per menu
+  # 8 menu items per menu currently
+	Item.create!(
+		menu_id: i,
+		item_name: Faker::Food.dish,
+		price: Faker::Commerce.price,
+		inventory: Faker::Number.within(range: 1..10),
+		category: Faker::Restaurant.type
+	)
+	Item.create!(
+		menu_id: i,
+		item_name: Faker::Food.dish,
+		price: Faker::Commerce.price,
+		inventory: Faker::Number.within(range: 1..10),
+		category: Faker::Restaurant.type
+	)
+	Item.create!(
+		menu_id: i,
+		item_name: Faker::Food.dish,
+		price: Faker::Commerce.price,
+		inventory: Faker::Number.within(range: 1..10),
+		category: Faker::Restaurant.type
+	)
+	Item.create!(
+		menu_id: i,
+		item_name: Faker::Food.dish,
+		price: Faker::Commerce.price,
+		inventory: Faker::Number.within(range: 1..10),
+		category: Faker::Restaurant.type
+	)
+	Item.create!(
+		menu_id: i,
+		item_name: Faker::Food.dish,
+		price: Faker::Commerce.price,
+		inventory: Faker::Number.within(range: 1..10),
+		category: Faker::Restaurant.type
+	)
+	Item.create!(
+		menu_id: i,
+		item_name: Faker::Food.dish,
+		price: Faker::Commerce.price,
+		inventory: Faker::Number.within(range: 1..10),
+		category: Faker::Restaurant.type
+	)
 	Item.create!(
 		menu_id: i,
 		item_name: Faker::Food.dish,
@@ -137,36 +238,65 @@ Review.delete_all
 
 # have each customer leave 1 review on each business, add more reviews as needed with extra .create calls
 
-(1..10).each do |i|
+(1..20).each do |i|
 	Review.create!(
-		customer_id: 1,
+		customer_id: 21,
 		business_id: i,
 		review: Faker::Restaurant.review,
 		rating: Faker::Number.within(range: 1..5)
 	)
 	Review.create!(
-		customer_id: 2,
+		customer_id: 22,
 		business_id: i,
 		review: Faker::Restaurant.review,
 		rating: Faker::Number.within(range: 1..5)
 	)
 	Review.create!(
-		customer_id: 3,
+		customer_id: 23,
 		business_id: i,
 		review: Faker::Restaurant.review,
 		rating: Faker::Number.within(range: 1..5)
 	)
 	Review.create!(
-		customer_id: 4,
+		customer_id: 24,
 		business_id: i,
 		review: Faker::Restaurant.review,
 		rating: Faker::Number.within(range: 1..5)
 	)
 	Review.create!(
-		customer_id: 5,
+		customer_id: 25,
+		business_id: i,
+		review: Faker::Restaurant.review,
+		rating: Faker::Number.within(range: 1..5)
+	)
+	Review.create!(
+		customer_id: 26,
+		business_id: i,
+		review: Faker::Restaurant.review,
+		rating: Faker::Number.within(range: 1..5)
+	)
+	Review.create!(
+		customer_id: 27,
+		business_id: i,
+		review: Faker::Restaurant.review,
+		rating: Faker::Number.within(range: 1..5)
+	)
+	Review.create!(
+		customer_id: 28,
+		business_id: i,
+		review: Faker::Restaurant.review,
+		rating: Faker::Number.within(range: 1..5)
+	)
+	Review.create!(
+		customer_id: 29,
+		business_id: i,
+		review: Faker::Restaurant.review,
+		rating: Faker::Number.within(range: 1..5)
+	)
+	Review.create!(
+		customer_id: 30,
 		business_id: i,
 		review: Faker::Restaurant.review,
 		rating: Faker::Number.within(range: 1..5)
 	)
 end
-
