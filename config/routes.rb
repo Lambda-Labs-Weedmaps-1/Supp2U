@@ -11,21 +11,19 @@ Rails.application.routes.draw do
 
 	namespace :api do
 		namespace :v1 do
-			# resources :home, only: [:index, :show]
+			# Login
 			post '/auth/login', to: 'authentication#login'
+
+			# Search
+			get 'search' => 'search#search'
+
+			# Users -> Businesses -> Customers
 			resources :users, except: %i[edit new] do
 				resources :customers, only: %i[index create]
 				resources :businesses, only: %i[index create]
 			end
 
-			# resource :businesses do
-			# 	collection { get :search, action: 'search_theme', on: :collection }
-			# end
 			resources :businesses, except: %i[create edit new] do
-				# collection do
-				# 	get :search, action: 'search_theme', on: :collection
-				# 	get 'search/:q', action: 'search', as: 'search'
-				# end
 				get :ratings, on: :member
 				resources :menus, only: %i[index create]
 				resources :schedules, only: %i[index create]
