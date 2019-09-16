@@ -6,6 +6,11 @@ class Business < ApplicationRecord
 	belongs_to :user
 	has_many :reviews
 	has_one :menu
+	has_many :items, through: :menu
+
+	pg_search_scope :search_menu_for_item,
+	                associated_against: { items: %i[item_name menu_id] }
+
 	has_one :schedule
 	has_one_attached :image
 

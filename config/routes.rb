@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 			post '/auth/login', to: 'authentication#login'
 
 			# Search
-			get 'search' => 'search#search'
+      get 'search' => 'search#search'
+      
+      # Filter
+      get 'filter' => 'filter#price'
 
 			# Users -> Businesses -> Customers
 			resources :users, except: %i[edit new] do
