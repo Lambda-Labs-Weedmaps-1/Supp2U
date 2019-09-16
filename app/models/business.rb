@@ -1,6 +1,6 @@
 class Business < ApplicationRecord
 	include PgSearch::Model
-	pg_search_scope :search_by_theme, against: :theme
+	pg_search_scope :search_by_theme, against: %i[theme name]
 
 	belongs_to :user
 	has_many :reviews
