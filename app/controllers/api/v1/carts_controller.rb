@@ -4,16 +4,14 @@ module Api
         class CartsController < ApplicationController
 
             def index
-                @cart = Customer.find(params[:customer_id]).cart
+                @cart = Customer.find(params[:customer_id]).carts
 
                 render json: @cart
             end
 
 
             def create
-                @cartthere = Customer.find(params[:customer_id]).cart
-                # puts('CAT CHECK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-                # puts(@cartthere)
+                @cartthere = Customer.find(params[:customer_id]).carts.find_by(active: true)
 
                 if @cartthere
                     render json: @cartthere, status: :ok
@@ -99,7 +97,7 @@ module Api
 
             private
             def cart_params
-                params.permit(:customer_id, :business_id, :quantity, :item_numbers)
+                params.permit(:customer_id, :active, :business_id, :quantity, :item_numbers)
 
             end
 
