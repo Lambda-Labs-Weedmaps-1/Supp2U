@@ -1,4 +1,5 @@
 class Business < ApplicationRecord
+	# Todo update method name to reflect search criteria
 	include PgSearch::Model
 	pg_search_scope :search_by_theme, against: %i[theme name]
 
