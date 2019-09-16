@@ -12,10 +12,9 @@ class OrderProcessor
     def ship
         return false unless items_available?
 
-        if @order.ship
-            # reduce_inventory is a method on  order_items model that reduces the inventory
-            @items.each { |item| item.reduce_inventory }
-        end
+        @items.each { |item| item.reduce_inventory }
+        @order.ship
+    
     end
 
     private

@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.boolean "recommended"
     t.string "long"
     t.string "lat"
+    t.string "stripe_token"
+    t.string "stripe_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -94,6 +96,8 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
     t.integer "item_id"
+    t.string "item_name"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -102,6 +106,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
     t.string "status"
     t.integer "customer_id"
     t.integer "business_id"
+    t.integer "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
