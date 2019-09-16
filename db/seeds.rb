@@ -41,10 +41,10 @@ real_places = {
 		long: '-104.7697916667'
 	},
 	7 => {
-		street: '17001 Lincoln Avenue',
-		zip: 80_134,
-		lat: '39.5361583333',
-		long: '-104.7922444444'
+		street: '20981 E Smoky Hill Rd',
+		zip: 80_015,
+		lat: '39.608567',
+		long: '-104.742429'
 	},
 	8 => {
 		street: '3400 Navajo Street',
