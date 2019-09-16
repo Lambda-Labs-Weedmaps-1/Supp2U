@@ -5,8 +5,14 @@ module Api
 
             def index
                 @cart = Customer.find(params[:customer_id]).carts
+                @carts = Cart.all
 
-                render json: @cart
+                if params[:customer_id].present?
+                    render json: @cart.find_by(active:true)
+                else
+                    render json: @carts
+                end
+
             end
 
 
