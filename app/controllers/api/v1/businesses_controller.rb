@@ -27,15 +27,9 @@ module Api
 
       def update
         @business = Business.find(params[:id])
-        puts @business
-
-
+    
         @upload = ImageUploader.new(@business, update_params)
-          # if @business.update(update_params)
-          #     render json: @business, status: :created
-          # else
-          #     render json: @business.errors, status: :unprocessable_entity
-          # end
+
         if @upload.call
           render json: @business, status: :ok
         else
@@ -60,18 +54,16 @@ module Api
         render json: rating
       end
 
-
       private
 
       #user_id will need to be passed in on the front end.
       def business_params
-        params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id, :image, :stripe_token, :token)
+        params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id, :image, :stripe_email, :stripe_token, :token)
       end
 
       def update_params
         params.permit(:id, :image, :name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat)
       end
-
     end
   end
 end
