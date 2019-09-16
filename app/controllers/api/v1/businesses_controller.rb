@@ -14,6 +14,7 @@ module Api
 
       def create
         @business = Business.new(business_params)
+        puts('business stuff coming in', @business.inspect)
 
         @stripeCreate = StripeChargesServices.new(business_params, @business)
 
