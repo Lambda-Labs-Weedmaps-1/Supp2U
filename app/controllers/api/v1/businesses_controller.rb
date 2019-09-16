@@ -15,9 +15,10 @@ module Api
       def create
         @business = Business.new(business_params)
 
-        @stripeCreate = StripeChargesServices.new(business_params)
+        @stripeCreate = StripeChargesServices.new(business_params, @business)
 
-        if @business.save && @stripeCreate.busCall
+        if @business.save
+          @stripeCreate.busCall
           render json: @business, status: :created
         else
           render json: @business.errors, status: :unprocessable_entity
@@ -64,7 +65,7 @@ module Api
 
       #user_id will need to be passed in on the front end.
       def business_params
-        params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id, :image, :stripeEmail, :stripeToken, :token)
+        params.permit(:name, :website, :city, :state, :street, :zipcode, :building_number, :theme, :description, :long, :lat, :user_id, :image, :stripe_token, :token)
       end
 
       def update_params
