@@ -50,7 +50,7 @@ RSpec.describe Order, type: :model do
          carto.update("item_numbers": [1])
         # carto.item_numbers.push(1,1)
         
-        puts('cartooooooo', cust.cart.item_numbers)
+        # puts('cartooooooo', cust.cart.item_numbers)
 
         # The order creation fails due to the validates order_items, line 11 on orders.rb
         order = Order.create!(customer_id: 1, business_id: 1, status: "pending")
