@@ -2,9 +2,10 @@ module Api
     module V1
         class OrdersController < ApplicationController
 
+
             def index
                 if params[:customer_id].present?
-                    find_orders = Order.where(customer_id: params[:customer_id]).includes([:items])
+                    find_orders = Order.where(customer_id: params[:customer_id])
                 elsif params[:business_id].present?
                     find_orders = Order.where(business_id: params[:business_id])
                 else
@@ -39,6 +40,27 @@ module Api
                 else
                     render json: order.errors, status: :unprocessable_entity
                 end
+            end
+
+            def update
+                order = Order.find(params[:id])
+
+                if order.update(status: params[:status])
+                    render json: order, status: :created
+                else
+                    render json: order.errors, status: :unprocessable_entity
+                end
+            end
+
+            def destroy
+                order = Order.find(params[:id])
+
+                if order.destroy
+                    render json: {message: "The order has successfully been canceled."}, status: :ok
+                else
+                    render json: {message: "Something went wrong finding that order."}, status: :not_acceptable
+                end
+                
             end
 
             # this will change the status of the order from pending to shipped.
