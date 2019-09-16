@@ -30,15 +30,16 @@ module Api
                 business = Business.find(params[:business_id])
                 business_user = business.user
 
-                cart = customer.cart
-                puts "HEREEEEEEEEE #{cart.inspect}"
+                cart = customer.carts.find_by(active: true)
+                puts " here here here#{cart.inspect}"
                 order = customer.orders.create(business_id: params[:business_id], cart_id: cart.id, status: :pending)
                 items = Item.where( id: cart.item_numbers ) 
                 # This sends the email when an order is created
                 OrderMailer.order_email(customer_user).deliver_now
                 # then it sends an email to the busniess
                 SaleMailer.sale_email(business_user).deliver_now
-                puts "HEREEEEEEEEE #{items.inspect}"
+
+                
 
                 items.each do |item|
                     order_item = OrderItem.new(order_id: order.id, item_id: item.id, item_name: item.item_name, price: item.price)
@@ -46,7 +47,7 @@ module Api
                     puts order_item.inspect
                 end
 
-                if order.save
+                if order.save && cart.update(active: false)
                     render json: order, status: :created
                 else
                     render json: order.errors, status: :unprocessable_entity

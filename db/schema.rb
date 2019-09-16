@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_201534) do
   create_table "carts", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "business_id"
+    t.boolean "active", default: true
     t.integer "item_numbers", default: [], array: true
     t.integer "quantity"
     t.datetime "created_at", null: false
