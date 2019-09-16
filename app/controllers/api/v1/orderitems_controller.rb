@@ -53,7 +53,7 @@ module Api
 
         private
         def order_item_params
-          params.permit(:order_id, :item_name, :price, :inventory, :image)
+          params.permit(:order_id, :item_id, :item_name, :price, :image)
         end
 
       end

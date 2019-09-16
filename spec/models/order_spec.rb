@@ -1,10 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
+    before do 
+        def cart_items_present?
+            self.cart.item_numbers.length > 0
+        end
+    end
+
     describe 'associations' do
         it { should belong_to(:customer).class_name('Customer') }
         it { should belong_to(:business).class_name('Business') }
         it { should belong_to(:cart).class_name('Cart')}
+        it { should have_many(:order_items) }
     end
 
     describe 'order creation' do
@@ -40,27 +47,23 @@ RSpec.describe Order, type: :model do
         )
         
 
-        # Cart.add("item_number": 1)
-        carto.item_numbers.push(1,1)
+         carto.update("item_numbers": [1])
+        # carto.item_numbers.push(1,1)
         
-        puts('cartooooooo', cust.cart)
+        # puts('cartooooooo', cust.cart.item_numbers)
 
         # The order creation fails due to the validates order_items, line 11 on orders.rb
-        order = Order.create!({
-            "customer_id": 1,
-            "business_id": 1,
-            
-        })
+        order = Order.create!(customer_id: 1, business_id: 1, status: "pending")
+        
     end
 
 
     describe 'validations' do
-
         it { should validate_presence_of(:customer_id) }
         it { should validate_presence_of(:business_id) }
         it { should validate_presence_of(:cart_id) }
         it { should validate_presence_of(:status) }
-        it { should validate_presence_of(:cart_items_present?)}
+        it { should validate_presence_of(:order_items).or_return(true)}
     end 
     
     
