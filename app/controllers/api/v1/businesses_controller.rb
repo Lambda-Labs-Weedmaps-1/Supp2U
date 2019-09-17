@@ -15,8 +15,9 @@ module Api
       def create
         @business = Business.new(business_params)
         puts('business stuff coming in', @business.inspect)
+        stripe_ip = request.remote_ip
 
-        @stripeCreate = StripeChargesServices.new(business_params, @business)
+        @stripeCreate = StripeChargesServices.new(business_params, @business, stripe_ip)
 
         if @business.save
           @stripeCreate.busCall
