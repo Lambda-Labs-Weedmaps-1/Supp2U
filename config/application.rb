@@ -28,11 +28,11 @@ module Supp2u
 		# -- all .rb files in that directory are automatically loaded after loading
 		# the framework and any gems in your application.
 
-    # Only loads a smaller set of middleware suitable for API only apps.
-    # Middleware like session, flash, cookies can be added back manually.
-    # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
-    config.active_record.belongs_to_required_by_default = false
+		# Only loads a smaller set of middleware suitable for API only apps.
+		# Middleware like session, flash, cookies can be added back manually.
+		# Skip views, helpers and assets when generating a new resource.
+		config.api_only = true
+		config.active_record.belongs_to_required_by_default = false
 
 		config.middleware.insert_before 0, Rack::Cors do
 			allow do

@@ -8,7 +8,6 @@ module Api
 				items = Business.search_menu_for_item(params[:query])
 				results = [businesses, items]
 
-				# render json: items
 				#! Todo ERROR CHECKING AND TESTS
 				render json: results.to_json
 			end

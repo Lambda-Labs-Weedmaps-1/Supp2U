@@ -1,5 +1,8 @@
 class Business < ApplicationRecord
 	# Todo update method name to reflect search criteria
+	# Todo Add weights to columns
+	# Additonal options => normalization, sort_only, any_word
+	#* Default results are ordered by relevance
 	include PgSearch::Model
 	pg_search_scope :search_by_theme,
 	                against: %i[theme name], using: { tsearch: { prefix: true } }
