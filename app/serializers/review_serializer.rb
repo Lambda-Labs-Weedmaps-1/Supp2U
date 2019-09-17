@@ -1,7 +1,7 @@
 class ReviewSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :image, :customer_id, :business_id, :review, :rating
+  attributes :id, :image, :customer_id, :business_id, :review, :rating, :customer, :updated_at
   def image
     return unless object.image.attached?
 
@@ -13,5 +13,8 @@ class ReviewSerializer < ActiveModel::Serializer
 
   def image_url
     url_for(object.image)
+  end
+  def customer
+    ActiveModel::SerializableResource.new(object.customer, each_serializer: CustomerSerializer)
   end
 end

@@ -1,7 +1,7 @@
 class CustomerSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :custname, :image, :user_id
+  attributes :id, :custname, :image, :user_id, :user
 
   def image
     return unless object.image.attached?
