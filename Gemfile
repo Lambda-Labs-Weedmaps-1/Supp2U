@@ -10,6 +10,8 @@ gem 'bundler'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
+# PgSearch builds named scopes that take advantage of PostgreSQL's full text search.
+gem 'pg_search', '~> 2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
