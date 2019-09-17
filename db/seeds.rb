@@ -3,7 +3,7 @@
 
 require_relative './schwifty.rb'
 require 'yaml'
-businesses = YAML.load(File.read('schwifty.yml'))
+get_schwifty = YAML.load(File.read('schwifty.yml'))
 
 # Cleanup Existing User Data
 User.delete_all
@@ -27,12 +27,12 @@ Business.delete_all
 		website: Faker::Internet.url,
 		city: 'Denver',
 		state: 'CO',
-		street: businesses[i][:street],
-		zipcode: businesses[i][:zip],
+		street: get_schwifty[i][:street],
+		zipcode: get_schwifty[i][:zip],
 		theme: Faker::Restaurant.type,
 		description: Faker::Restaurant.description,
-		lat: businesses[i][:lat],
-		long: businesses[i][:long]
+		lat: get_schwifty[i][:lat],
+		long: get_schwifty[i][:long]
 	)
 end
 
