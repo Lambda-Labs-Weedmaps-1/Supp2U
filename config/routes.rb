@@ -57,7 +57,6 @@ Rails.application.routes.draw do
 
 			resources :orders, only: %i[show index destroy update] do
 				post :ship, on: :member
-				post :additem, on: :member
 				resources :orderitems, only: %i[index create]
 			end
 		end
