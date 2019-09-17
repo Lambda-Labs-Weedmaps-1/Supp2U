@@ -10,10 +10,8 @@
 | GET    | `/users/:id`                         | Returns a user associated with an id.        |
 | PUT    | `/users/:id`                         | Modify an existing user.                     |
 | DELETE | `/users/:id`                         | Delete an existing user.                     |
-
 | GET    | `/users/:user_id/customers`          | Returns a user's customer info.              |
 | POST   | `/users:/user_id/customers`          | Allows a user to create/be a customer.       |
-
 | GET    | `/users/:user_id/businesses`         | Returns a user's business info.              |
 | POST   | `/users/:user_id/businesses`         | Allows a user to create/be a business.       |
 
@@ -25,13 +23,10 @@
 | GET    | `/customers/:id`                     | Returns a customer associated with an id.    |
 | PUT    | `/customers/:id`                     | Modify an existing customer.                 |
 | DELETE | `/customers/:id`                     | Delete an existing customer.                 |
-
 | GET    | `/customers/:customer_id/carts`      | Returns a customer's active cart.            |
 | POST   | `/customers/:customer_id/carts`      | Creates a cart if one is not active.         |
-
 | GET    | `/customers/:customer_id/orders`     | Returns a customer's orders.                 |
 | POST   | `/customers/:customer_id/orders`     | Creates an order populated with cart items.  |
-
 | GET    | `/customers/:customer_id/reviews`    | Returns all customer reviews.                |
 | POST   | `/customers/:customer_id/reviews`    | Allows a customer to post a review.          |
 
@@ -81,13 +76,10 @@
 | GET    | `/businesses/:id`                    | Returns a business associated with an id     |
 | PUT    | `/businesses/:id`                    | Modify an existing business profile.         |
 | DELETE | `/businesses/:id`                    | Delete an existing business.                 |
-
 | GET    | `/businesses/:business_id/menus`     | Returns a menu associated with a business.   |
 | POST   | `/businesses/:business_id/menus`     | Allows a business to create a menu.          |
-
 | GET    | `/businesses/:business_id/schedules` | Returns a businesses schedule.               |
 | POST   | `/businesses/:business_id/schedules` | Allows a business to create a schedule.      |
-
 | GET    | `/businesses/:business_id/reviews`   | Returns the reviews on a business.           | 
 | GET    | `/businesses/:business_id/orders`    | Returns the orders placed on a business.     |
 | GET    | `/businesses/:id/ratings`            | Returns the total rating for a business.     |
