@@ -1,140 +1,167 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+#
+10.times do |i|
+	username = Faker::Internet.user_name
+	email = Faker::Internet.email
+	password = Faker::Internet.password
+	User.create!(username: username, email: email, password: password)
+end
 
-require_relative './schwifty.rb'
-require 'yaml'
-get_schwifty = YAML.load(File.read('schwifty.yml'))
+Business.create!(
+	user_id: 10,
+	name: "Angelo's Taverna",
+	website: 'angelosdenver.com',
+	city: 'Denver',
+	state: 'CO',
+	street: '620 E 6th Ave',
+	zipcode: 80_203,
+	theme: 'American',
+	description: "Angelo's Yo !",
+	lat: '39.725465',
+	long: '-104.979174'
+)
 
-# Cleanup Existing User Data
-User.delete_all
+Business.create!(
+	user_id: 2,
+	name: 'Lowdown Brewery',
+	website: 'angelosdenver.com',
+	city: 'Denver',
+	state: 'CO',
+	street: '800 Lincoln St',
+	zipcode: 80_203,
+	theme: 'American',
+	description: 'Low down place for Low down people!',
+	lat: 39.729261,
+	long: -104.985802
+)
 
-(1..150).each do |_|
-	User.create!(
-		username: Faker::Internet.unique.user_name,
-		email: Faker::Internet.email,
-		password: Faker::Internet.password
+Business.create!(
+	user_id: 3,
+	name: 'Ivy On 7th',
+	website: 'ivyon7th.com',
+	city: 'Denver',
+	state: 'CO',
+	street: '410 E 7th Ave, Denver',
+	zipcode: 80_203,
+	theme: 'American',
+	description: "It's IVY !!!",
+	lat: 39.727066,
+	long: -104.981963
+)
+
+Customer.create!(user_id: 1, custname: 'Athos')
+
+Customer.create!(user_id: 2, custname: 'Porthos')
+
+Customer.create!(user_id: 3, custname: 'Aramis')
+
+@business_id = 0
+3.times do |i|
+	@business_id += 1
+	name = Faker::Company.bs
+	Menu.create!(business_id: @business_id, name: name)
+end
+
+10.times do |i|
+	item_name = Faker::Commerce.product_name
+	price = Faker::Commerce.price
+	Item.create!(
+		menu_id: 1,
+		item_name: item_name,
+		price: price,
+		inventory: 5,
+		category: 'Breakfast, Lunch and Dinner.'
 	)
 end
 
-# Cleanup Existing Business Data
-Business.delete_all
-
-# 110 businesses with user_ids 1-110
-(1..110).each do |i|
-	Business.create!(
-		user_id: i,
-		name: Faker::Restaurant.unique.name,
-		website: Faker::Internet.url,
-		city: 'Denver',
-		state: 'CO',
-		street: get_schwifty[i][:street],
-		zipcode: get_schwifty[i][:zip],
-		theme: Faker::Restaurant.type,
-		description: Faker::Restaurant.description,
-		lat: get_schwifty[i][:lat],
-		long: get_schwifty[i][:long]
+10.times do |i|
+	item_name = Faker::Commerce.product_name
+	price = Faker::Commerce.price
+	Item.create!(
+		menu_id: 2,
+		item_name: item_name,
+		price: price,
+		inventory: 5,
+		category: 'Breakfast, Lunch and Dinner.'
 	)
 end
 
-# Cleanup Existing Menu Data
-Menu.delete_all
-
-# 110 menus with business_id 1-110
-(1..110).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
-
-# Cleanup Existing Customer Data
-Customer.delete_all
-
-# 111 customers with user_ids 111- 150
-(111..150).each do |i|
-	Customer.create!(user_id: i, custname: Faker::DcComics.name)
+10.times do |i|
+    item_name = Faker::Commerce.product_name
+    price = Faker::Commerce.price
+Item.create!(
+    menu_id: 3,
+    item_name: item_name,
+	price: price,
+	inventory: 5,
+    category: "Breakfast, Lunch and Dinner."
+)
 end
 
-# Cleanup Existing Item Data
-Item.delete_all
+Review.create!(
+    customer_id: 1,
+    business_id: 1,
+    review: "The food was way too salty and the chicken tasted like dumpster fish.... I can't wait to go back!!!",
+    rating: 5
 
-(1..110).each do |i|
-	# add more calls to create for additional menu items
-	# number of .create calls == number of items per menu
-	# 8 menu items per menu currently
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-	Item.create!(
-		menu_id: i,
-		description: Faker::Food.description,
-		item_name: Faker::Food.dish,
-		price: Faker::Commerce.price,
-		inventory: Faker::Number.within(range: 1..10),
-		category: Faker::Restaurant.type
-	)
-end
+)
 
-# Cleanup Existing Review Data
-Review.delete_all
+Review.create!(
+    customer_id: 2,
+    business_id: 1,
+    review: "The price was cheap, the portions were generous, and the quality was beyond perfect. Never going back. Perfection is overrated.",
+    rating: 1
 
-# Todo Make this code block more efficient or hard-code in customer_ids
+)
 
-(1..110).each do |i|
-	(111..150).each do |j|
-		Review.create!(
-			customer_id: j,
-			business_id: i,
-			review: Faker::Restaurant.review,
-			rating: Faker::Number.within(range: 1..5)
-		)
-	end
-end
+Review.create!(
+    customer_id: 3,
+    business_id: 1,
+    review: "I spilled coffee on myself. It was hot and did not feel good. If it weren't for that, I would have rated them a 5.",
+    rating: 3
+)
+
+Review.create!(
+    customer_id: 1,
+    business_id: 2,
+    review: "The grandma-aged woman who served me coffee called me sweetheart. My girlfriend got jealous and broke up with me...",
+    rating: 1.5
+)
+
+Review.create!(
+    customer_id: 2,
+    business_id: 2,
+    review: "The dentures of the grandma-aged woman, who served me, fell into my coffee. It still tasted fantastic!",
+    rating: 5
+)
+
+Review.create!(
+    customer_id: 3,
+    business_id: 2,
+    review: "I didn't find out there was a cockroach in my soup until it started moving after being bitten in half!",
+    rating: 5
+)
+
+Review.create!(
+    customer_id: 1,
+    business_id: 3,
+    review: "I ordered pancakes, and got waffles... I like waffles more than pancakes.",
+    rating: 5
+)
+
+Review.create!(
+    customer_id: 2,
+    business_id: 3,
+    review: "I tripped on flat ground as I was walking to my table... It made me uncomfortable...",
+    rating: 1
+)
+
+Review.create!(
+    customer_id: 3,
+    business_id: 3,
+    review: "Another customer said that my food looked delicious...",
+    rating: 2.3
+)
