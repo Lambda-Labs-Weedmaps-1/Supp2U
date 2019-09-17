@@ -22,6 +22,7 @@ class Order < ApplicationRecord
     end
 
     def cart_items_present?
+        
         self.cart.item_numbers.length > 0
     end
 

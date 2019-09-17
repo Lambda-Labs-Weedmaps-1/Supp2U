@@ -15,7 +15,6 @@ RSpec.describe Order, type: :model do
     end
 
     describe 'order creation' do
-
         user = User.create!(username: "bob", email: "thebuilder@work.com", password: "widget")
         cust = Customer.create!(user_id: 1, custname: 'Athos')
         bus = Business.create!(user_id: 1,
