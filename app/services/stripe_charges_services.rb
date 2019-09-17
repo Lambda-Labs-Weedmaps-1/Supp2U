@@ -51,7 +51,7 @@ class StripeChargesServices
         {
           tos_acceptance: {
             date: Time.now.to_i,
-            ip: "97.82.216.12", 
+            ip: request.remote_ip, 
           },
         }
       )

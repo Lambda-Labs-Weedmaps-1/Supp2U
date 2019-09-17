@@ -28,23 +28,7 @@ module Api
 			private
 
 			def schedules_params
-				params.permit(
-					:business_id,
-					:sundayopen,
-					:sundayclose,
-					:mondayopen,
-					:mondayclose,
-					:tuesdayopen,
-					:tuesdayclose,
-					:wednesdayopen,
-					:wednesdayclose,
-					:thursdayopen,
-					:thursdayclose,
-					:fridayopen,
-					:fridayclose,
-					:saturdayopen,
-					:saturdayclose
-				)
+				params.permit(:business_id,:sundayopen,:sundayclose,:mondayopen,:mondayclose,:tuesdayopen,:tuesdayclose,:wednesdayopen, :wednesdayclose, :thursdayopen, :thursdayclose, :fridayopen, :fridayclose, :saturdayopen, :saturdayclose)
 			end
 		end
 	end
