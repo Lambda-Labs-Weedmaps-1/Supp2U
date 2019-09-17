@@ -8,8 +8,8 @@ module Api
         
             def create
                 business = Business.find(params[:business_id])
-                
-                @charge = StripeChargesServices.new(charges_params, business)
+                stripe_ip = request.remote_ip
+                @charge = StripeChargesServices.new(charges_params, business, stripe_ip)
                 
                 if @charge.call
                     render status: :ok, json: {message: "it workssssss!!!!!"}

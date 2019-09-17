@@ -1,7 +1,7 @@
 class StripeChargesServices
     DEFAULT_CURRENCY = 'usd'.freeze
     
-    def initialize(params, business)
+    def initialize(params, business, stripe_ip)
       @stripe_token = params[:token]
       @amount = params[:amount]
       @business = business
