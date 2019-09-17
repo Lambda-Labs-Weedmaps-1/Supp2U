@@ -27,4 +27,3 @@ production:
   url: "postgres://ntxxjndtzsxorx:8d8ea582544323f245bdb10be9fce1b06412312d38546fc59a680aad3ad7c1d5@ec2-54-83-9-36.compute-1.amazonaws.com:5432/d750vprflufl8s"
   adapter: postgresql
   encoding: unicode
-  # url: <%= ENV["DATABASE_URL"] %>
