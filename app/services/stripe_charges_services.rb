@@ -1,12 +1,9 @@
 class StripeChargesServices
     DEFAULT_CURRENCY = 'usd'.freeze
     
-    def initialize(params, business, stripe_ip)
-      # @stripe_email = params[:stripeEmail]
+    def initialize(params, business)
       @stripe_token = params[:token]
       @amount = params[:amount]
-      # @order = params[:order_id]
-      # @customer = customer
       @business = business
       @stripe_business = stripe_business
       @stripe_ip = stripe_ip
@@ -19,7 +16,6 @@ class StripeChargesServices
     def busCall
       find_business()
     end
-
   
     private
   
@@ -82,15 +78,10 @@ class StripeChargesServices
     end
   
     def create_charge(customer)
-      puts "this works!!!!!!asdfkjas;kldfjas;kldfja;sdfjkl!!"
-      puts customer.id
-      puts @business.stripe_token
-      puts @amount.to_i
-
       Stripe::Charge.create(
         customer: customer.id,
         amount: @amount.to_i,
-        description: "supp2u!",
+        # description: "supp2u!",
         currency: DEFAULT_CURRENCY,
         transfer_data: {
           destination: "acct_1FJ0qeLHC02ycZnJ"

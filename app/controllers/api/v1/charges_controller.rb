@@ -2,6 +2,7 @@ module Api
     module V1
         class ChargesController < ApplicationController
             rescue_from Stripe::CardError, with: :catch_exception
+            
             def new
             end
         
@@ -18,10 +19,6 @@ module Api
             end
 
             private
-
-            # def charges_params
-            #     params.permit(:stripeEmail, :stripeToken, :token, :charge)
-            # end
         
             def charges_params
                 params.permit(:stripeEmail, :stripeToken, :token, :amount)
