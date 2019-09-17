@@ -19,6 +19,7 @@ module Api
 
 			def create
 				@business = Business.new(business_params)
+				puts('business stuff coming in', @business.inspect)
 
 				@stripeCreate = StripeChargesServices.new(business_params, @business)
 
@@ -32,14 +33,9 @@ module Api
 
 			def update
 				@business = Business.find(params[:id])
-				puts @business
 
 				@upload = ImageUploader.new(@business, update_params)
-				# if @business.update(update_params)
-				#     render json: @business, status: :created
-				# else
-				#     render json: @business.errors, status: :unprocessable_entity
-				# end
+
 				if @upload.call
 					render json: @business, status: :ok
 				else
@@ -86,6 +82,7 @@ module Api
 					:lat,
 					:user_id,
 					:image,
+					:stripe_email,
 					:stripe_token,
 					:token
 				)

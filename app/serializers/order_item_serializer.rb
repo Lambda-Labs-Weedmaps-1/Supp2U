@@ -1,7 +1,7 @@
 class OrderItemSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
   
-    attributes :id, :item_name, :price, :inventory, :image
+    attributes :id, :item_id, :item_name, :price, :image
   
     def image
       return unless object.image.attached?

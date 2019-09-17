@@ -2,9 +2,10 @@ module Api
     module V1
         class OrdersController < ApplicationController
 
+
             def index
                 if params[:customer_id].present?
-                    find_orders = Order.where(customer_id: params[:customer_id]).includes([:items])
+                    find_orders = Order.where(customer_id: params[:customer_id])
                 elsif params[:business_id].present?
                     find_orders = Order.where(business_id: params[:business_id])
                 else
@@ -24,10 +25,13 @@ module Api
             # customers/customer_id/orders
             def create
                 customer = Customer.find(params[:customer_id])
-                customer_user = User.find_by_id(customer.user_id)
-                business = Business.find_by_id(params[:business_id])
-                business_user = User.find_by_id(business.user_id)
-                cart = customer.cart
+                customer_user = customer.user
+
+                business = Business.find(params[:business_id])
+                business_user = business.user
+
+                cart = customer.carts.find_by(active: true)
+                puts " here here here#{cart.inspect}"
                 order = customer.orders.create(business_id: params[:business_id], cart_id: cart.id, status: :pending)
                 items = Item.where( id: cart.item_numbers ) 
                 # This sends the email when an order is created
@@ -35,17 +39,40 @@ module Api
                 # then it sends an email to the busniess
                 SaleMailer.sale_email(business_user).deliver_now
 
+                
+
                 items.each do |item|
-                    order_item = OrderItem.new(order_id: order.id, item_name: item.item_name, price: item.price, inventory: item.inventory)
+                    order_item = OrderItem.new(order_id: order.id, item_id: item.id, item_name: item.item_name, price: item.price)
                     order_item.save
                     puts order_item.inspect
                 end
 
-                if order.save
+                if order.save && cart.update(active: false)
                     render json: order, status: :created
                 else
                     render json: order.errors, status: :unprocessable_entity
                 end
+            end
+
+            def update
+                order = Order.find(params[:id])
+
+                if order.update(status: params[:status])
+                    render json: order, status: :created
+                else
+                    render json: order.errors, status: :unprocessable_entity
+                end
+            end
+
+            def destroy
+                order = Order.find(params[:id])
+
+                if order.destroy
+                    render json: {message: "The order has successfully been canceled."}, status: :ok
+                else
+                    render json: {message: "Something went wrong finding that order."}, status: :not_acceptable
+                end
+                
             end
 
             # this will change the status of the order from pending to shipped.
@@ -80,8 +107,7 @@ module Api
                       id: item.id,
                       name: item.item_name,
                       price: item.price,
-                      order_id: item.order_id,
-                      inventory: item.inventory
+                      order_id: item.order_id
                     }
                   end
                 }

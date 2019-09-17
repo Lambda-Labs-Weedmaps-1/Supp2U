@@ -7,19 +7,21 @@ class OrderProcessor
         @items = order.order_items
     end
 
-    # checks to see if the items in the order are shippable. If so, it reduces the inventory for
+    # checks to see if the order can be shipped (if it is a pending order with items in it). If so, it reduces the inventory for
     # each item being shipped, and then updates the order to shipped.
     def ship
         return false unless items_available?
 
         @items.each { |item| item.reduce_inventory }
         @order.ship
+    
     end
 
     private
 
-    # Checks to see if the inventory for each item is > 0 (available? is a function in item model). 
+    # Verifies positive inventory of items. (available? is a function in item model). 
     def items_available?
+        # available? is a method on orderitems model that checks to make sure the inventory is greater than 1
       @items.all? { |item| item.available? }
     end
 

@@ -24,4 +24,6 @@ class Business < ApplicationRecord
 	validates :state, presence: true
 	validates :street, presence: true
 	validates :zipcode, presence: true
+	validates :lat, presence: true
+	validates :long, presence: true
 end
