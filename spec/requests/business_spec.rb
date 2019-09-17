@@ -35,13 +35,17 @@ RSpec.describe 'Business request', type: :request do
 					street: Faker::Address.street_address,
 					zipcode: Faker::Company.sic_code,
 					city: Faker::Address.city,
-					state: Faker::Address.state
+					state: Faker::Address.state,
+        	long: "103.12312312313",
+        	lat: "104.212312312"
 				}
 
 				post "/api/v1/users/#{user[:id]}/businesses", params: businesses
 				response_body = json.deep_symbolize_keys
 				expect(response).to have_http_status(201)
 				expect(response_body[:name]).to eq(businesses[:name])
+				expect(response_body[:long]).to eq(businesses[:long])
+				expect(response_body[:lat]).to eq(businesses[:lat])
 			end
 		end
 		context 'with invalid request' do

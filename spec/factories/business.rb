@@ -6,6 +6,8 @@ FactoryBot.define do
 		zipcode { Faker::Company.sic_code }
 		city { Faker::Address.city }
 		state { Faker::Address.state }
+    long { "103.24213123" }
+		lat { "10.24213123sa" }
 		image do
 			{
 				io: File.open(Rails.root.join('spec/assets/test.png')),
