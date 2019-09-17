@@ -52,7 +52,7 @@ RSpec.describe Order, type: :model do
         # puts('cartooooooo', cust.cart.item_numbers)
 
         # The order creation fails due to the validates order_items, line 11 on orders.rb
-        order = Order.create!(customer_id: 1, business_id: 1, status: "pending")
+        order = Order.create!(customer_id: 1, business_id: 1, status: "pending", cart_id: carto.id )
         
     end
 
@@ -62,7 +62,8 @@ RSpec.describe Order, type: :model do
         it { should validate_presence_of(:business_id) }
         it { should validate_presence_of(:cart_id) }
         it { should validate_presence_of(:status) }
-        it { should validate_presence_of(:order_items).or_return(true)}
+        it { should validate_presence_of(:order_items)}
+        # it { should validate_presence_of(:order_items).or_return(true)}
     end 
     
     
