@@ -1,9 +1,11 @@
 class Item < ApplicationRecord
-    belongs_to :menu
-    has_many :order_items
-	has_one_attached :image
-  
-    validates :item_name, presence: true
-    validates :price, presence: true
+	include PgSearch::Model
+	# pg_search_scope :search_by_item_name, against: %i[item_name]
 
+	belongs_to :menu
+	has_one_attached :image
+	has_many :order_items
+
+	validates :item_name, presence: true
+	validates :price, presence: true
 end

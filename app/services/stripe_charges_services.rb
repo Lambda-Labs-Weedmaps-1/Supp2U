@@ -1,7 +1,7 @@
 class StripeChargesServices
     DEFAULT_CURRENCY = 'usd'.freeze
     
-    def initialize(params, business)
+    def initialize(params, business, stripe_ip)
       # @stripe_email = params[:stripeEmail]
       @stripe_token = params[:token]
       @amount = params[:amount]
@@ -9,6 +9,7 @@ class StripeChargesServices
       # @customer = customer
       @business = business
       @stripe_business = stripe_business
+      @stripe_ip = stripe_ip
     end
   
     def call
@@ -51,7 +52,7 @@ class StripeChargesServices
         {
           tos_acceptance: {
             date: Time.now.to_i,
-            ip: request.remote_ip, 
+            ip: @stripe_ip, 
           },
         }
       )
