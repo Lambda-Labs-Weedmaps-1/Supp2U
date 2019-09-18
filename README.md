@@ -8,6 +8,29 @@ Ruby Version 2.5.0
 #### Database Configuration/Deployment
 The database was configured and created using postgres and was deployed through Heroku.
 
+#### Environment Variables
+
+---
+
+```
+AUTH0_CLIENT_ID - gem installed that configures the token audience
+AUTH0_DOMAIN - Our particular company's account with auth0
+
+JWT_SECRET - json webtoken secret for authorization
+
+PASSWORD - postgress password for local db
+
+ACCESS_KEY_ID - access key for s3
+SECRET_ACCESS_KEY - secret for s3
+BUCKET - s3 storage
+
+STRIPE_PUBLISHABLE_KEY - our stripe account key
+STRIPE_SECRET_KEY - stripe secret for rails configuration
+
+SENDGRID_API_KEY - connects to email server when order is confirmed
+
+
+```
 
 #### To Run Tests....
 Rspec was used for testing. 
