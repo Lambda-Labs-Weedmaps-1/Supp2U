@@ -25,6 +25,26 @@ module Api
 				end
 			end
 
+			def update
+				@schedule = Schedule.find(params[:id])
+
+				if @schedule.update(schedules_params)
+					render json: @schedule, status: :created
+				else
+					render json: @schedule.errors, status: :unprocessable_entity
+				end
+			end
+
+			def destroy
+				@schedule = Schedule.find(params[:id])
+
+				if @schedule.destroy
+					render json: { message: "Your user has been deleted." }, status: :ok
+				else
+					render json: { message: "There was an error retrieving your schedule to delete." }, status: :unprocessable_entity
+				end
+			end
+
 			private
 
 			def schedules_params

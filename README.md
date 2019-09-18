@@ -142,7 +142,7 @@
 
 #### index -->
 <pre>If a customer_id is found in the parameters, it returns all of the customer's reviews.
-     If a business_id is found in the parameters, it returns all of the reviews on a business.</pre>
+If a business_id is found in the parameters, it returns all of the reviews on a business.</pre>
 
 #### show -->
 <pre>Returns a review associated with an ID. </pre>
@@ -176,21 +176,24 @@
 #### itemfetch -->
 <pre>Returns all of the items within a customer's cart.</pre>
 
+#### destroy -->
+<pre>Delete an existing cart from the database by its ID. </pre>
+
 
 
 ### Orders 
 
 #### index -->
 <pre>If a customer's ID is present in the params, it returns all of that customer's orders.
-     If a businesses' ID is present in the params, it returns all of that businesses' orders.
-     If no Id is present, it returns all orders in the database.</pre>
+If a businesses' ID is present in the params, it returns all of that businesses' orders.
+If no Id is present, it returns all orders in the database.</pre>
 
 #### show --> 
 <pre>Returns a business by it's ID.</pre>
 
 #### create --> 
 <pre>Transforms a customer's cart into an order. It takes all of the items within a customer's cart and creates 
-     new orderitems for the order aswell.</pre>
+new orderitems for the order aswell.</pre>
 
 #### update --> 
 <pre>Update an order's status with its ID.</pre>

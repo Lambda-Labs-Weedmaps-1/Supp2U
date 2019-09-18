@@ -76,28 +76,17 @@ module Api
                 else
                     render json: itemlot, status: :not_acceptable
                 end
-                # @cart = Cart.find(params[:id])
 
-                # #assumes coming in as an array
-                # @itemlot = @cart.item_numbers
+            end
 
-                # @arrayofitems = ["Array of Cart Items"]
-                # # @arrayofitems = Array.new(@itemlot.length, "null")
-                # puts("I AM HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-                # puts(@arrayofitems)
+            def destroy
+                @cart = Cart.find(params[:id])
 
-                # @itemlot.each { |a| 
-                #     @items = Item.where(id: a)
-                #     puts(@items.inspect)
-                #     @arrayofitems.push(@items)
-                # }
-
-                # if @arrayofitems.length > 0
-                #     render json: @arrayofitems, status: :ok
-                # else
-                #     render json: @itemlot, status: :not_acceptable
-                # end
-
+				if @cart.destroy
+					render json: { message: 'Your cart has successfully been deleted.'}, status: :ok
+				else
+					render json: { message: 'Could not find the cart you are trying to remove.'}, status: :unprocessable_entity
+				end
             end
 
 

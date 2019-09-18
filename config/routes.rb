@@ -50,7 +50,7 @@ Rails.application.routes.draw do
 			resources :schedules, only: %i[show destroy update]
 
 			resources :charges
-			resources :carts, only: %i[show update] do
+			resources :carts, only: %i[show update destroy] do
 				put :add, on: :member
 				get :itemfetch, on: :member
 			end
