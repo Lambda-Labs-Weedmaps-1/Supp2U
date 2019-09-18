@@ -111,27 +111,37 @@
 | DELETE | `/items/:id`                         | Delete an existing item.                     |
 
 
-### Actions
+## Actions
 
-## Users
+# Users
 
-## Reviews
+# Reviews
 
-## Carts
+# Carts
 
-## Orders
+`index` -> If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.
 
-## OrderItems
+`create` -> Checks to see if there is already an active cart for the customer, if so, it returns that cart, else it creates a new active cart.
 
-## Customers
+`show` -> Returns a cart based on the provided ID.
 
-## Businesses
+`add` -> Adds an item to a customer's cart by updating that cart's item_numbers array column with a new ID that references a specific item.
 
-## Schedules
+`itemfetch` -> Returns all of the items within a customer's cart.
 
-## Menus
+# Orders
 
-## Items
+# OrderItems
+
+# Customers
+
+# Businesses
+
+# Schedules
+
+# Menus
+
+# Items
 
 
 * ...
