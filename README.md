@@ -114,6 +114,151 @@
 
 ![](/datamodel.png)
 
+#### Customers
+
+---
+
+```
+{
+    id: INTEGER
+    user_id: INTEGER
+    custname: STRING
+    stripe_token: STRING
+    stripe_email: STRING
+}
+```
+
+#### Review
+
+---
+
+```
+{
+    id: INTEGER
+    customer_id: INTEGER
+    business_id: INTEGER
+    review: STRING
+    rating: FLOAT
+}
+```
+
+#### Carts
+
+---
+
+```
+{
+    id: INTEGER
+    customer_id: INTEGER
+    business_id: INTEGER
+    active: BOOLEAN
+    item_numbers: INTEGER(ARRAY)
+    quantity: INTEGER
+}
+```
+
+#### Orders
+
+---
+
+```
+{
+    id: INTEGER
+    customer_id: INTEGER
+    business_id: INTEGER
+    cart_id: INTEGER
+    status: STRING
+
+}
+```
+
+#### OrderItems
+
+---
+
+```
+{
+    id: INTEGER
+    order_id: INTEGER
+    item_id: INTEGER
+    item_name: STRING
+    price: FLOAT
+}
+```
+
+#### Businesses
+
+---
+
+```
+{
+    id: INTEGER
+    user_id: INTEGER
+    name: STRING
+    website: STRING
+    city: STRING
+    state: STRING
+    street: STRING
+    zipcode: INTEGER
+    building_number: INTEGER
+    theme: STRING
+    description: STRING
+    recommended: BOOLEAN
+    long: STRING
+    lat: STRING
+    stripe_token: STRING
+    stripe_email: STRING
+
+}
+```
+
+#### Schedules
+
+---
+
+```
+{
+    id: INTEGER
+    business_id: INTEGER
+    sunday: STRING
+    monday: STRING
+    tuesday: STRING
+    wednesday: STRING
+    thursday: STRING
+    friday: STRING
+    saturday: STRING
+}
+```
+
+#### Menus
+
+---
+
+```
+{
+    id: INTEGER
+    business_id: INTEGER
+    name: STRING
+}
+```
+
+#### Items
+
+---
+
+```
+{
+    id: INTEGER
+    menu_id: INTEGER
+    item_name: STRING
+    price: FLOAT
+    inventory: INTEGER
+    category: STRING
+    description: STRING
+    cals: INTEGER
+}
+```
+
 ## Actions
 
 ### Users
@@ -152,7 +297,7 @@ If a business_id is found in the parameters, it returns all of the reviews on a 
       per business. </pre>
 
 #### update -->
-<pre>Allows review's to be updated by ID.</pre>
+<pre>Allows reviews to be updated by ID.</pre>
 
 #### destroy -->
 <pre>Allows a review to be deleted</pre>
@@ -171,7 +316,7 @@ If a business_id is found in the parameters, it returns all of the reviews on a 
 <pre>Returns a cart based on the provided ID.</pre>
 
 #### add -->
-<pre>Add's an item to a cart.</pre>
+<pre>Adds an item to a cart.</pre>
 
 #### itemfetch -->
 <pre>Returns all of the items within a customer's cart.</pre>
@@ -193,7 +338,7 @@ If no Id is present, it returns all orders in the database.</pre>
 
 #### create --> 
 <pre>Transforms a customer's cart into an order. It takes all of the items within a customer's cart and creates 
-new orderitems for the order aswell.</pre>
+new order_items for the order as well.</pre>
 
 #### update --> 
 <pre>Update an order's status with its ID.</pre>

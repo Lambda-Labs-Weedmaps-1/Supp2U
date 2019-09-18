@@ -57,20 +57,6 @@ module Api
 					:thursday,
 					:friday,
 					:saturday,
-					:sundayopen,
-					:sundayclose,
-					:mondayopen,
-					:mondayclose,
-					:tuesdayopen,
-					:tuesdayclose,
-					:wednesdayopen,
-					:wednesdayclose,
-					:thursdayopen,
-					:thursdayclose,
-					:fridayopen,
-					:fridayclose,
-					:saturdayopen,
-					:saturdayclose
 				)
 			end
 		end
