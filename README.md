@@ -114,6 +114,21 @@
 
 ![](/datamodel.png)
 
+#### Users
+
+---
+
+```
+{
+    id: INTEGER
+    email: STRING
+    password: STRING
+    wallet: STRING
+    is_admin: STRING
+
+}
+```
+
 #### Customers
 
 ---
@@ -261,7 +276,39 @@
 
 ## Actions
 
+### AUTH
+
+#### login -->
+<pre>Finds a user by their email. If the user doesn't exist, it creates one. If a user does exist it checks to see if the user is a customer or a business and then logs them in accordingly.</pre>
+
+
+
+### CHARGES
+
+#### create --> 
+<pre> Handles transaction creation between customers and businesses utilizing a custom stripe_charge_service that essentially retrieves a businesses' stripe information (or creates it if it doesn't yet exist) and then retrieves a customer's stripe information (or creates it if it doesn't exist) and then creates a linked charge/transaction between the two parties. </pre>
+
+
+
+### SEARCH
+
+#### search -->
+<pre> Find businesses by theme or items </pre>
+
+
 ### Users
+
+#### index -->
+<pre> Finds all user's in the database.</pre>
+
+#### show -->
+<pre>Finds a user by ID.</pre>
+
+#### update -->
+<pre>Edit an existing user's information by their ID.</pre>
+
+#### destroy -->
+<pre>Delete an existing user from the database by their ID.</pre>
 
 
 ### Customers
