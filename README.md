@@ -123,6 +123,13 @@ The command for running a testing file is -> rspec _pathtofile_
 | PUT    | `/items/:id`                         | Modify an existing item.                     |
 | DELETE | `/items/:id`                         | Delete an existing item.                     |
 
+#### Random Routes
+| Method | Endpoint                             | Description                                  |
+| ------ | ------------------------------------ | -------------------------------------------- |
+| POST   | `/auth/login`                        | User login/creation                          |
+| GET    | `/search`                            | Customized business searching                |
+| GET    | `/filter`                            | Filtering through database for businesses    |
+
 # Data Model
 
 ![](/datamodel.png)
