@@ -117,20 +117,36 @@
 
 # Reviews
 
+
+
 # Carts
 
-`index` -> If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.
+`index` -> <pre>If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.</pre>
 
-`create` -> Returns the customer's active cart, or create's a new active cart if they do not have one.
+`create` -> <pre>Returns the customer's active cart, or create's a new active cart if they do not have one.</pre>
 
-`show` -> Returns a cart based on the provided ID.
+`show` -> <pre>Returns a cart based on the provided ID.</pre>
 
-`add` -> Adds an item to a customer's cart by updating that cart's item_numbers array column with a new ID that references
-         a specific item.
+`add` -> <pre>Add's an item to a cart.</pre>
 
-`itemfetch` -> Returns all of the items within a customer's cart.
+`itemfetch` -> <pre>Returns all of the items within a customer's cart.</pre>
 
 # Orders
+
+`index` -> <pre>If a customer's ID is present in the params, it returns all of that customer's orders.
+                If a businesses' ID is present in the params, it returns all of that businesses' orders.
+                If no Id is present, it returns all orders in the database.</pre>
+
+`show` -> Returns a business by it's ID.
+
+`create` -> <pre>Transforms a customer's cart into an order. It take's all of the items within a customer's cart and create's 
+                 new orderitems for the order aswell.</pre>
+
+`update` -> Allows an order's status to be updated.
+
+`destroy` -> Deletes an order from the database.
+
+`ship` -> Checks to see if an order meets the criteria required to be shipped off. If so, it is shipped.
 
 # OrderItems
 
