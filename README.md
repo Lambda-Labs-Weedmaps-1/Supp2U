@@ -528,6 +528,12 @@ It has two private methods. One (file?) which checks to see if there is already 
 It also has a "call" method which checks to see if an image is being sent through the params and if there is already an attached image. If so it removes the old attached image and updates it with the new one. If there isn't an attached image, it just adds one, if provided.
 ```
 
+### Serializers
+
+```
+All serializers attach image files to the json blob to be consumed by the frontend. 
+```
+
 ### StripeChargesService
 
 See Charges action for generalized description of this service.
