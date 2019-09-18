@@ -2,13 +2,14 @@ module Api
     module V1
         class ChargesController < ApplicationController
             rescue_from Stripe::CardError, with: :catch_exception
+            
             def new
             end
         
             def create
                 business = Business.find(params[:business_id])
-                
-                @charge = StripeChargesServices.new(charges_params, business)
+                stripe_ip = request.remote_ip
+                @charge = StripeChargesServices.new(charges_params, business, stripe_ip)
                 
                 if @charge.call
                     render status: :ok, json: {message: "it workssssss!!!!!"}
@@ -18,10 +19,6 @@ module Api
             end
 
             private
-
-            # def charges_params
-            #     params.permit(:stripeEmail, :stripeToken, :token, :charge)
-            # end
         
             def charges_params
                 params.permit(:stripeEmail, :stripeToken, :token, :amount, :business_id)
