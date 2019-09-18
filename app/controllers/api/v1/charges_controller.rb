@@ -24,7 +24,7 @@ module Api
             # end
         
             def charges_params
-                params.permit(:stripeEmail, :stripeToken, :token, :amount)
+                params.permit(:stripeEmail, :stripeToken, :token, :amount, :business_id)
             end
         
             def catch_exception(exception)
