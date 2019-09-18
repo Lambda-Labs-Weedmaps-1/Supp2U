@@ -121,11 +121,12 @@
 
 `index` -> If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.
 
-`create` -> Checks to see if there is already an active cart for the customer, if so, it returns that cart, else it creates a new active cart.
+`create` -> Returns the customer's active cart, or create's a new active cart if they do not have one.
 
 `show` -> Returns a cart based on the provided ID.
 
-`add` -> Adds an item to a customer's cart by updating that cart's item_numbers array column with a new ID that references a specific item.
+`add` -> Adds an item to a customer's cart by updating that cart's item_numbers array column with a new ID that references
+         a specific item.
 
 `itemfetch` -> Returns all of the items within a customer's cart.
 
