@@ -113,25 +113,30 @@
 
 ## Actions
 
-# Users
+### Users
 
-# Reviews
+### Reviews
 
 
 
-# Carts
+### Carts
 
-`index` <pre>If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.</pre>
+#### index 
+<pre>If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.</pre>
 
-`create` <pre>Returns the customer's active cart, or create's a new active cart if they do not have one.</pre>
+#### create
+<pre>Returns the customer's active cart, or create's a new active cart if they do not have one.</pre>
 
-`show` <pre>Returns a cart based on the provided ID.</pre>
+#### show 
+<pre>Returns a cart based on the provided ID.</pre>
 
-`add` <pre>Add's an item to a cart.</pre>
+#### add 
+<pre>Add's an item to a cart.</pre>
 
-`itemfetch` <pre>Returns all of the items within a customer's cart.</pre>
+##### itemfetch
+ <pre>Returns all of the items within a customer's cart.</pre>
 
-# Orders
+### Orders
 
 `index` <pre>If a customer's ID is present in the params, it returns all of that customer's orders.
                 If a businesses' ID is present in the params, it returns all of that businesses' orders.
@@ -148,17 +153,17 @@
 
 `ship` -> <pre>Checks to see if an order meets the criteria required to be shipped off. If so, it is shipped.</pre>
 
-# OrderItems
+### OrderItems
 
-# Customers
+### Customers
 
-# Businesses
+### Businesses
 
-# Schedules
+### Schedules
 
-# Menus
+### Menus
 
-# Items
+### Items
 
 
 * ...
