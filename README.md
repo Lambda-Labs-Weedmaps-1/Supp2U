@@ -85,7 +85,7 @@
 | GET    | `/businesses/:id/ratings`            | Returns the total rating for a business.     |
 
 
-#### Item Routes
+#### Schedules Routes
 | Method | Endpoint                             | Description                                  |
 | ------ | ------------------------------------ | -------------------------------------------- |
 | GET    | `/schedules/:id`                     | Returns a schedule associated with an id     |
@@ -109,6 +109,29 @@
 | GET    | `/items/:id`                         | Returns an item associated with an id        |
 | PUT    | `/items/:id`                         | Modify an existing item.                     |
 | DELETE | `/items/:id`                         | Delete an existing item.                     |
+
+
+### Actions
+
+## Users
+
+## Reviews
+
+## Carts
+
+## Orders
+
+## OrderItems
+
+## Customers
+
+## Businesses
+
+## Schedules
+
+## Menus
+
+## Items
 
 
 * ...
