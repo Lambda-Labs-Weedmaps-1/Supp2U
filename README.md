@@ -269,38 +269,41 @@ new orderitems for the order aswell.</pre>
 ### Menus
 
 #### index -->
-<pre></pre>
+<pre>Finds a businesses' menu.</pre>
 
 #### show -->
-<pre></pre>
+<pre>Finds a menu by its ID.</pre>
 
 #### create -->
-<pre></pre>
+<pre>Create/add a menu for a business. Business_id is required.</pre>
 
 #### update -->
-<pre></pre>
+<pre>Edit an existing menu by it's ID.</pre>
 
 #### destroy -->
-<pre></pre>
+<pre>Delete an existing menu by it's ID.</pre>
 
 
 
 ### Items
 
 #### index -->
-<pre></pre>
+<pre>Finds all items associated with a menu.</pre>
 
 #### show -->
-<pre></pre>
+<pre>Finds an item by it's ID.</pre>
 
-#### create -->
-<pre></pre>
+#### create --> 
+<pre>Creates/adds an item to a menu. Requires order_id.</pre>
 
 #### update -->
-<pre></pre>
+<pre>Edit an existing item by its ID.</pre>
 
 #### destroy -->
-<pre></pre>
+<pre>Deletes an item from the database by ID.</pre>
 
 
-* ...
+## Front-End Documentation
+
+Refer to [Front-End Docs](https://github.com/Lambda-Labs-Weedmaps-1/Supp2U-FE) to view
+our Front-End information
