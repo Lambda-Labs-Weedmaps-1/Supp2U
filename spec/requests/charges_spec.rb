@@ -27,7 +27,7 @@ RSpec.describe "ChargesController", type: :controller do
         end
         describe 'create account' do
             it 'creates one more account' do
-              account = Stripe::Account.create(email: 'lol@what.com')
+              account = Stripe::Account.create(email: 'test@test.com')
         
               expect(account).to be_a Stripe::Account
             end
