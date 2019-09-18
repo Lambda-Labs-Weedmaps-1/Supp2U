@@ -121,37 +121,43 @@
 
 ### Carts
 
-#### index 
+#### index -->
 <pre>If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.</pre>
 
-#### create
+#### create -->
 <pre>Returns the customer's active cart, or create's a new active cart if they do not have one.</pre>
 
-#### show 
+#### show -->
 <pre>Returns a cart based on the provided ID.</pre>
 
-#### add 
+#### add -->
 <pre>Add's an item to a cart.</pre>
 
-##### itemfetch
- <pre>Returns all of the items within a customer's cart.</pre>
+#### itemfetch -->
+<pre>Returns all of the items within a customer's cart.</pre>
 
-### Orders
+### Orders 
 
-`index` <pre>If a customer's ID is present in the params, it returns all of that customer's orders.
-                If a businesses' ID is present in the params, it returns all of that businesses' orders.
-                If no Id is present, it returns all orders in the database.</pre>
+#### index -->
+<pre>If a customer's ID is present in the params, it returns all of that customer's orders.
+     If a businesses' ID is present in the params, it returns all of that businesses' orders.
+     If no Id is present, it returns all orders in the database.</pre>
 
-`show` -> <pre>Returns a business by it's ID.</pre>
+#### show --> 
+<pre>Returns a business by it's ID.</pre>
 
-`create` -> <pre>Transforms a customer's cart into an order. It take's all of the items within a customer's cart and create's 
-                 new orderitems for the order aswell.</pre>
+#### create --> 
+<pre>Transforms a customer's cart into an order. It take's all of the items within a customer's cart and create's 
+     new orderitems for the order aswell.</pre>
 
-`update` -> <pre>Allows an order's status to be updated.</pre>
+#### update --> 
+<pre>Allows an order's status to be updated.</pre>
 
-`destroy` -> <pre>Deletes an order from the database.</pre>
+#### destroy --> 
+<pre>Deletes an order from the database.</pre>
 
-`ship` -> <pre>Checks to see if an order meets the criteria required to be shipped off. If so, it is shipped.</pre>
+#### ship --> 
+<pre>Checks to see if an order meets the criteria required to be shipped off. If so, it is shipped.</pre>
 
 ### OrderItems
 
