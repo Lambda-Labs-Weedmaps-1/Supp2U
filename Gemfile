@@ -23,6 +23,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jwt'
 
+gem 'stripe-ruby-mock', '~> 2.5.0', :require => 'stripe_mock'
+
 gem 'stripe'
 
 gem 'sendgrid-ruby'
