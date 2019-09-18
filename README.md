@@ -2,6 +2,18 @@
 
 #### SUPP2U BACKEND DEPLOYMENT: https://supp2udev.herokuapp.com <br>
 
+#### Ruby Version
+Ruby Version 2.5.0
+
+#### Database Configuration/Deployment
+The database was configured and created using postgres and was deployed through Heroku.
+
+
+#### To Run Tests....
+Rspec was used for testing. 
+The command to run all of the tests at once is -> rspec
+The command for running a testing file is -> rspec _pathtofile_
+
 #### User Routes
 | Method | Endpoint                             | Description                                  |
 | ------ | ------------------------------------ | -------------------------------------------- |
@@ -45,6 +57,7 @@
 | GET    | `/carts/:id`                         | Returns a cart associated with an id.        |
 | GET    | `/carts/:id/itemfetch`               | Returns all items assiciated with a cart.    |
 | PUT    | `/carts/:id`                         | Modify an existing cart.                     |
+| DELETE | `/carts/:id`                         | Delete an existing cart.                     |
 | PUT    | `/carts/:id/add`                     | Allows an item to be added to a cart.        |
 
 
@@ -286,7 +299,7 @@
 ### CHARGES
 
 #### create --> 
-<pre> Handles transaction creation between customers and businesses utilizing a custom stripe_charge_service that essentially retrieves a businesses' stripe information (or creates it if it doesn't yet exist) and then retrieves a customer's stripe information (or creates it if it doesn't exist) and then creates a linked charge/transaction between the two parties. </pre>
+<pre> Handles transaction creation between customers and businesses utilizing a custom stripe_charge_service that essentially retrieves a businesses' stripe information (or creates it if it doesn't yet exist),retrieves a customer's stripe information (or creates it if it doesn't exist) and then creates a linked charge/transaction between the two parties. </pre>
 
 
 
@@ -493,6 +506,51 @@ new order_items for the order as well.</pre>
 
 #### destroy -->
 <pre>Deletes an item from the database by ID.</pre>
+
+## Services
+
+### OrderProcessor
+
+```
+The order_processor takes in an order and initializes with that order and the items belonging to that order.
+
+It has a private method that check an order_item against the item in the database to make sure that there is sufficient inventory. It returns a true or false boolean value.
+
+It also has a "ship" method which uses the private "items_available?" method to insure that the order can be shipped. It then reduces the inventory of each item in the database and ships the order provided that it is a pending order with items.
+```
+
+### ImageUploader
+```
+The image_uploader is/can be initialized with any model instance that can have an attached image and with the params for it. 
+
+It has two private methods. One (file?) which checks to see if there is already an attached image. And another (delete_image), which can remove an attached image.
+
+It also has a "call" method which checks to see if an image is being sent through the params and if there is already an attached image. If so it removes the old attached image and updates it with the new one. If there isn't an attached image, it just adds one, if provided.
+```
+
+### StripeChargesService
+
+See Charges action for generalized description of this service.
+
+---
+Private Methods:
+
+`find_business` --> Finds a businesses stripe information or creates it if it doesn't exist.
+`retrieve_business` --> Retrieves a businesses stripe account using their stripe_token.
+`create_business` --> Creates a businesses stripe account and adds the stripe_token to the database. 
+                      Sends terms of service agreement to stripe.
+
+`find_customer` -->  Finds a customer's stripe information or creates it if it does not exist.
+`retrieve_customer` --> Retrieves a customer's stripe account using their stripe_token.
+`create_customer` --> Creates a customer's stripe account and adds the stripe_token to the database.
+`create_charge` --> Creates a charge to the customer's account.
+
+Public Methods:
+`call` --> Uses the private method "create_charge" on a customer.
+`buscall` --> Uses the private method "find_business".
+
+---
+
 
 
 ## Front-End Documentation
