@@ -110,12 +110,52 @@
 | PUT    | `/items/:id`                         | Modify an existing item.                     |
 | DELETE | `/items/:id`                         | Delete an existing item.                     |
 
+# Data Model
+
+![](/datamodel.png)
 
 ## Actions
 
 ### Users
 
+
+### Customers
+
+#### index -->
+<pre> Finds a user's customer if a user_id is present in the params. Else it finds all users in the database </pre>
+
+#### show -->
+<pre>Finds a customer by ID.</pre>
+
+#### create -->
+<pre>Adds a new customer to the database. Requires a user_id.</pre>
+
+#### update -->
+<pre>Edit an existing customer information by their ID.</pre>
+
+#### destroy -->
+<pre>Delete a customer from the database by their ID.</pre>
+
+
+
 ### Reviews
+
+#### index -->
+<pre>If a customer_id is found in the parameters, it returns all of the customer's reviews.
+     If a business_id is found in the parameters, it returns all of the reviews on a business.</pre>
+
+#### show -->
+<pre>Returns a review associated with an ID. </pre>
+
+#### create -->
+<pre> Allows a customer to post a review to a business. It also ensures that they can only post one review
+      per business. </pre>
+
+#### update -->
+<pre>Allows review's to be updated by ID.</pre>
+
+#### destroy -->
+<pre>Allows a review to be deleted</pre>
 
 
 
@@ -125,7 +165,7 @@
 <pre>If a valid customer_id is in the params it returns that customer's active cart, else it returns all of the carts in the db.</pre>
 
 #### create -->
-<pre>Returns the customer's active cart, or create's a new active cart if they do not have one.</pre>
+<pre>Returns the customer's active cart, or creates a new active cart if they do not have one.</pre>
 
 #### show -->
 <pre>Returns a cart based on the provided ID.</pre>
@@ -135,6 +175,8 @@
 
 #### itemfetch -->
 <pre>Returns all of the items within a customer's cart.</pre>
+
+
 
 ### Orders 
 
@@ -147,11 +189,11 @@
 <pre>Returns a business by it's ID.</pre>
 
 #### create --> 
-<pre>Transforms a customer's cart into an order. It take's all of the items within a customer's cart and create's 
+<pre>Transforms a customer's cart into an order. It takes all of the items within a customer's cart and creates 
      new orderitems for the order aswell.</pre>
 
 #### update --> 
-<pre>Allows an order's status to be updated.</pre>
+<pre>Update an order's status with its ID.</pre>
 
 #### destroy --> 
 <pre>Deletes an order from the database.</pre>
@@ -159,17 +201,103 @@
 #### ship --> 
 <pre>Checks to see if an order meets the criteria required to be shipped off. If so, it is shipped.</pre>
 
+
+
 ### OrderItems
 
-### Customers
+#### index -->
+<pre>If an order_id is present in the params, it returns all of that order's items. Else it returns all of the order_items in the database.</pre>
+
+#### show -->
+<pre>Finds an order_item by it's ID.</pre>
+
+#### create --> 
+<pre>Creates/adds an order_item to an order. Requires order_id.</pre>
+
+#### update -->
+<pre>Edit an existing order_item by its ID.</pre>
+
+#### destroy -->
+<pre>Deletes an order_item from the database by ID.</pre>
+
+
 
 ### Businesses
 
+#### index -->
+<pre>Finds a user's business if a user_id is present in the params, else it returns all businesses in the database.</pre>
+
+#### show -->
+<pre>Finds a business by its ID.</pre>
+
+#### create -->
+<pre>Creates a business for a user. The user_id is required for creation.</pre>
+
+#### update -->
+<pre>Edit an existing business by its ID.</pre>
+
+#### destroy -->
+<pre>Delete an existing business by its ID.</pre>
+
+#### ratings -->
+<pre>Finds a businesses average rating based off of all reviews for that business.</pre>
+
+
+
 ### Schedules
+
+#### index -->
+<pre>Finds a businesses' schedule.</pre>
+
+#### show -->
+<pre>Finds a business by its ID.</pre>
+
+#### create -->
+<pre>Create/add a schedule to a business. Business_id is required.</pre>
+
+#### update -->
+<pre>Edit an existing schedule by it's ID.</pre>
+
+#### destroy -->
+<pre>Delete an existing schedule by it's ID.</pre>
+
+
 
 ### Menus
 
+#### index -->
+<pre></pre>
+
+#### show -->
+<pre></pre>
+
+#### create -->
+<pre></pre>
+
+#### update -->
+<pre></pre>
+
+#### destroy -->
+<pre></pre>
+
+
+
 ### Items
+
+#### index -->
+<pre></pre>
+
+#### show -->
+<pre></pre>
+
+#### create -->
+<pre></pre>
+
+#### update -->
+<pre></pre>
+
+#### destroy -->
+<pre></pre>
 
 
 * ...
