@@ -62,7 +62,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -70,7 +71,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -78,7 +80,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -86,7 +89,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -94,7 +98,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -102,7 +107,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -110,7 +116,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
   Item.create!(
     menu_id: i,
@@ -118,7 +125,8 @@ Item.delete_all
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
     inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type
+    category: Faker::Restaurant.type,
+    cals: Faker::Number.within(range: 1..1_400)
   )
 end
 
