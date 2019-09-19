@@ -76,7 +76,18 @@ module Api
                 else
                     render json: itemlot, status: :not_acceptable
                 end
+            end
 
+            def removeitem
+                cart = Cart.find(params[:id])
+                items = cart.item_numbers
+                items.delete_at(items.index(params[:item_number]))
+
+                if cart.save!
+                    render json: cart, status: :ok
+                else
+                    render json: cart.errors, status: :not_acceptable
+                end
             end
 
             def destroy
