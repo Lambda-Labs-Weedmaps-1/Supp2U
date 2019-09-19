@@ -76,7 +76,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -85,7 +85,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -94,7 +94,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -103,7 +103,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -112,7 +112,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -121,7 +121,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -130,7 +130,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
@@ -139,7 +139,7 @@ Item.delete_all
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
     price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
+    inventory: Faker::Number.within(range: 100..200),
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )

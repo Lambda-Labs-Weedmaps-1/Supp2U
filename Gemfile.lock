@@ -329,6 +329,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  faraday (~> 0.15.4)
   jwt
   knock
   listen (>= 3.0.5, < 3.2)
