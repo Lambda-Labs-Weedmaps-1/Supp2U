@@ -1,18 +1,5 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-=begin
-def self.restaurants
-  conn = Faraday.new(url: 'https://eatstreet.com/publicapi/v1')
-  response =
-    conn.get('restaurant/search') do |req|
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['X-Access-Token'] = ENV['EATSTREET_KEY']
-      req.params['street-address'] = '80012'
-      req.params['method'] = 'both'
-      req.params['pickup-radius'] = '30'
-    end
-=end
-
 require_relative './schwifty.rb'
 require 'yaml'
 get_schwifty = YAML.load(File.read('schwifty.yml'))
