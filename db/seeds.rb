@@ -13,9 +13,22 @@ def self.restaurants
     end
 =end
 
+require 'open-uri'
+
 require_relative './schwifty.rb'
 require 'yaml'
 get_schwifty = YAML.load(File.read('schwifty.yml'))
+
+
+def fetch_image (instance, search)
+  image = Pexels::Photo.search(search)
+  puts image
+  if image.present?
+    image = image.first.source
+    downloaded_image = open(image)
+    instance.image.attach(io: downloaded_image  , filename: "#{search}.jpg")
+  end
+end
 
 # Cleanup Existing User Data
 User.delete_all
@@ -31,9 +44,9 @@ end
 # Cleanup Existing Business Data
 Business.delete_all
 
-# 110 businesses with user_ids 1-110
-(1..100).each do |i|
-  Business.create!(
+# 110 businesses with user_ids 1-50
+(1..50).each do |i|
+  business = Business.create!(
     user_id: i,
     name: Faker::Restaurant.unique.name,
     website: Faker::Internet.url,
@@ -46,6 +59,7 @@ Business.delete_all
     lat: get_schwifty[i][:lat],
     long: get_schwifty[i][:long]
   )
+  fetch_image(business, business.name)
 end
 
 Schedule.delete_all
@@ -66,25 +80,26 @@ end
 # Cleanup Existing Menu Data
 Menu.delete_all
 
-# 110 menus with business_id 1-110
-(1..100).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
+# 50 menus with business_id 1-50
+(1..50).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
 
 # Cleanup Existing Customer Data
 Customer.delete_all
 
-# 111 customers with user_ids 111- 1100
-(101..200).each do |i|
-  Customer.create!(user_id: i, custname: Faker::DcComics.name)
+# 50 customers with user_ids 50-150
+(50..150).each do |i|
+  customer = Customer.create!(user_id: i, custname: Faker::DcComics.name)
+  fetch_image(customer, customer.custname)
 end
 
 # Cleanup Existing Item Data
 Item.delete_all
 
-(1..100).each do |i|
+(1..50).each do |i|
   # add more calls to create for additional menu items
   # number of .create calls == number of items per menu
   # 8 menu items per menu currently
-  Item.create!(
+  item_1 = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -93,7 +108,21 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
+
+  # fetch_image(item_1, item_1.item_name)
+
+  item_2 = Item.create!(
+     menu_id: i,
+     description: Faker::Food.description,
+     item_name: Faker::Food.dish,
+     price: Faker::Commerce.price,
+     inventory: Faker::Number.within(range: 1..10),
+     category: Faker::Restaurant.type,
+     cals: Faker::Number.within(range: 1..1_400)
+   )
+  # fetch_image(item_2, item_2.item_name)
+
+  item = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -102,7 +131,8 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
+  # fetch_image(item, item.item_name)
+  item = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -111,7 +141,8 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
+  # fetch_image(item, item.item_name)
+  item = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -120,7 +151,9 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
+  # fetch_image(item, item.item_name)
+
+  item = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -129,7 +162,8 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
+  # fetch_image(item, item.item_name)
+  item = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -138,7 +172,9 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
+  # fetch_image(item, item.item_name)
+
+  item = Item.create!(
     menu_id: i,
     description: Faker::Food.description,
     item_name: Faker::Food.dish,
@@ -147,15 +183,7 @@ Item.delete_all
     category: Faker::Restaurant.type,
     cals: Faker::Number.within(range: 1..1_400)
   )
-  Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 1..10),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
+  # fetch_image(item, item.item_name)
 end
 
 # Customers that need to leave a review []
@@ -189,3 +217,23 @@ end
     rating: Faker::Number.within(range: 1..5)
   )
 end
+
+#
+# i = Item.create!(
+#     menu_id: 1,
+#     description: Faker::Food.description,
+#     item_name: Faker::Food.dish,
+#     price: Faker::Commerce.price,
+#     inventory: Faker::Number.within(range: 1..10),
+#     category: Faker::Restaurant.type,
+#     cals: Faker::Number.within(range: 1..1_400),
+#     )
+#
+# # image = Unsplash::Photo.search( i.item_name, page = 1, per_page = 1)
+# image = Pexels::Photo.search(i.item_name)
+# puts image
+# if image.present?
+#   image = image.first.source
+#   downloaded_image = open(image)
+#   i.image.attach(io: downloaded_image  , filename: "foo.jpg")
+# end
