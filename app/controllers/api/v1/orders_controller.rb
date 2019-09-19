@@ -33,20 +33,25 @@ module Api
                 cart = customer.carts.find_by(active: true)
                 puts " here here here#{cart.inspect}"
                 order = customer.orders.create(business_id: params[:business_id], cart_id: cart.id, status: :pending)
-                items = Item.where( id: cart.item_numbers ) 
-                # This sends the email when an order is created
-                OrderMailer.order_email(customer_user).deliver_now
-                # then it sends an email to the busniess
-                SaleMailer.sale_email(business_user).deliver_now
 
+                arrayofitems = []
+                cart.item_numbers.each do |item_id|
+                    item = Item.find(item_id)
+                    arrayofitems << item
+                end
+
+                # items = Item.where( id: cart.item_numbers ) 
                 
-
-                items.each do |item|
+                arrayofitems.each do |item|
                     order_item = OrderItem.new(order_id: order.id, item_id: item.id, item_name: item.item_name, price: item.price)
                     order_item.save
                     puts order_item.inspect
                 end
-
+                
+                # This sends the email when an order is created
+                OrderMailer.order_email(customer_user).deliver_now
+                # then it sends an email to the busniess
+                SaleMailer.sale_email(business_user).deliver_now
                 if order.save && cart.update(active: false)
                     render json: order, status: :created
                 else
@@ -104,7 +109,7 @@ module Api
                   customer_id: order.customer_id,
                   items: order.order_items.map do |item|
                     {
-                      id: item.id,
+                      id: item.item_id,
                       name: item.item_name,
                       price: item.price,
                       order_id: item.order_id
