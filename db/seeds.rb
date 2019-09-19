@@ -7,7 +7,7 @@ get_schwifty = YAML.load(File.read('schwifty.yml'))
 # Cleanup Existing User Data
 User.delete_all
 
-(1..150).each do |_|
+(1..200).each do |_|
   User.create!(
     username: Faker::Internet.unique.user_name,
     email: Faker::Internet.email,
@@ -19,7 +19,7 @@ end
 Business.delete_all
 
 # 110 businesses with user_ids 1-110
-(1..110).each do |i|
+(1..100).each do |i|
   Business.create!(
     user_id: i,
     name: Faker::Restaurant.unique.name,
@@ -37,7 +37,7 @@ end
 
 Schedule.delete_all
 
-(1..110).each do |i|
+(1..100).each do |i|
   Schedule.create!(
     business_id: i,
     monday: '8:00 AM',
@@ -54,20 +54,20 @@ end
 Menu.delete_all
 
 # 110 menus with business_id 1-110
-(1..110).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
+(1..100).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
 
 # Cleanup Existing Customer Data
 Customer.delete_all
 
-# 111 customers with user_ids 111- 150
-(111..150).each do |i|
+# 111 customers with user_ids 111- 1100
+(101..200).each do |i|
   Customer.create!(user_id: i, custname: Faker::DcComics.name)
 end
 
 # Cleanup Existing Item Data
 Item.delete_all
 
-(1..110).each do |i|
+(1..100).each do |i|
   # add more calls to create for additional menu items
   # number of .create calls == number of items per menu
   # 8 menu items per menu currently
@@ -145,65 +145,36 @@ Item.delete_all
   )
 end
 
-Review.create!(
-  customer_id: 1,
-  business_id: 1,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
+# Customers that need to leave a review []
 
-Review.create!(
-  customer_id: 2,
-  business_id: 1,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
+(1..100).each do |j|
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
 
-Review.create!(
-  customer_id: 3,
-  business_id: 1,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
 
-Review.create!(
-  customer_id: 1,
-  business_id: 2,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
 
-Review.create!(
-  customer_id: 2,
-  business_id: 2,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
+  
+end
 
-Review.create!(
-  customer_id: 3,
-  business_id: 2,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
-
-Review.create!(
-  customer_id: 1,
-  business_id: 3,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
-
-Review.create!(
-  customer_id: 2,
-  business_id: 3,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
-
-Review.create!(
-  customer_id: 3,
-  business_id: 3,
-  review: Faker::Restaurant.review,
-  rating: Faker::Number.within(range: 1..5)
-)
