@@ -82,7 +82,10 @@ module Api
             def destroy
                 @cart = Cart.find(params[:id])
 
-				if @cart.destroy
+                # destroy doesn't 'save' because instance variable, just like .save after creation
+                # @cart.destroy
+
+				if @cart.delete
 					render json: { message: 'Your cart has successfully been deleted.'}, status: :ok
 				else
 					render json: { message: 'Could not find the cart you are trying to remove.'}, status: :unprocessable_entity
