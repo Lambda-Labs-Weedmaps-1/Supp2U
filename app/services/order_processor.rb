@@ -12,8 +12,9 @@ class OrderProcessor
     def ship
         return false unless items_available?
 
-        @items.each { |item| item.reduce_inventory }
-        @order.ship
+        if @order.ship
+            @items.each { |item| item.reduce_inventory }
+        end
     
     end
 

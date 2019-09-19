@@ -88,9 +88,5 @@ class StripeChargesServices
         },
       )
     end
-  
-    def order_amount
-      Item.find_by(id: order).price
-    end
 end
   
