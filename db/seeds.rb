@@ -35,6 +35,21 @@ Business.delete_all
   )
 end
 
+Schedule.delete_all
+
+(1..110).each do |i|
+  Schedule.create!(
+    business_id: i,
+    monday: '8:00 AM',
+    tuesday: '8:00 AM',
+    wednesday: '8:00 AM',
+    thursday: '8:00 AM',
+    friday: '8:00 AM',
+    saturday: '12:00 PM',
+    sunday: 'Closed'
+  )
+end
+
 # Cleanup Existing Menu Data
 Menu.delete_all
 
