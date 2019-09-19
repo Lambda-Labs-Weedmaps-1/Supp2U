@@ -13,6 +13,7 @@ class OrderProcessor
         return false unless items_available?
 
         if @order.ship
+            puts "hereerere #{@items.inspect}"
             @items.each { |item| item.reduce_inventory }
         end
     
