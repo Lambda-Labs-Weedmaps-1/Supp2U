@@ -109,7 +109,7 @@ module Api
                   customer_id: order.customer_id,
                   items: order.order_items.map do |item|
                     {
-                      id: item.id,
+                      id: item.item_id,
                       name: item.item_name,
                       price: item.price,
                       order_id: item.order_id
