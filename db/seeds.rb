@@ -19,14 +19,13 @@ require_relative './schwifty.rb'
 require 'yaml'
 get_schwifty = YAML.load(File.read('schwifty.yml'))
 
-
-def fetch_image (instance, search)
+def fetch_image(instance, search)
   image = Pexels::Photo.search(search)
   puts image
   if image.present?
     image = image.first.source
     downloaded_image = open(image)
-    instance.image.attach(io: downloaded_image  , filename: "#{search}.jpg")
+    instance.image.attach(io: downloaded_image, filename: "#{search}.jpg")
   end
 end
 
@@ -46,20 +45,21 @@ Business.delete_all
 
 # 110 businesses with user_ids 1-50
 (1..50).each do |i|
-  business = Business.create!(
-    user_id: i,
-    name: Faker::Restaurant.unique.name,
-    website: Faker::Internet.url,
-    city: 'Denver',
-    state: 'CO',
-    street: get_schwifty[i][:street],
-    zipcode: get_schwifty[i][:zip],
-    theme: Faker::Restaurant.type,
-    description: Faker::Restaurant.description,
-    lat: get_schwifty[i][:lat],
-    long: get_schwifty[i][:long]
-  )
-  fetch_image(business, business.name)
+  business =
+    Business.create!(
+      user_id: i,
+      name: Faker::Restaurant.unique.name,
+      website: Faker::Internet.url,
+      city: 'Denver',
+      state: 'CO',
+      street: get_schwifty[i][:street],
+      zipcode: get_schwifty[i][:zip],
+      theme: Faker::Restaurant.type,
+      description: Faker::Restaurant.description,
+      lat: get_schwifty[i][:lat],
+      long: get_schwifty[i][:long]
+    )
+  fetch_image(business, business.theme)
 end
 
 Schedule.delete_all
@@ -89,7 +89,7 @@ Customer.delete_all
 # 50 customers with user_ids 50-150
 (50..150).each do |i|
   customer = Customer.create!(user_id: i, custname: Faker::DcComics.name)
-  fetch_image(customer, customer.custname)
+  # fetch_image(customer, customer.custname)
 end
 
 # Cleanup Existing Item Data
@@ -99,101 +99,108 @@ Item.delete_all
   # add more calls to create for additional menu items
   # number of .create calls == number of items per menu
   # 8 menu items per menu currently
-  item_1 = Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
+  item_1 =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
 
-  # fetch_image(item_1, item_1.item_name)
+  fetch_image(item_1, item_1.item_name)
 
-  item_2 = Item.create!(
-     menu_id: i,
-     description: Faker::Food.description,
-     item_name: Faker::Food.dish,
-     price: Faker::Commerce.price,
-     inventory: Faker::Number.within(range: 1..10),
-     category: Faker::Restaurant.type,
-     cals: Faker::Number.within(range: 1..1_400)
-   )
-  # fetch_image(item_2, item_2.item_name)
+  item_2 =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 1..10),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item_2, item_2.item_name)
 
-  item = Item.create!(
-  Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
-  Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
+  # item = Item.create!(
+  # Item.create!(
+  #   menu_id: i,
+  #   description: Faker::Food.description,
+  #   item_name: Faker::Food.dish,
+  #   price: Faker::Commerce.price,
+  #   inventory: Faker::Number.within(range: 100..200),
+  #   category: Faker::Restaurant.type,
+  #   cals: Faker::Number.within(range: 1..1_400)
+  # )
+  # Item.create!(
+  #   menu_id: i,
+  #   description: Faker::Food.description,
+  #   item_name: Faker::Food.dish,
+  #   price: Faker::Commerce.price,
+  #   inventory: Faker::Number.within(range: 100..200),
+  #   category: Faker::Restaurant.type,
+  #   cals: Faker::Number.within(range: 1..1_400)
+  # )
   # fetch_image(item, item.item_name)
-  item = Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
-  # fetch_image(item, item.item_name)
-  item = Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
-  # fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
 
-  item = Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
-  # fetch_image(item, item.item_name)
-  item = Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
-  # fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
 
-  item = Item.create!(
-    menu_id: i,
-    description: Faker::Food.description,
-    item_name: Faker::Food.dish,
-    price: Faker::Commerce.price,
-    inventory: Faker::Number.within(range: 100..200),
-    category: Faker::Restaurant.type,
-    cals: Faker::Number.within(range: 1..1_400)
-  )
-  # fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
 end
 
 # Customers that need to leave a review []
