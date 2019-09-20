@@ -91,7 +91,7 @@ end
 # Cleanup Existing Item Data
 Item.delete_all
 
-(1..100).each do |i|
+(1..50).each do |i|
   # add more calls to create for additional menu items
   # number of .create calls == number of items per menu
   # 8 menu items per menu currently
@@ -210,3 +210,4 @@ end
     rating: Faker::Number.within(range: 1..5)
   )
 end
+

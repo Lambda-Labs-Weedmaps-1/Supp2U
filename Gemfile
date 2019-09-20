@@ -47,6 +47,9 @@ gem 'omniauth-rails_csrf_protection'
 # Faraday HTTP client (configure requests - embraces rack middleware concept)
 gem 'faraday', '~> 0.15.4'
 
+gem 'unsplash'
+gem 'pexels', git: 'https://github.com/mikeholford/pexels'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
