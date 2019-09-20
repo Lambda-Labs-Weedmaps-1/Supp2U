@@ -1,162 +1,213 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-10.times do |i|
-	username = Faker::Internet.user_name
-	email = Faker::Internet.email
-	password = Faker::Internet.password
-	User.create!(username: username, email: email, password: password)
+
+require 'open-uri'
+require_relative './schwifty.rb'
+require 'yaml'
+
+get_schwifty = YAML.load(File.read('schwifty.yml'))
+
+def fetch_image(instance, search)
+  url = "https://pixabay.com/api/?key=13687146-57344923f31576e6d7f7b17a2&category=food&q=#{URI.encode(search.to_s)}"
+  res = Faraday.get(url)
+  data = JSON.parse(res.body)
+  hits = data['hits'].present? ? data['hits'] : nil
+
+  max_count = hits.present? ? hits.count.to_i : 0
+  # puts max_count
+  image = max_count > 0 ? hits[rand(0...max_count) || 0]['largeImageURL'] : nil
+  puts max_count
+
+  if image.present?
+    downloaded_image = open(image)
+    instance.image.attach(io: downloaded_image, filename: "#{search.to_s}.jpg")
+  end
+  puts "Done searching #{search.to_s}, which resulted in #{image}"
 end
 
-Business.create!(
-	user_id: 10,
-	name: "Angelo's Taverna",
-	website: 'angelosdenver.com',
-	city: 'Denver',
-	state: 'CO',
-	street: '620 E 6th Ave',
-	zipcode: 80_203,
-	theme: 'American',
-	description: "Angelo's Yo !",
-	lat: '39.725465',
-	long: '-104.979174'
-)
+# Cleanup Existing User Data
+User.delete_all
 
-Business.create!(
-	user_id: 2,
-	name: 'Lowdown Brewery',
-	website: 'angelosdenver.com',
-	city: 'Denver',
-	state: 'CO',
-	street: '800 Lincoln St',
-	zipcode: 80_203,
-	theme: 'American',
-	description: 'Low down place for Low down people!',
-	lat: 39.729261,
-	long: -104.985802
-)
-
-Business.create!(
-	user_id: 3,
-	name: 'Ivy On 7th',
-	website: 'ivyon7th.com',
-	city: 'Denver',
-	state: 'CO',
-	street: '410 E 7th Ave, Denver',
-	zipcode: 80_203,
-	theme: 'American',
-	description: "It's IVY !!!",
-	lat: 39.727066,
-	long: -104.981963
-)
-
-Customer.create!(user_id: 1, custname: 'Athos')
-
-Customer.create!(user_id: 2, custname: 'Porthos')
-
-Customer.create!(user_id: 3, custname: 'Aramis')
-
-@business_id = 0
-3.times do |i|
-	@business_id += 1
-	name = Faker::Company.bs
-	Menu.create!(business_id: @business_id, name: name)
+(1..200).each do |_|
+  User.create!(
+    username: Faker::Internet.unique.user_name,
+    email: Faker::Internet.email,
+    password: Faker::Internet.password
+  )
 end
 
-10.times do |i|
-	item_name = Faker::Commerce.product_name
-	price = Faker::Commerce.price
-	Item.create!(
-		menu_id: 1,
-		item_name: item_name,
-		price: price,
-		category: 'Breakfast, Lunch and Dinner.'
-	)
+# Cleanup Existing Business Data
+Business.delete_all
+
+# 100 businesses with user_ids 1-100
+(1..100).each do |i|
+  business =
+    Business.create!(
+      user_id: i,
+      name: Faker::Restaurant.unique.name,
+      website: Faker::Internet.url,
+      city: 'Denver',
+      state: 'CO',
+      street: get_schwifty[i][:street],
+      zipcode: get_schwifty[i][:zip],
+      theme: Faker::Restaurant.type,
+      description: Faker::Restaurant.description,
+      lat: get_schwifty[i][:lat],
+      long: get_schwifty[i][:long]
+    )
+  fetch_image(business, business.theme)
 end
 
-10.times do |i|
-	item_name = Faker::Commerce.product_name
-	price = Faker::Commerce.price
-	Item.create!(
-		menu_id: 2,
-		item_name: item_name,
-		price: price,
-		category: 'Breakfast, Lunch and Dinner.'
-	)
+Schedule.delete_all
+
+(1..100).each do |i|
+  Schedule.create!(
+    business_id: i,
+    monday: '8:00 AM',
+    tuesday: '8:00 AM',
+    wednesday: '8:00 AM',
+    thursday: '8:00 AM',
+    friday: '8:00 AM',
+    saturday: '12:00 PM',
+    sunday: 'Closed'
+  )
 end
 
-10.times do |i|
-    item_name = Faker::Commerce.product_name
-    price = Faker::Commerce.price
-Item.create!(
-    menu_id: 3,
-    item_name: item_name,
-    price: price,
-    category: "Breakfast, Lunch and Dinner."
-)
+# Cleanup Existing Menu Data
+Menu.delete_all
+
+# 100 menus with business_id 1-100
+(1..100).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
+
+# Cleanup Existing Customer Data
+Customer.delete_all
+
+# 100 customers with user_ids 101-200
+(101..200).each do |i|
+  customer = Customer.create!(user_id: i, custname: Faker::DcComics.name)
+  # fetch_image(customer, customer.custname)
 end
 
-Review.create!(
-    customer_id: 1,
-    business_id: 1,
-    review: "The food was way too salty and the chicken tasted like dumpster fish.... I can't wait to go back!!!",
-    rating: 5
+# Cleanup Existing Item Data
+Item.delete_all
 
-)
+(1..100).each do |i|
+  # add more calls to create for additional menu items
+  # number of .create calls == number of items per menu
+  # 8 menu items per menu currently
+  item_1 =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
 
-Review.create!(
-    customer_id: 2,
-    business_id: 1,
-    review: "The price was cheap, the portions were generous, and the quality was beyond perfect. Never going back. Perfection is overrated.",
-    rating: 1
+  fetch_image(item_1, item_1.item_name)
 
-)
+  item_2 =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 1..10),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item_2, item_2.item_name)
 
-Review.create!(
-    customer_id: 3,
-    business_id: 1,
-    review: "I spilled coffee on myself. It was hot and did not feel good. If it weren't for that, I would have rated them a 5.",
-    rating: 3
-)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
 
-Review.create!(
-    customer_id: 1,
-    business_id: 2,
-    review: "The grandma-aged woman who served me coffee called me sweetheart. My girlfriend got jealous and broke up with me...",
-    rating: 1.5
-)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
 
-Review.create!(
-    customer_id: 2,
-    business_id: 2,
-    review: "The dentures of the grandma-aged woman, who served me, fell into my coffee. It still tasted fantastic!",
-    rating: 5
-)
+  item =
+    Item.create!(
+      menu_id: i,
+      description: Faker::Food.description,
+      item_name: Faker::Food.dish,
+      price: Faker::Commerce.price,
+      inventory: Faker::Number.within(range: 100..200),
+      category: Faker::Restaurant.type,
+      cals: Faker::Number.within(range: 1..1_400)
+    )
+  fetch_image(item, item.item_name)
+end
 
-Review.create!(
-    customer_id: 3,
-    business_id: 2,
-    review: "I didn't find out there was a cockroach in my soup until it started moving after being bitten in half!",
-    rating: 5
-)
+# Customers that need to leave a review []
 
-Review.create!(
-    customer_id: 1,
-    business_id: 3,
-    review: "I ordered pancakes, and got waffles... I like waffles more than pancakes.",
-    rating: 5
-)
+(1..100).each do |j|
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
 
-Review.create!(
-    customer_id: 2,
-    business_id: 3,
-    review: "I tripped on flat ground as I was walking to my table... It made me uncomfortable...",
-    rating: 1
-)
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
 
-Review.create!(
-    customer_id: 3,
-    business_id: 3,
-    review: "Another customer said that my food looked delicious...",
-    rating: 2.3
-)
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
+
+  Review.create!(
+    customer_id: j,
+    business_id: Faker::Number.within(range: 1..100),
+    review: Faker::Restaurant.review,
+    rating: Faker::Number.within(range: 1..5)
+  )
+end
+

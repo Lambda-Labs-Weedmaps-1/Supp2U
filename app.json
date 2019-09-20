@@ -1,15 +1,25 @@
-//{
-//  "name": "Supp2U",
-//  "scripts": {},
-//  "env": {},
-//  "formation": {},
-//  "addons": [
-//    "heroku-postgresql"
-//  ],
-//  "buildpacks": [
-//    {
-//      "url": "https://github.com/heroku/heroku-buildpack-ruby"
-//    }
-//  ],
-//  "stack": "heroku-18"
-//}
+{
+  "name": "Supp2U",
+  "scripts": {},
+  "env": {
+    "DATABASE_URL": {
+      "reqired": true
+    },
+    "JWT_SECRET": {
+      "reqired": true
+    },
+    "STRIPE_SECRET_KEY": {
+      "reqired": true
+    }
+  },
+  "formation": {},
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby"
+    }
+  ],
+  "stack": "heroku-18"
+}

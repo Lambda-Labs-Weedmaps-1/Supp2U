@@ -1,4 +1,6 @@
 class Menu < ApplicationRecord
-    belongs_to :business
-    has_many :items
+	include PgSearch::Model
+
+	belongs_to :business
+	has_many :items
 end

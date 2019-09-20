@@ -4,22 +4,31 @@ module Api
         class CartsController < ApplicationController
 
             def index
-                @cart = Customer.find(params[:customer_id]).cart
+                @cart = Customer.find(params[:customer_id]).carts
+                @carts = Cart.all
 
-                render json: @cart
+                if params[:customer_id].present?
+                    render json: @cart.find_by(active:true)
+                else
+                    render json: @carts
+                end
+
             end
 
 
             def create
-                # @cartitem = params[:id]
-                # @newItem = Menu.find(item = cartitem)
+                @cartthere = Customer.find(params[:customer_id]).carts.find_by(active: true)
 
-                @createcart = Cart.new(cart_params)
-
-                if @createcart.save
-                    render json: @createcart, status: :created
+                if @cartthere
+                    render json: @cartthere, status: :ok
                 else
-                    render json: @createcart.errors, status: :unprocessable_entity
+                    @createcart = Cart.new(cart_params)
+
+                    if @createcart.save
+                        render json: @createcart, status: :created
+                    else
+                        render json: @createcart.errors, status: :unprocessable_entity
+                    end
                 end
 
             end
@@ -31,7 +40,6 @@ module Api
 
                 render json: @cartnum
             end
-
 
             def add
 
@@ -53,44 +61,52 @@ module Api
 
 
             def itemfetch
-                @cart = Cart.find(params[:id])
-
+                cart = Cart.find(params[:id])
                 #assumes coming in as an array
-                @itemlot = @cart.item_numbers
-
-                @arrayofitems = ["Array of Cart Items"]
-                # @arrayofitems = Array.new(@itemlot.length, "null")
-                puts("I AM HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-                puts(@arrayofitems)
-
-                @itemlot.each { |a| 
-                    @items = Item.where(id: a)
-                    puts(@items.inspect)
-                    @arrayofitems.push(@items)
-                    # @arrayofitems.unshift(@items)
-                    # @arrayofitems.delete("null")
-
-                    puts("I GOT HERE NOW MEOWWSWWWwwwwwwwwwwwwwww")
-                    puts(@arrayofitems)
-
-                }
-
-                # @arrayofitems.unshift()
-
-                if @arrayofitems.length > 0
-                    render json: @arrayofitems, status: :ok
-                else
-                    render json: @itemlot, status: :not_acceptable
+                itemlot = cart.item_numbers # looking at array column on carts table
+                arrayofitems = []
+                
+                itemlot.each do |item_id|
+                    item = Item.find(item_id)
+                    arrayofitems << item
                 end
 
-                
+                if arrayofitems.length > 0
+                    render json: arrayofitems, status: :ok
+                else
+                    render json: itemlot, status: :not_acceptable
+                end
+            end
 
+            def removeitem
+                cart = Cart.find(params[:id])
+                items = cart.item_numbers
+                items.delete_at(items.index(params[:item_number]))
+
+                if cart.save!
+                    render json: cart, status: :ok
+                else
+                    render json: cart.errors, status: :not_acceptable
+                end
+            end
+
+            def destroy
+                @cart = Cart.find(params[:id])
+
+                # destroy doesn't 'save' because instance variable, just like .save after creation
+                # @cart.destroy
+
+				if @cart.delete
+					render json: { message: 'Your cart has successfully been deleted.'}, status: :ok
+				else
+					render json: { message: 'Could not find the cart you are trying to remove.'}, status: :unprocessable_entity
+				end
             end
 
 
             private
             def cart_params
-                params.permit(:customer_id, :business_id, :quantity, :item_numbers)
+                params.permit(:customer_id, :active, :business_id, :quantity, :item_numbers)
 
             end
 

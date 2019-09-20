@@ -4,7 +4,7 @@ module Api
 
         def index
           if params[:user_id].present?
-              @customers = Customer.where(user_id: params[:user_id])
+              @customers = Customer.where(user_id: params[:user_id]).first
           else
               @customers = Customer.all
           end
@@ -12,7 +12,7 @@ module Api
         end
 
         def show
-          @customer = Customer.find(params[:user_id])
+          @customer = Customer.find(params[:id])
 
           render json: @customer
         end
@@ -20,7 +20,7 @@ module Api
         def create
           @customer = Customer.new(customer_params)
 
-          if @customer.save
+          if @customer.save 
               render json: @customer, status: :created
           else
               render json: @customer.errors, status: :unprocessable_entity
@@ -28,17 +28,20 @@ module Api
         end
 
         def update
-          @customer = Customer.find(params[:user_id])
+          @customer = Customer.find(params[:id])
 
-          if ImageUploadService.new(@customer, customer_params).call
+          @upload = ImageUploader.new(@customer, customer_params)
+
+          if @upload.call
             render json: @customer, status: :ok
           else
-            render json: @customers.errors, status: :unprocessable_entity
+            render json: @customer.errors, status: :unprocessable_entity
           end
         end
 
+
         def destroy
-          @customer = Customer.find(params[:user_id])
+          @customer = Customer.find(params[:id])
 
           if @customer.destroy
             render json: { message: "Your customer has successfully been terminated." } 

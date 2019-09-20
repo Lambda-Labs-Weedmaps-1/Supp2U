@@ -1,7 +1,7 @@
 class ItemSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :item_name, :price, :category, :description, :cals, :image
+  attributes :id, :item_name, :price, :inventory, :category, :description, :cals, :image
 
   def image
     return unless object.image.attached?

@@ -8,6 +8,7 @@ if Rails.env.production?
 end
 require 'rspec/rails'
 require 'support/factory_bot'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -34,14 +35,12 @@ rescue ActiveRecord::PendingMigrationError => e
 	exit 1
 end
 RSpec.configure do |config|
-	# Factory bot
-	# required from support/factory_bot.rb
-	# config.include FactoryBot::Syntax::Methods
+	config.include Requests::JsonHelpers, type: :request
 	# DB cleaning strategy setup #
 	# -------------------------- #
 	#* before tests run
 	config.before(:suite) do
-		DatabaseCleaner.strategy = :transaction
+		DatabaseCleaner.strategy = :truncation
 		DatabaseCleaner.clean_with(:truncation)
 	end
 	#* before and after each test runs
@@ -79,5 +78,13 @@ RSpec.configure do |config|
 			with.test_framework :rspec
 			with.library :rails
 		end
+	end
+end
+shared_context 'with integration test' do
+	run_test!
+	after do |example|
+		example.metadata[:response][:examples] = {
+			'application/json' => JSON.parse(response.body, symbolize_names: true)
+		}
 	end
 end

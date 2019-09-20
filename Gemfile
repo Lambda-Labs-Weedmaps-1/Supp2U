@@ -10,6 +10,8 @@ gem 'bundler'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
+# PgSearch builds named scopes that take advantage of PostgreSQL's full text search.
+gem 'pg_search', '~> 2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -20,6 +22,12 @@ gem 'puma', '~> 3.11'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'jwt'
+
+gem 'stripe-ruby-mock', '~> 2.5.0', :require => 'stripe_mock'
+
+gem 'stripe'
+
+gem 'sendgrid-ruby'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -35,6 +43,12 @@ gem 'dotenv-rails'
 gem 'faker'
 gem 'omniauth-auth0'
 gem 'omniauth-rails_csrf_protection'
+
+# Faraday HTTP client (configure requests - embraces rack middleware concept)
+gem 'faraday', '~> 0.15.4'
+
+gem 'unsplash'
+gem 'pexels', git: 'https://github.com/mikeholford/pexels'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -60,6 +74,7 @@ end
 
 group :test do 
   gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 group :development do

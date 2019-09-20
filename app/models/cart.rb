@@ -2,6 +2,6 @@ class Cart < ApplicationRecord
     
     belongs_to :customer
     belongs_to :business
-    # has_many :items
-
+    has_one :order
+    
 end
