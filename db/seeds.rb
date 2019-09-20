@@ -39,7 +39,7 @@ end
 # Cleanup Existing Business Data
 Business.delete_all
 
-# 110 businesses with user_ids 1-50
+# 100 businesses with user_ids 1-100
 (1..100).each do |i|
   business =
     Business.create!(
@@ -76,13 +76,13 @@ end
 # Cleanup Existing Menu Data
 Menu.delete_all
 
-# 50 menus with business_id 1-50
+# 100 menus with business_id 1-100
 (1..100).each { |i| Menu.create!(business_id: i, name: Faker::Company.bs) }
 
 # Cleanup Existing Customer Data
 Customer.delete_all
 
-# 50 customers with user_ids 50-150
+# 100 customers with user_ids 101-200
 (101..200).each do |i|
   customer = Customer.create!(user_id: i, custname: Faker::DcComics.name)
   # fetch_image(customer, customer.custname)
@@ -91,7 +91,7 @@ end
 # Cleanup Existing Item Data
 Item.delete_all
 
-(1..50).each do |i|
+(1..100).each do |i|
   # add more calls to create for additional menu items
   # number of .create calls == number of items per menu
   # 8 menu items per menu currently
