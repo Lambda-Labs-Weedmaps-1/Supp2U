@@ -107,12 +107,14 @@ module Api
                   status: order.status,
                   business_id: order.business_id,
                   customer_id: order.customer_id,
+                  updated_at: order.updated_at,
                   items: order.order_items.map do |item|
                     {
                       id: item.item_id,
                       name: item.item_name,
                       price: item.price,
-                      order_id: item.order_id
+                      order_id: item.order_id,
+                      description: item.item.description
                     }
                   end
                 }
