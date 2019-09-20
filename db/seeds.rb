@@ -20,13 +20,21 @@ require 'yaml'
 get_schwifty = YAML.load(File.read('schwifty.yml'))
 
 def fetch_image(instance, search)
-  image = Pexels::Photo.search(search)
-  puts image
+  url = "https://pixabay.com/api/?key=13687146-57344923f31576e6d7f7b17a2&category=food&q=#{URI.encode(search.to_s)}"
+  res = Faraday.get(url)
+  data = JSON.parse(res.body)
+  hits = data['hits'].present? ? data['hits'] : nil
+
+  max_count = hits.present? ? hits.count.to_i : 0
+  # puts max_count
+  image = max_count > 0 ? hits[rand(0...max_count) || 0]['largeImageURL'] : nil
+  puts max_count
+
   if image.present?
-    image = image.first.source
     downloaded_image = open(image)
-    instance.image.attach(io: downloaded_image, filename: "#{search}.jpg")
+    instance.image.attach(io: downloaded_image, filename: "#{search.to_s}.jpg")
   end
+  puts "Done searching #{search.to_s}, which resulted in #{image}"
 end
 
 # Cleanup Existing User Data
