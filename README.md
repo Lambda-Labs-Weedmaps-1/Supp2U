@@ -1,5 +1,7 @@
 # README
 
+NOTE: S3 bucket has been disabled due to rapidly reached AWS free tier limit. There may be issues with seeds photos loading/production level image upload. If so, I can look into a more sustainable fix.  - Henry
+
 #### SUPP2U BACKEND DEPLOYMENT: https://supp2udev.herokuapp.com <br>
 
 #### Ruby Version
