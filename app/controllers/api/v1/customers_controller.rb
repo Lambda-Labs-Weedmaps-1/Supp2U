@@ -53,7 +53,7 @@ module Api
         private
 
         def customer_params
-            params.permit(:user_id, :custname, :image)
+            params.permit(:user_id, :custname,)
         end
 
       end

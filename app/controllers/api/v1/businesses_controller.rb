@@ -83,7 +83,6 @@ module Api
 					:long,
 					:lat,
 					:user_id,
-					:image,
 					:stripe_email,
 					:stripe_token,
 					:token
