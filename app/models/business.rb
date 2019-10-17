@@ -5,7 +5,7 @@ class Business < ApplicationRecord
 	#* Default results are ordered by relevance
 	include PgSearch::Model
 	pg_search_scope :search_by_theme,
-	                against: %i[theme name], using: { tsearch: { prefix: true } }
+	                against: %i[theme name zipcode street], using: { tsearch: { prefix: true } }
 
 	belongs_to :user
 	has_many :reviews

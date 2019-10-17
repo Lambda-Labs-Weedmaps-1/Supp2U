@@ -12,3 +12,5 @@ amazon:
    secret_access_key: <%= ENV['SECRET_ACCESS_KEY'] %>
    bucket: <%= ENV['BUCKET'] %>
    region: "us-east-2"
+
+
