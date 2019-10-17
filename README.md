@@ -1,5 +1,7 @@
 # README
 
+## NOTE: Image upload is disabled on production due to AWS costs with seeded images, but will work locally if you clone from the MASTER branch. 
+
 #### SUPP2U BACKEND DEPLOYMENT: https://supp2udev.herokuapp.com <br>
 
 #### Ruby Version
